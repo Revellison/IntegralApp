@@ -1,0 +1,1388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EduLab</class>
+ <widget class="QMainWindow" name="EduLab">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Sans Serif Collection</family>
+   </font>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>EduLab</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/logo/icon_blck.png</normaloff>:/logo/icon_blck.png</iconset>
+  </property>
+  <property name="statusTip">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+background-color: rgb(15, 15, 15);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="open1_textreworker_pg3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+    </property>
+    <property name="text">
+     <string>Исправитель текста</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="home_pg1">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: green;
+}
+
+
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>icons/home.png</normaloff>icons/home.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>18</width>
+      <height>18</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="settings_pg2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>200</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: red;
+}
+
+
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>icons/settings.png</normaloff>icons/settings.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>18</width>
+      <height>18</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>141</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: transparent;
+color: white;
+border: 5px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:pressed {
+background-color: gray;
+}
+
+
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>icons/logo.png</normaloff>icons/logo.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>130</width>
+      <height>130</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>40</y>
+      <width>521</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif Collection</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="page">
+     <widget class="QTextEdit" name="ai_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>410</y>
+        <width>501</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+background-color: #1E1E1E;
+color: white;
+border: 14px solid transparent;
+  border-radius: 25px;
+}
+QTextEdit:hover {
+background-color: #1D1D1D;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ai_send_button">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>420</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>6</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #0E0E0E;
+color: white;
+border: 1px solid transparent;
+  border-radius: 15px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #878383;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/send.png</normaloff>icons/send.png</iconset>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="ai_output">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>481</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="ai_chat_text">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>0</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>AI Чат</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_3">
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>LLama 3-1 Api Key</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="llama_input_api">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>40</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 10px;
+}
+QLineEdit:hover {
+background-color: #1D1D1D;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="llama_api_add">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>40</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1C1C;
+color: white;
+border: 2px solid transparent;
+  border-radius: 15px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #878383;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/add.png</normaloff>icons/add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="chatgpt_input_api">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>120</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 10px;
+}
+QLineEdit:hover {
+background-color: #1D1D1D;
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>100</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>ChatGPT Api Key</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="chatgpt_api_add">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>120</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1C1C;
+color: white;
+border: 2px solid transparent;
+  border-radius: 15px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #878383;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/add.png</normaloff>icons/add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="more_settings">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>170</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>14</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Другие настройки</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="background_change_text">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>220</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Изменить фон окна</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="theme_text">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>20</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+background-color: ;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Тема приложения</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="background_set_file_open">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>240</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+      </property>
+      <property name="text">
+       <string>Выбрать изображение</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="background_reset">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>240</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #EE3232;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/delete text.png</normaloff>icons/delete text.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="set_black_theme">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>60</y>
+        <width>181</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>11</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+      </property>
+      <property name="text">
+       <string>Темная</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="set_white_theme">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>160</y>
+        <width>181</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bahnschrift SemiBold</family>
+        <pointsize>11</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: white;
+color: black;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: gray;
+}
+QPushButton:pressed {
+background-color: #1E1E1E;
+}</string>
+      </property>
+      <property name="text">
+       <string>Белая</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <widget class="QPushButton" name="openfile1">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>140</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}
+
+
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/filepick.png</normaloff>icons/filepick.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="outputYandex">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>190</y>
+        <width>491</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="paste1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>140</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/paste.png</normaloff>icons/paste.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="errorcopy">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>470</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Leelawadee</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/copy.png</normaloff>icons/copy.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="delete2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>330</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #EE3232;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/delete text.png</normaloff>icons/delete text.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="inputYandex">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>491</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QTextEdit:hover {
+background-color: #1E1E1E;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteerrors">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>470</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Leelawadee</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/delete text.png</normaloff>icons/delete text.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="copy2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>330</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}
+
+
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/copy.png</normaloff>icons/copy.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="copy1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}
+
+
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/copy.png</normaloff>icons/copy.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="delete1">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>140</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #EE3232;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>icons/delete text.png</normaloff>icons/delete text.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>18</width>
+        <height>18</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="checktext">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>140</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: green;
+}</string>
+      </property>
+      <property name="text">
+       <string>Исправить текст</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="errorlog">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>380</y>
+        <width>491</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextEdit {
+background-color: #1B1B1B;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="open2_translator">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+    </property>
+    <property name="text">
+     <string>Переводчик</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="open3_pptxgen">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>320</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+    </property>
+    <property name="text">
+     <string>PPTX Генератор</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="open4_imggen">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: #1E1E1E;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+    </property>
+    <property name="text">
+     <string>IMG Генератор</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="header" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>791</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="rollup">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>10</y>
+       <width>21</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: gray;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../../Downloads/remove.png</normaloff>../../../Downloads/remove.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="close">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>10</y>
+       <width>21</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Calibri</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #1D1D1D;
+color: white;
+border: 2px solid transparent;
+  border-radius: 6px;
+}
+QPushButton:hover {
+background-color: #252525;
+}
+QPushButton:pressed {
+background-color: #EE3232;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../../Downloads/close.png</normaloff>../../../Downloads/close.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="icons/background.qrc"/>
+ </resources>
+ <connections/>
+</ui>
