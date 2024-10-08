@@ -1,0 +1,145 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/andre/OneDrive/Desktop/tempatepyqt/reworker.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "C:/Users/andre/Downloads/icon.ico"
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons;icons/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/add.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/background.qrc;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/close_app.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/copy.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/day.jpg;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/del_history.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/delete text.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/filepick.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/history.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/home.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/logo.ico;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/logo.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/night.jpg;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/paste.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/questions.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/remove_app.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/send.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/settings.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/text open.png;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Andrey/tempatepyqt/icons/user.png;."
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

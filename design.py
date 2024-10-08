@@ -29,7 +29,7 @@ class Ui_EduLab(object):
         self.open1_textreworker_pg3 = QtWidgets.QPushButton(parent=self.centralwidget)
         self.open1_textreworker_pg3.setGeometry(QtCore.QRect(20, 240, 151, 31))
         font = QtGui.QFont()
-        font.setFamily("Segoe UI")
+        font.setFamily("Bahnschrift SemiBold")
         font.setPointSize(10)
         font.setBold(True)
         self.open1_textreworker_pg3.setFont(font)
@@ -102,7 +102,7 @@ class Ui_EduLab(object):
         self.settings_pg2.setIconSize(QtCore.QSize(18, 18))
         self.settings_pg2.setObjectName("settings_pg2")
         self.logo = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.logo.setGeometry(QtCore.QRect(20, 50, 141, 131))
+        self.logo.setGeometry(QtCore.QRect(20, 130, 141, 51))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -126,72 +126,19 @@ class Ui_EduLab(object):
         self.logo.setIconSize(QtCore.QSize(130, 130))
         self.logo.setObjectName("logo")
         self.stackedWidget = QtWidgets.QStackedWidget(parent=self.centralwidget)
-        self.stackedWidget.setGeometry(QtCore.QRect(250, 40, 521, 531))
+        self.stackedWidget.setGeometry(QtCore.QRect(260, 40, 521, 531))
         font = QtGui.QFont()
         font.setFamily("Sans Serif Collection")
-        font.setPointSize(9)
+        font.setPointSize(10)
         self.stackedWidget.setFont(font)
         self.stackedWidget.setObjectName("stackedWidget")
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
-        self.ai_input = QtWidgets.QTextEdit(parent=self.page)
-        self.ai_input.setGeometry(QtCore.QRect(20, 410, 501, 51))
-        font = QtGui.QFont()
-        font.setFamily("Bahnschrift SemiBold")
-        font.setPointSize(10)
-        font.setBold(True)
-        self.ai_input.setFont(font)
-        self.ai_input.setStyleSheet("QTextEdit {\n"
-"background-color: #1E1E1E;\n"
-"color: white;\n"
-"border: 14px solid transparent;\n"
-"  border-radius: 25px;\n"
-"}\n"
-"QTextEdit:hover {\n"
-"background-color: #1D1D1D;\n"
-"}")
-        self.ai_input.setObjectName("ai_input")
-        self.ai_send_button = QtWidgets.QPushButton(parent=self.page)
-        self.ai_send_button.setGeometry(QtCore.QRect(480, 420, 31, 31))
-        font = QtGui.QFont()
-        font.setPointSize(6)
-        self.ai_send_button.setFont(font)
-        self.ai_send_button.setStyleSheet("QPushButton {\n"
-"background-color: #0E0E0E;\n"
-"color: white;\n"
-"border: 1px solid transparent;\n"
-"  border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: #252525;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: #878383;\n"
-"}")
-        self.ai_send_button.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("icons/send.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.ai_send_button.setIcon(icon4)
-        self.ai_send_button.setObjectName("ai_send_button")
-        self.ai_output = QtWidgets.QTextEdit(parent=self.page)
-        self.ai_output.setGeometry(QtCore.QRect(30, 20, 481, 391))
-        font = QtGui.QFont()
-        font.setFamily("Bahnschrift SemiBold")
-        font.setPointSize(10)
-        font.setBold(True)
-        self.ai_output.setFont(font)
-        self.ai_output.setStyleSheet("QTextEdit {\n"
-"background-color: #1E1E1E;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 6px;\n"
-"}")
-        self.ai_output.setObjectName("ai_output")
         self.ai_chat_text = QtWidgets.QLabel(parent=self.page)
-        self.ai_chat_text.setGeometry(QtCore.QRect(30, 0, 141, 21))
+        self.ai_chat_text.setGeometry(QtCore.QRect(130, 50, 191, 31))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift SemiBold")
-        font.setPointSize(12)
+        font.setPointSize(16)
         font.setBold(True)
         self.ai_chat_text.setFont(font)
         self.ai_chat_text.setStyleSheet("QLabel {\n"
@@ -204,110 +151,8 @@ class Ui_EduLab(object):
         self.stackedWidget.addWidget(self.page)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
-        self.label = QtWidgets.QLabel(parent=self.page_3)
-        self.label.setGeometry(QtCore.QRect(30, 20, 131, 16))
-        font = QtGui.QFont()
-        font.setFamily("Bahnschrift SemiBold")
-        font.setBold(True)
-        self.label.setFont(font)
-        self.label.setStyleSheet("QLabel {\n"
-"background-color: ;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 6px;\n"
-"}")
-        self.label.setObjectName("label")
-        self.llama_input_api = QtWidgets.QLineEdit(parent=self.page_3)
-        self.llama_input_api.setGeometry(QtCore.QRect(30, 40, 211, 31))
-        self.llama_input_api.setStyleSheet("QLineEdit {\n"
-"background-color: #1E1E1E;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 10px;\n"
-"}\n"
-"QLineEdit:hover {\n"
-"background-color: #1D1D1D;\n"
-"}")
-        self.llama_input_api.setObjectName("llama_input_api")
-        self.llama_api_add = QtWidgets.QPushButton(parent=self.page_3)
-        self.llama_api_add.setGeometry(QtCore.QRect(250, 40, 31, 31))
-        self.llama_api_add.setStyleSheet("QPushButton {\n"
-"background-color: #1D1C1C;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: #252525;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: #878383;\n"
-"}")
-        self.llama_api_add.setText("")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("icons/add.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.llama_api_add.setIcon(icon5)
-        self.llama_api_add.setIconSize(QtCore.QSize(20, 20))
-        self.llama_api_add.setObjectName("llama_api_add")
-        self.chatgpt_input_api = QtWidgets.QLineEdit(parent=self.page_3)
-        self.chatgpt_input_api.setGeometry(QtCore.QRect(30, 120, 211, 31))
-        self.chatgpt_input_api.setStyleSheet("QLineEdit {\n"
-"background-color: #1E1E1E;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 10px;\n"
-"}\n"
-"QLineEdit:hover {\n"
-"background-color: #1D1D1D;\n"
-"}")
-        self.chatgpt_input_api.setObjectName("chatgpt_input_api")
-        self.label_2 = QtWidgets.QLabel(parent=self.page_3)
-        self.label_2.setGeometry(QtCore.QRect(30, 100, 131, 16))
-        font = QtGui.QFont()
-        font.setFamily("Bahnschrift SemiBold")
-        font.setBold(True)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("QLabel {\n"
-"background-color: ;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 6px;\n"
-"}")
-        self.label_2.setObjectName("label_2")
-        self.chatgpt_api_add = QtWidgets.QPushButton(parent=self.page_3)
-        self.chatgpt_api_add.setGeometry(QtCore.QRect(250, 120, 31, 31))
-        self.chatgpt_api_add.setStyleSheet("QPushButton {\n"
-"background-color: #1D1C1C;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 15px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: #252525;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"background-color: #878383;\n"
-"}")
-        self.chatgpt_api_add.setText("")
-        self.chatgpt_api_add.setIcon(icon5)
-        self.chatgpt_api_add.setIconSize(QtCore.QSize(20, 20))
-        self.chatgpt_api_add.setObjectName("chatgpt_api_add")
-        self.more_settings = QtWidgets.QLabel(parent=self.page_3)
-        self.more_settings.setGeometry(QtCore.QRect(40, 170, 181, 31))
-        font = QtGui.QFont()
-        font.setFamily("Bahnschrift SemiBold")
-        font.setPointSize(14)
-        font.setBold(True)
-        self.more_settings.setFont(font)
-        self.more_settings.setStyleSheet("QLabel {\n"
-"background-color: ;\n"
-"color: white;\n"
-"border: 2px solid transparent;\n"
-"  border-radius: 6px;\n"
-"}")
-        self.more_settings.setObjectName("more_settings")
         self.background_change_text = QtWidgets.QLabel(parent=self.page_3)
-        self.background_change_text.setGeometry(QtCore.QRect(40, 220, 131, 16))
+        self.background_change_text.setGeometry(QtCore.QRect(30, 30, 131, 16))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift SemiBold")
         font.setPointSize(10)
@@ -335,7 +180,7 @@ class Ui_EduLab(object):
 "}")
         self.theme_text.setObjectName("theme_text")
         self.background_set_file_open = QtWidgets.QPushButton(parent=self.page_3)
-        self.background_set_file_open.setGeometry(QtCore.QRect(40, 240, 161, 31))
+        self.background_set_file_open.setGeometry(QtCore.QRect(30, 50, 161, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -355,7 +200,7 @@ class Ui_EduLab(object):
 "}")
         self.background_set_file_open.setObjectName("background_set_file_open")
         self.background_reset = QtWidgets.QPushButton(parent=self.page_3)
-        self.background_reset.setGeometry(QtCore.QRect(200, 240, 31, 31))
+        self.background_reset.setGeometry(QtCore.QRect(190, 50, 31, 31))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -373,9 +218,9 @@ class Ui_EduLab(object):
 "background-color: #EE3232;\n"
 "}")
         self.background_reset.setText("")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("icons/delete text.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.background_reset.setIcon(icon6)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("icons/delete text.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.background_reset.setIcon(icon4)
         self.background_reset.setIconSize(QtCore.QSize(18, 18))
         self.background_reset.setObjectName("background_reset")
         self.set_black_theme = QtWidgets.QPushButton(parent=self.page_3)
@@ -418,17 +263,43 @@ class Ui_EduLab(object):
 "background-color: #1E1E1E;\n"
 "}")
         self.set_white_theme.setObjectName("set_white_theme")
-        self.stackedWidget.addWidget(self.page_3)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.openfile1 = QtWidgets.QPushButton(parent=self.page_2)
-        self.openfile1.setGeometry(QtCore.QRect(110, 140, 41, 31))
+        self.background_change_text_2 = QtWidgets.QLabel(parent=self.page_3)
+        self.background_change_text_2.setGeometry(QtCore.QRect(370, 500, 131, 16))
         font = QtGui.QFont()
-        font.setFamily("Calibri")
+        font.setFamily("Bahnschrift SemiBold")
         font.setPointSize(10)
-        self.openfile1.setFont(font)
-        self.openfile1.setStyleSheet("QPushButton {\n"
-"background-color: #1D1D1D;\n"
+        font.setBold(True)
+        self.background_change_text_2.setFont(font)
+        self.background_change_text_2.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.background_change_text_2.setObjectName("background_change_text_2")
+        self.background_change_text_5 = QtWidgets.QLabel(parent=self.page_3)
+        self.background_change_text_5.setGeometry(QtCore.QRect(320, 260, 141, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.background_change_text_5.setFont(font)
+        self.background_change_text_5.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.background_change_text_5.setObjectName("background_change_text_5")
+        self.background_set_file_open_3 = QtWidgets.QPushButton(parent=self.page_3)
+        self.background_set_file_open_3.setGeometry(QtCore.QRect(320, 280, 161, 31))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.background_set_file_open_3.setFont(font)
+        self.background_set_file_open_3.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
 "color: white;\n"
 "border: 2px solid transparent;\n"
 "  border-radius: 6px;\n"
@@ -437,17 +308,12 @@ class Ui_EduLab(object):
 "background-color: #252525;\n"
 "}\n"
 "QPushButton:pressed {\n"
-"background-color: gray;\n"
-"}\n"
-"\n"
-"\n"
-"")
-        self.openfile1.setText("")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("icons/filepick.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.openfile1.setIcon(icon7)
-        self.openfile1.setIconSize(QtCore.QSize(18, 18))
-        self.openfile1.setObjectName("openfile1")
+"background-color: red;\n"
+"}")
+        self.background_set_file_open_3.setObjectName("background_set_file_open_3")
+        self.stackedWidget.addWidget(self.page_3)
+        self.page_2 = QtWidgets.QWidget()
+        self.page_2.setObjectName("page_2")
         self.outputYandex = QtWidgets.QTextEdit(parent=self.page_2)
         self.outputYandex.setGeometry(QtCore.QRect(20, 190, 491, 131))
         self.outputYandex.setStyleSheet("QTextEdit {\n"
@@ -458,7 +324,7 @@ class Ui_EduLab(object):
 "}")
         self.outputYandex.setObjectName("outputYandex")
         self.paste1 = QtWidgets.QPushButton(parent=self.page_2)
-        self.paste1.setGeometry(QtCore.QRect(50, 140, 31, 31))
+        self.paste1.setGeometry(QtCore.QRect(20, 140, 31, 31))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -476,9 +342,9 @@ class Ui_EduLab(object):
 "background-color: gray;\n"
 "}")
         self.paste1.setText("")
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("icons/paste.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.paste1.setIcon(icon8)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("icons/paste.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.paste1.setIcon(icon5)
         self.paste1.setIconSize(QtCore.QSize(18, 18))
         self.paste1.setObjectName("paste1")
         self.errorcopy = QtWidgets.QPushButton(parent=self.page_2)
@@ -501,9 +367,9 @@ class Ui_EduLab(object):
 "background-color: gray;\n"
 "}")
         self.errorcopy.setText("")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("icons/copy.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.errorcopy.setIcon(icon9)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("icons/copy.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.errorcopy.setIcon(icon6)
         self.errorcopy.setObjectName("errorcopy")
         self.delete2 = QtWidgets.QPushButton(parent=self.page_2)
         self.delete2.setGeometry(QtCore.QRect(50, 330, 31, 31))
@@ -524,7 +390,7 @@ class Ui_EduLab(object):
 "background-color: #EE3232;\n"
 "}")
         self.delete2.setText("")
-        self.delete2.setIcon(icon6)
+        self.delete2.setIcon(icon4)
         self.delete2.setIconSize(QtCore.QSize(18, 18))
         self.delete2.setObjectName("delete2")
         self.inputYandex = QtWidgets.QTextEdit(parent=self.page_2)
@@ -559,7 +425,7 @@ class Ui_EduLab(object):
 "background-color: red;\n"
 "}")
         self.deleteerrors.setText("")
-        self.deleteerrors.setIcon(icon6)
+        self.deleteerrors.setIcon(icon4)
         self.deleteerrors.setObjectName("deleteerrors")
         self.copy2 = QtWidgets.QPushButton(parent=self.page_2)
         self.copy2.setGeometry(QtCore.QRect(20, 330, 31, 31))
@@ -583,11 +449,11 @@ class Ui_EduLab(object):
 "\n"
 "")
         self.copy2.setText("")
-        self.copy2.setIcon(icon9)
+        self.copy2.setIcon(icon6)
         self.copy2.setIconSize(QtCore.QSize(18, 18))
         self.copy2.setObjectName("copy2")
         self.copy1 = QtWidgets.QPushButton(parent=self.page_2)
-        self.copy1.setGeometry(QtCore.QRect(20, 140, 31, 31))
+        self.copy1.setGeometry(QtCore.QRect(50, 140, 31, 31))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -608,7 +474,7 @@ class Ui_EduLab(object):
 "\n"
 "")
         self.copy1.setText("")
-        self.copy1.setIcon(icon9)
+        self.copy1.setIcon(icon6)
         self.copy1.setIconSize(QtCore.QSize(18, 18))
         self.copy1.setObjectName("copy1")
         self.delete1 = QtWidgets.QPushButton(parent=self.page_2)
@@ -630,11 +496,11 @@ class Ui_EduLab(object):
 "background-color: #EE3232;\n"
 "}")
         self.delete1.setText("")
-        self.delete1.setIcon(icon6)
+        self.delete1.setIcon(icon4)
         self.delete1.setIconSize(QtCore.QSize(18, 18))
         self.delete1.setObjectName("delete1")
         self.checktext = QtWidgets.QPushButton(parent=self.page_2)
-        self.checktext.setGeometry(QtCore.QRect(150, 140, 131, 31))
+        self.checktext.setGeometry(QtCore.QRect(110, 140, 131, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -662,15 +528,271 @@ class Ui_EduLab(object):
 "  border-radius: 6px;\n"
 "}")
         self.errorlog.setObjectName("errorlog")
+        self.delete1_2 = QtWidgets.QPushButton(parent=self.page_2)
+        self.delete1_2.setGeometry(QtCore.QRect(480, 140, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.delete1_2.setFont(font)
+        self.delete1_2.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: #EE3232;\n"
+"}")
+        self.delete1_2.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap("icons/history.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.delete1_2.setIcon(icon7)
+        self.delete1_2.setIconSize(QtCore.QSize(18, 18))
+        self.delete1_2.setObjectName("delete1_2")
         self.stackedWidget.addWidget(self.page_2)
-        self.open2_translator = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.open2_translator.setGeometry(QtCore.QRect(20, 280, 151, 31))
+        self.page_4 = QtWidgets.QWidget()
+        self.page_4.setObjectName("page_4")
+        self.translate_button = QtWidgets.QPushButton(parent=self.page_4)
+        self.translate_button.setGeometry(QtCore.QRect(210, 140, 91, 31))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        self.translate_button.setFont(font)
+        self.translate_button.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: green;\n"
+"}")
+        self.translate_button.setObjectName("translate_button")
+        self.translator_input = QtWidgets.QTextEdit(parent=self.page_4)
+        self.translator_input.setGeometry(QtCore.QRect(20, 10, 491, 121))
+        self.translator_input.setStyleSheet("QTextEdit {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QTextEdit:hover {\n"
+"background-color: #1E1E1E;\n"
+"}")
+        self.translator_input.setObjectName("translator_input")
+        self.translatecopy_2 = QtWidgets.QPushButton(parent=self.page_4)
+        self.translatecopy_2.setGeometry(QtCore.QRect(20, 320, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.translatecopy_2.setFont(font)
+        self.translatecopy_2.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.translatecopy_2.setText("")
+        self.translatecopy_2.setIcon(icon6)
+        self.translatecopy_2.setIconSize(QtCore.QSize(18, 18))
+        self.translatecopy_2.setObjectName("translatecopy_2")
+        self.translatecopy = QtWidgets.QPushButton(parent=self.page_4)
+        self.translatecopy.setGeometry(QtCore.QRect(50, 140, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.translatecopy.setFont(font)
+        self.translatecopy.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.translatecopy.setText("")
+        self.translatecopy.setIcon(icon6)
+        self.translatecopy.setIconSize(QtCore.QSize(18, 18))
+        self.translatecopy.setObjectName("translatecopy")
+        self.translate_output = QtWidgets.QTextEdit(parent=self.page_4)
+        self.translate_output.setGeometry(QtCore.QRect(20, 180, 491, 131))
+        self.translate_output.setStyleSheet("QTextEdit {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.translate_output.setObjectName("translate_output")
+        self.translate_delete = QtWidgets.QPushButton(parent=self.page_4)
+        self.translate_delete.setGeometry(QtCore.QRect(80, 140, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.translate_delete.setFont(font)
+        self.translate_delete.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: #EE3232;\n"
+"}")
+        self.translate_delete.setText("")
+        self.translate_delete.setIcon(icon4)
+        self.translate_delete.setIconSize(QtCore.QSize(18, 18))
+        self.translate_delete.setObjectName("translate_delete")
+        self.translator_languages_comboBox = QtWidgets.QComboBox(parent=self.page_4)
+        self.translator_languages_comboBox.setGeometry(QtCore.QRect(110, 140, 101, 31))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.translator_languages_comboBox.setFont(font)
+        self.translator_languages_comboBox.setStyleSheet("QComboBox{\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"")
+        self.translator_languages_comboBox.setObjectName("translator_languages_comboBox")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translator_languages_comboBox.addItem("")
+        self.translate_paste = QtWidgets.QPushButton(parent=self.page_4)
+        self.translate_paste.setGeometry(QtCore.QRect(20, 140, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.translate_paste.setFont(font)
+        self.translate_paste.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.translate_paste.setText("")
+        self.translate_paste.setIcon(icon5)
+        self.translate_paste.setIconSize(QtCore.QSize(18, 18))
+        self.translate_paste.setObjectName("translate_paste")
+        self.translate_delete2 = QtWidgets.QPushButton(parent=self.page_4)
+        self.translate_delete2.setGeometry(QtCore.QRect(50, 320, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.translate_delete2.setFont(font)
+        self.translate_delete2.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: #EE3232;\n"
+"}")
+        self.translate_delete2.setText("")
+        self.translate_delete2.setIcon(icon4)
+        self.translate_delete2.setIconSize(QtCore.QSize(18, 18))
+        self.translate_delete2.setObjectName("translate_delete2")
+        self.translator_otladka_output = QtWidgets.QTextEdit(parent=self.page_4)
+        self.translator_otladka_output.setGeometry(QtCore.QRect(360, 320, 151, 81))
+        self.translator_otladka_output.setStyleSheet("QTextEdit {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.translator_otladka_output.setObjectName("translator_otladka_output")
+        self.stackedWidget.addWidget(self.page_4)
+        self.page_9 = QtWidgets.QWidget()
+        self.page_9.setObjectName("page_9")
+        self.downloader_text = QtWidgets.QLabel(parent=self.page_9)
+        self.downloader_text.setGeometry(QtCore.QRect(30, 50, 311, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.downloader_text.setFont(font)
+        self.downloader_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.downloader_text.setObjectName("downloader_text")
+        self.reset_ssilka_button_downloader = QtWidgets.QPushButton(parent=self.page_9)
+        self.reset_ssilka_button_downloader.setGeometry(QtCore.QRect(150, 80, 41, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.reset_ssilka_button_downloader.setFont(font)
+        self.reset_ssilka_button_downloader.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: #EE3232;\n"
+"}")
+        self.reset_ssilka_button_downloader.setText("")
+        self.reset_ssilka_button_downloader.setIcon(icon4)
+        self.reset_ssilka_button_downloader.setIconSize(QtCore.QSize(18, 18))
+        self.reset_ssilka_button_downloader.setObjectName("reset_ssilka_button_downloader")
+        self.download_video_button = QtWidgets.QPushButton(parent=self.page_9)
+        self.download_video_button.setGeometry(QtCore.QRect(30, 110, 161, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         font.setBold(True)
-        self.open2_translator.setFont(font)
-        self.open2_translator.setStyleSheet("QPushButton {\n"
+        self.download_video_button.setFont(font)
+        self.download_video_button.setStyleSheet("QPushButton {\n"
 "background-color: #1E1E1E;\n"
 "color: white;\n"
 "border: 2px solid transparent;\n"
@@ -682,15 +804,15 @@ class Ui_EduLab(object):
 "QPushButton:pressed {\n"
 "background-color: gray;\n"
 "}")
-        self.open2_translator.setObjectName("open2_translator")
-        self.open3_pptxgen = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.open3_pptxgen.setGeometry(QtCore.QRect(20, 320, 151, 31))
+        self.download_video_button.setObjectName("download_video_button")
+        self.paste_ssilka_button = QtWidgets.QPushButton(parent=self.page_9)
+        self.paste_ssilka_button.setGeometry(QtCore.QRect(30, 80, 121, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         font.setBold(True)
-        self.open3_pptxgen.setFont(font)
-        self.open3_pptxgen.setStyleSheet("QPushButton {\n"
+        self.paste_ssilka_button.setFont(font)
+        self.paste_ssilka_button.setStyleSheet("QPushButton {\n"
 "background-color: #1E1E1E;\n"
 "color: white;\n"
 "border: 2px solid transparent;\n"
@@ -702,15 +824,33 @@ class Ui_EduLab(object):
 "QPushButton:pressed {\n"
 "background-color: gray;\n"
 "}")
-        self.open3_pptxgen.setObjectName("open3_pptxgen")
-        self.open4_imggen = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.open4_imggen.setGeometry(QtCore.QRect(20, 360, 151, 31))
+        self.paste_ssilka_button.setObjectName("paste_ssilka_button")
+        self.doswnloader_progressbar = QtWidgets.QProgressBar(parent=self.page_9)
+        self.doswnloader_progressbar.setGeometry(QtCore.QRect(30, 140, 161, 23))
+        self.doswnloader_progressbar.setProperty("value", 24)
+        self.doswnloader_progressbar.setObjectName("doswnloader_progressbar")
+        self.skachat_ychebnik_text = QtWidgets.QLabel(parent=self.page_9)
+        self.skachat_ychebnik_text.setGeometry(QtCore.QRect(30, 240, 141, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.skachat_ychebnik_text.setFont(font)
+        self.skachat_ychebnik_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.skachat_ychebnik_text.setObjectName("skachat_ychebnik_text")
+        self.downloader_ychebnikov = QtWidgets.QPushButton(parent=self.page_9)
+        self.downloader_ychebnikov.setGeometry(QtCore.QRect(30, 260, 161, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         font.setBold(True)
-        self.open4_imggen.setFont(font)
-        self.open4_imggen.setStyleSheet("QPushButton {\n"
+        self.downloader_ychebnikov.setFont(font)
+        self.downloader_ychebnikov.setStyleSheet("QPushButton {\n"
 "background-color: #1E1E1E;\n"
 "color: white;\n"
 "border: 2px solid transparent;\n"
@@ -722,7 +862,555 @@ class Ui_EduLab(object):
 "QPushButton:pressed {\n"
 "background-color: gray;\n"
 "}")
-        self.open4_imggen.setObjectName("open4_imggen")
+        self.downloader_ychebnikov.setObjectName("downloader_ychebnikov")
+        self.predmet_combobox = QtWidgets.QComboBox(parent=self.page_9)
+        self.predmet_combobox.setGeometry(QtCore.QRect(190, 260, 91, 31))
+        self.predmet_combobox.setObjectName("predmet_combobox")
+        self.predmet_combobox.addItem("")
+        self.predmet_combobox.addItem("")
+        self.klass_combobox = QtWidgets.QComboBox(parent=self.page_9)
+        self.klass_combobox.setGeometry(QtCore.QRect(280, 260, 51, 31))
+        self.klass_combobox.setObjectName("klass_combobox")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_combobox.addItem("")
+        self.klass_text = QtWidgets.QLabel(parent=self.page_9)
+        self.klass_text.setGeometry(QtCore.QRect(280, 240, 41, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(9)
+        font.setBold(True)
+        self.klass_text.setFont(font)
+        self.klass_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.klass_text.setObjectName("klass_text")
+        self.predmet_text = QtWidgets.QLabel(parent=self.page_9)
+        self.predmet_text.setGeometry(QtCore.QRect(190, 240, 61, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(9)
+        font.setBold(True)
+        self.predmet_text.setFont(font)
+        self.predmet_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.predmet_text.setObjectName("predmet_text")
+        self.avtor_text = QtWidgets.QLabel(parent=self.page_9)
+        self.avtor_text.setGeometry(QtCore.QRect(330, 240, 91, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(9)
+        font.setBold(True)
+        self.avtor_text.setFont(font)
+        self.avtor_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.avtor_text.setObjectName("avtor_text")
+        self.avtor_combobox = QtWidgets.QComboBox(parent=self.page_9)
+        self.avtor_combobox.setGeometry(QtCore.QRect(330, 260, 91, 31))
+        self.avtor_combobox.setObjectName("avtor_combobox")
+        self.avtor_combobox.addItem("")
+        self.avtor_combobox.setItemText(0, "")
+        self.downloader_ychebnikov_progressbar = QtWidgets.QProgressBar(parent=self.page_9)
+        self.downloader_ychebnikov_progressbar.setGeometry(QtCore.QRect(30, 290, 161, 23))
+        self.downloader_ychebnikov_progressbar.setProperty("value", 24)
+        self.downloader_ychebnikov_progressbar.setObjectName("downloader_ychebnikov_progressbar")
+        self.predmet_combobox_2 = QtWidgets.QComboBox(parent=self.page_9)
+        self.predmet_combobox_2.setGeometry(QtCore.QRect(190, 110, 91, 31))
+        self.predmet_combobox_2.setObjectName("predmet_combobox_2")
+        self.predmet_combobox_2.addItem("")
+        self.predmet_combobox_2.addItem("")
+        self.predmet_combobox_2.addItem("")
+        self.predmet_combobox_2.addItem("")
+        self.predmet_combobox_2.addItem("")
+        self.predmet_combobox_2.addItem("")
+        self.stackedWidget.addWidget(self.page_9)
+        self.page_10 = QtWidgets.QWidget()
+        self.page_10.setObjectName("page_10")
+        self.analyzed_text_copy = QtWidgets.QPushButton(parent=self.page_10)
+        self.analyzed_text_copy.setGeometry(QtCore.QRect(40, 220, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.analyzed_text_copy.setFont(font)
+        self.analyzed_text_copy.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.analyzed_text_copy.setText("")
+        self.analyzed_text_copy.setIcon(icon6)
+        self.analyzed_text_copy.setIconSize(QtCore.QSize(18, 18))
+        self.analyzed_text_copy.setObjectName("analyzed_text_copy")
+        self.analyxed_text_clear = QtWidgets.QPushButton(parent=self.page_10)
+        self.analyxed_text_clear.setGeometry(QtCore.QRect(70, 220, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.analyxed_text_clear.setFont(font)
+        self.analyxed_text_clear.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: #EE3232;\n"
+"}")
+        self.analyxed_text_clear.setText("")
+        self.analyxed_text_clear.setIcon(icon4)
+        self.analyxed_text_clear.setIconSize(QtCore.QSize(18, 18))
+        self.analyxed_text_clear.setObjectName("analyxed_text_clear")
+        self.analyze_input = QtWidgets.QTextEdit(parent=self.page_10)
+        self.analyze_input.setGeometry(QtCore.QRect(10, 30, 491, 181))
+        self.analyze_input.setStyleSheet("QTextEdit {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QTextEdit:hover {\n"
+"background-color: #1E1E1E;\n"
+"}")
+        self.analyze_input.setObjectName("analyze_input")
+        self.simvols_text = QtWidgets.QLabel(parent=self.page_10)
+        self.simvols_text.setGeometry(QtCore.QRect(10, 260, 91, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.simvols_text.setFont(font)
+        self.simvols_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.simvols_text.setObjectName("simvols_text")
+        self.vsego_simvols_text = QtWidgets.QLabel(parent=self.page_10)
+        self.vsego_simvols_text.setGeometry(QtCore.QRect(10, 290, 61, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.vsego_simvols_text.setFont(font)
+        self.vsego_simvols_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.vsego_simvols_text.setObjectName("vsego_simvols_text")
+        self.simvols_bezprobelow_text = QtWidgets.QLabel(parent=self.page_10)
+        self.simvols_bezprobelow_text.setGeometry(QtCore.QRect(10, 370, 131, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.simvols_bezprobelow_text.setFont(font)
+        self.simvols_bezprobelow_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.simvols_bezprobelow_text.setObjectName("simvols_bezprobelow_text")
+        self.simvols_probels_text = QtWidgets.QLabel(parent=self.page_10)
+        self.simvols_probels_text.setGeometry(QtCore.QRect(10, 330, 71, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.simvols_probels_text.setFont(font)
+        self.simvols_probels_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.simvols_probels_text.setObjectName("simvols_probels_text")
+        self.slov_tetradnyhstr_text = QtWidgets.QLabel(parent=self.page_10)
+        self.slov_tetradnyhstr_text.setGeometry(QtCore.QRect(230, 370, 121, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.slov_tetradnyhstr_text.setFont(font)
+        self.slov_tetradnyhstr_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.slov_tetradnyhstr_text.setObjectName("slov_tetradnyhstr_text")
+        self.slov_achetyre_text = QtWidgets.QLabel(parent=self.page_10)
+        self.slov_achetyre_text.setGeometry(QtCore.QRect(230, 330, 81, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.slov_achetyre_text.setFont(font)
+        self.slov_achetyre_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.slov_achetyre_text.setObjectName("slov_achetyre_text")
+        self.vsego_slov_text = QtWidgets.QLabel(parent=self.page_10)
+        self.vsego_slov_text.setGeometry(QtCore.QRect(230, 290, 61, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.vsego_slov_text.setFont(font)
+        self.vsego_slov_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.vsego_slov_text.setObjectName("vsego_slov_text")
+        self.slov_text = QtWidgets.QLabel(parent=self.page_10)
+        self.slov_text.setGeometry(QtCore.QRect(230, 260, 91, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.slov_text.setFont(font)
+        self.slov_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.slov_text.setObjectName("slov_text")
+        self.analyze_text_button = QtWidgets.QPushButton(parent=self.page_10)
+        self.analyze_text_button.setGeometry(QtCore.QRect(100, 220, 121, 31))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.analyze_text_button.setFont(font)
+        self.analyze_text_button.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: green;\n"
+"}")
+        self.analyze_text_button.setObjectName("analyze_text_button")
+        self.widget = QtWidgets.QWidget(parent=self.page_10)
+        self.widget.setGeometry(QtCore.QRect(10, 420, 341, 4))
+        self.widget.setStyleSheet("background-color: rgb(27, 27, 27);")
+        self.widget.setObjectName("widget")
+        self.voda_text = QtWidgets.QLabel(parent=self.page_10)
+        self.voda_text.setGeometry(QtCore.QRect(20, 430, 41, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.voda_text.setFont(font)
+        self.voda_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.voda_text.setObjectName("voda_text")
+        self.toshnota_text = QtWidgets.QLabel(parent=self.page_10)
+        self.toshnota_text.setGeometry(QtCore.QRect(20, 460, 61, 20))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.toshnota_text.setFont(font)
+        self.toshnota_text.setStyleSheet("QLabel {\n"
+"background-color: ;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}")
+        self.toshnota_text.setObjectName("toshnota_text")
+        self.simvols_output_vsego = QtWidgets.QLineEdit(parent=self.page_10)
+        self.simvols_output_vsego.setGeometry(QtCore.QRect(10, 310, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.simvols_output_vsego.setFont(font)
+        self.simvols_output_vsego.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.simvols_output_vsego.setObjectName("simvols_output_vsego")
+        self.simvols_output_probels = QtWidgets.QLineEdit(parent=self.page_10)
+        self.simvols_output_probels.setGeometry(QtCore.QRect(10, 350, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.simvols_output_probels.setFont(font)
+        self.simvols_output_probels.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.simvols_output_probels.setObjectName("simvols_output_probels")
+        self.simvols_output_bezprobelov = QtWidgets.QLineEdit(parent=self.page_10)
+        self.simvols_output_bezprobelov.setGeometry(QtCore.QRect(10, 390, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.simvols_output_bezprobelov.setFont(font)
+        self.simvols_output_bezprobelov.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.simvols_output_bezprobelov.setObjectName("simvols_output_bezprobelov")
+        self.slova_output_tetradnyxlistov = QtWidgets.QLineEdit(parent=self.page_10)
+        self.slova_output_tetradnyxlistov.setGeometry(QtCore.QRect(230, 390, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.slova_output_tetradnyxlistov.setFont(font)
+        self.slova_output_tetradnyxlistov.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.slova_output_tetradnyxlistov.setObjectName("slova_output_tetradnyxlistov")
+        self.slova_output_Achetyre = QtWidgets.QLineEdit(parent=self.page_10)
+        self.slova_output_Achetyre.setGeometry(QtCore.QRect(230, 350, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.slova_output_Achetyre.setFont(font)
+        self.slova_output_Achetyre.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.slova_output_Achetyre.setObjectName("slova_output_Achetyre")
+        self.slova_output_vsego = QtWidgets.QLineEdit(parent=self.page_10)
+        self.slova_output_vsego.setGeometry(QtCore.QRect(230, 310, 111, 16))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.slova_output_vsego.setFont(font)
+        self.slova_output_vsego.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.slova_output_vsego.setObjectName("slova_output_vsego")
+        self.voda_output = QtWidgets.QLineEdit(parent=self.page_10)
+        self.voda_output.setGeometry(QtCore.QRect(60, 430, 61, 21))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.voda_output.setFont(font)
+        self.voda_output.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.voda_output.setObjectName("voda_output")
+        self.toshnota_output = QtWidgets.QLineEdit(parent=self.page_10)
+        self.toshnota_output.setGeometry(QtCore.QRect(80, 460, 61, 21))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        self.toshnota_output.setFont(font)
+        self.toshnota_output.setStyleSheet("QLineEdit {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"background-color: #252525;\n"
+"}")
+        self.toshnota_output.setObjectName("toshnota_output")
+        self.analysed_text_paste = QtWidgets.QPushButton(parent=self.page_10)
+        self.analysed_text_paste.setGeometry(QtCore.QRect(10, 220, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.analysed_text_paste.setFont(font)
+        self.analysed_text_paste.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.analysed_text_paste.setText("")
+        self.analysed_text_paste.setIcon(icon5)
+        self.analysed_text_paste.setIconSize(QtCore.QSize(18, 18))
+        self.analysed_text_paste.setObjectName("analysed_text_paste")
+        self.questions_analyzator = QtWidgets.QPushButton(parent=self.page_10)
+        self.questions_analyzator.setGeometry(QtCore.QRect(470, 220, 31, 31))
+        font = QtGui.QFont()
+        font.setFamily("Calibri")
+        font.setPointSize(10)
+        self.questions_analyzator.setFont(font)
+        self.questions_analyzator.setStyleSheet("QPushButton {\n"
+"background-color: #1D1D1D;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.questions_analyzator.setText("")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("icons/questions.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.questions_analyzator.setIcon(icon8)
+        self.questions_analyzator.setIconSize(QtCore.QSize(18, 18))
+        self.questions_analyzator.setObjectName("questions_analyzator")
+        self.stackedWidget.addWidget(self.page_10)
+        self.translator_open_page4 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.translator_open_page4.setGeometry(QtCore.QRect(20, 320, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        self.translator_open_page4.setFont(font)
+        self.translator_open_page4.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.translator_open_page4.setObjectName("translator_open_page4")
+        self.textanalyzer_open_page6 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.textanalyzer_open_page6.setGeometry(QtCore.QRect(20, 280, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        self.textanalyzer_open_page6.setFont(font)
+        self.textanalyzer_open_page6.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.textanalyzer_open_page6.setObjectName("textanalyzer_open_page6")
+        self.drygoe_open_page5 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.drygoe_open_page5.setGeometry(QtCore.QRect(20, 360, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.drygoe_open_page5.setFont(font)
+        self.drygoe_open_page5.setStyleSheet("QPushButton {\n"
+"background-color: #1E1E1E;\n"
+"color: white;\n"
+"border: 2px solid transparent;\n"
+"  border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"background-color: #252525;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: gray;\n"
+"}")
+        self.drygoe_open_page5.setObjectName("drygoe_open_page5")
         self.header = QtWidgets.QWidget(parent=self.centralwidget)
         self.header.setGeometry(QtCore.QRect(0, 0, 791, 41))
         self.header.setObjectName("header")
@@ -745,9 +1433,9 @@ class Ui_EduLab(object):
 "background-color: gray;\n"
 "}")
         self.rollup.setText("")
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("../../../Downloads/remove.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.rollup.setIcon(icon10)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("icons/remove_app.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.rollup.setIcon(icon9)
         self.rollup.setIconSize(QtCore.QSize(18, 18))
         self.rollup.setObjectName("rollup")
         self.close = QtWidgets.QPushButton(parent=self.header)
@@ -769,31 +1457,90 @@ class Ui_EduLab(object):
 "background-color: #EE3232;\n"
 "}")
         self.close.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("../../../Downloads/close.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.close.setIcon(icon11)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap("icons/close_app.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.close.setIcon(icon10)
         self.close.setIconSize(QtCore.QSize(18, 18))
         self.close.setObjectName("close")
         EduLab.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(EduLab)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(EduLab)
 
     def retranslateUi(self, EduLab):
         _translate = QtCore.QCoreApplication.translate
         EduLab.setWindowTitle(_translate("EduLab", "EduLab"))
         self.open1_textreworker_pg3.setText(_translate("EduLab", "Исправитель текста"))
-        self.ai_chat_text.setText(_translate("EduLab", "AI Чат"))
-        self.label.setText(_translate("EduLab", "LLama 3-1 Api Key"))
-        self.label_2.setText(_translate("EduLab", "ChatGPT Api Key"))
-        self.more_settings.setText(_translate("EduLab", "Другие настройки"))
+        self.ai_chat_text.setText(_translate("EduLab", "Приветствуем вас!"))
         self.background_change_text.setText(_translate("EduLab", "Изменить фон окна"))
         self.theme_text.setText(_translate("EduLab", "Тема приложения"))
         self.background_set_file_open.setText(_translate("EduLab", "Выбрать изображение"))
         self.set_black_theme.setText(_translate("EduLab", "Темная"))
         self.set_white_theme.setText(_translate("EduLab", "Белая"))
+        self.background_change_text_2.setText(_translate("EduLab", "EduLab 1.2.1 (noAi)"))
+        self.background_change_text_5.setText(_translate("EduLab", "Удалить приложение"))
+        self.background_set_file_open_3.setText(_translate("EduLab", "Удалить"))
         self.checktext.setText(_translate("EduLab", "Исправить текст"))
-        self.open2_translator.setText(_translate("EduLab", "Переводчик"))
-        self.open3_pptxgen.setText(_translate("EduLab", "PPTX Генератор"))
-        self.open4_imggen.setText(_translate("EduLab", "IMG Генератор"))
+        self.translate_button.setText(_translate("EduLab", "Перевести"))
+        self.translator_languages_comboBox.setItemText(0, _translate("EduLab", "Русский"))
+        self.translator_languages_comboBox.setItemText(1, _translate("EduLab", "Английский"))
+        self.translator_languages_comboBox.setItemText(2, _translate("EduLab", "Немецкий"))
+        self.translator_languages_comboBox.setItemText(3, _translate("EduLab", "Французский"))
+        self.translator_languages_comboBox.setItemText(4, _translate("EduLab", "Японский"))
+        self.translator_languages_comboBox.setItemText(5, _translate("EduLab", "курво"))
+        self.translator_languages_comboBox.setItemText(6, _translate("EduLab", "Китайский"))
+        self.translator_languages_comboBox.setItemText(7, _translate("EduLab", "Турецкий"))
+        self.translator_languages_comboBox.setItemText(8, _translate("EduLab", "Белорусский"))
+        self.translator_languages_comboBox.setItemText(9, _translate("EduLab", "Казахский"))
+        self.downloader_text.setText(_translate("EduLab", "Скачать видео или изображение с видеохостинга"))
+        self.download_video_button.setText(_translate("EduLab", "Скачать"))
+        self.paste_ssilka_button.setText(_translate("EduLab", "Вставить ссылку"))
+        self.skachat_ychebnik_text.setText(_translate("EduLab", "Скачать учебник"))
+        self.downloader_ychebnikov.setText(_translate("EduLab", "Скачать"))
+        self.predmet_combobox.setItemText(0, _translate("EduLab", "Русский"))
+        self.predmet_combobox.setItemText(1, _translate("EduLab", "Литература"))
+        self.klass_combobox.setItemText(0, _translate("EduLab", "1"))
+        self.klass_combobox.setItemText(1, _translate("EduLab", "2"))
+        self.klass_combobox.setItemText(2, _translate("EduLab", "3"))
+        self.klass_combobox.setItemText(3, _translate("EduLab", "4"))
+        self.klass_combobox.setItemText(4, _translate("EduLab", "5"))
+        self.klass_combobox.setItemText(5, _translate("EduLab", "6"))
+        self.klass_combobox.setItemText(6, _translate("EduLab", "7"))
+        self.klass_combobox.setItemText(7, _translate("EduLab", "8"))
+        self.klass_combobox.setItemText(8, _translate("EduLab", "9"))
+        self.klass_combobox.setItemText(9, _translate("EduLab", "10"))
+        self.klass_combobox.setItemText(10, _translate("EduLab", "11"))
+        self.klass_text.setText(_translate("EduLab", "Класс"))
+        self.predmet_text.setText(_translate("EduLab", "Предмет"))
+        self.avtor_text.setText(_translate("EduLab", "Автор"))
+        self.predmet_combobox_2.setItemText(0, _translate("EduLab", "YouTube"))
+        self.predmet_combobox_2.setItemText(1, _translate("EduLab", "VK"))
+        self.predmet_combobox_2.setItemText(2, _translate("EduLab", "Dzen"))
+        self.predmet_combobox_2.setItemText(3, _translate("EduLab", "Pinterest"))
+        self.predmet_combobox_2.setItemText(4, _translate("EduLab", "Platform"))
+        self.predmet_combobox_2.setItemText(5, _translate("EduLab", "RuTube"))
+        self.simvols_text.setText(_translate("EduLab", "Символов"))
+        self.vsego_simvols_text.setText(_translate("EduLab", "Всего"))
+        self.simvols_bezprobelow_text.setText(_translate("EduLab", "Без учёта пробелов"))
+        self.simvols_probels_text.setText(_translate("EduLab", "Пробелов"))
+        self.slov_tetradnyhstr_text.setText(_translate("EduLab", "Тетрадных листов"))
+        self.slov_achetyre_text.setText(_translate("EduLab", "Страниц A4"))
+        self.vsego_slov_text.setText(_translate("EduLab", "Всего"))
+        self.slov_text.setText(_translate("EduLab", "Слов"))
+        self.analyze_text_button.setText(_translate("EduLab", "Анализировать"))
+        self.voda_text.setText(_translate("EduLab", "Вода"))
+        self.toshnota_text.setText(_translate("EduLab", "Тошнота"))
+        self.translator_open_page4.setText(_translate("EduLab", "Переводчик"))
+        self.textanalyzer_open_page6.setText(_translate("EduLab", "Анализ текста"))
+        self.drygoe_open_page5.setText(_translate("EduLab", "Другое"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    EduLab = QtWidgets.QMainWindow()
+    ui = Ui_EduLab()
+    ui.setupUi(EduLab)
+    EduLab.show()
+    sys.exit(app.exec())

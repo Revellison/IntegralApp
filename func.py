@@ -103,3 +103,6 @@ def copy_errors(error_output):
     clipboard = QtWidgets.QApplication.clipboard()
     clipboard.setText(error_output.toPlainText())
 
+
+
+
