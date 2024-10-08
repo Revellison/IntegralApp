@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="bck">
-    <file>night.jpg</file>
-    <file>day.jpg</file>
-  </qresource>
-</RCC>
