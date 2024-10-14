@@ -1,0 +1,51 @@
+QMainWindow {
+    background-color: rgb(15, 15, 15);
+}
+
+QPushButton {
+    background-color: #1E1E1E;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #252525;
+}
+
+QPushButton:pressed {
+    background-color: gray;
+}
+
+QTextEdit {
+    background-color: #1D1D1D;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 6px;
+}
+
+QTextEdit:hover {
+    background-color: #1E1E1E;
+}
+
+QLabel {
+    color: white;
+}
+
+QComboBox {
+    background-color: #1E1E1E;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 6px;
+}
+
+QLineEdit {
+    background-color: #1D1D1D;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 6px;
+}
+
+QLineEdit:hover {
+    background-color: #1E1E1E;
+}
