@@ -5,25 +5,25 @@ QMainWindow {
 
 /* Кнопки */
 QPushButton {
-    background-color: #C8C6CD; /* Фон кнопок */
-    color: black;              /* Черный текст */
+    background-color: #6495ED; /* Фон кнопок */
+    color: white;              /* Черный текст */
     border: 2px solid transparent;
     border-radius: 6px;
 }
 
 /* При наведении на кнопку */
 QPushButton:hover {
-    background-color: #B3AFBC; /* Цвет кнопки при наведении */
+    background-color: #89AEF1; /* Цвет кнопки при наведении */
 }
 
 /* При нажатии на кнопку */
 QPushButton:pressed {
-    background-color: #B497FF;    /* Цвет кнопки при нажатии */
+    background-color: #B3CBF5;    /* Цвет кнопки при нажатии */
 }
 
 /* Поля ввода (QLineEdit, QTextEdit) */
 QLineEdit, QTextEdit {
-    background-color: #D6D4DA;   /* Фон полей ввода */
+    background-color: #BDD7F1;   /* Фон полей ввода */
     color: black;              /* Черный текст */
     border: 2px solid transparent;
     border-radius: 6px;
@@ -31,7 +31,7 @@ QLineEdit, QTextEdit {
 
 /* При наведении на поле ввода */
 QLineEdit:hover, QTextEdit:hover {
-    background-color: #f0f0f0; /* Цвет поля ввода при наведении */
+    background-color: #B6D0FB; /* Цвет поля ввода при наведении */
 }
 
 /* Метки */
