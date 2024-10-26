@@ -1,26 +1,32 @@
-#pyinstaller --noconfirm --onedir --windowed --clean --log-level=DEBUG --hidden-import=scipy.special._cdflib --hidden-import=setuptools.msvc --exclude-module=tzdata your_script.py
-#(old)pyinstaller --noconfirm --onedir --windowed --clean --log-level=DEBUG --hidden-import=scipy.special._cdflib --hidden-import=setuptools.msvc your_script.py
-#pyinstaller --noconfirm --onedir --windowed --clean --hidden-import=func --hidden-import=googletrans --hidden-import=googlesearch --hidden-import=tqdm --hidden-import=requests --hidden-import=bs4 --hidden-import=sklearn.feature_extraction.text.TfidfVectorizer --hidden-import=sklearn.metrics.pairwise.cosine_similarity --exclude-module=tkinter your_script.py
-from PyQt6 import QtWidgets, QtCore
-from PyQt6.QtWidgets import QFileDialog
-from design2 import Ui_EduLab  # Импортируем интерфейс из сгенерированного файла
-from collections import Counter
-from deep_translator import GoogleTranslator
-import func  # Импортируем файл с функциями
-import time
-import re
+#pyinstaller --noconfirm --onedir --windowed --icon "D:\Andrey\env\app_icons\logo_white.ico" --clean --log-level "DEBUG" --add-data "D:\Andrey\env\styles;styles/" --add-data "D:\Andrey\env\icons;icons/" --add-data "D:\Andrey\env\app_icons;app_icons/"  "D:\Andrey\env\EduLab.py"
+import sys
 import json
 import os
+import re
+import time
+from collections import Counter
+from PyQt6.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget
+from PyQt6.QtGui import QMovie, QPalette, QColor
+from PyQt6.QtCore import Qt
+from deep_translator import GoogleTranslator
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import QGraphicsDropShadowEffect, QFileDialog
+from PyQt6.QtCore import QTimer
+
+import func  # Импортируем файл с функциями
+from design2 import Ui_EduLab  # Импортируем интерфейс из сгенерированного файла
 
 
 class MyApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
+
+
         self.current_background = None  # Переменная для хранения пути к текущему изображению
         self.isAnimating = False
         self.ui = Ui_EduLab()  # Создаем объект интерфейса
         self.ui.setupUi(self)  # Инициализируем интерфейс
-        self.setFixedSize(800, 600)  # Фиксируем размер окна
+        self.setFixedSize(1000, 600)  # Фиксируем размер окна
         self.ui.stackedWidget.setCurrentIndex(0)  # Устанавливаем начальную страницу
         #self.apply_theme("styles/light_theme.qss")
         self.current_theme = "light"  # По умолчанию светлая тема
@@ -28,8 +34,46 @@ class MyApp(QtWidgets.QMainWindow):
         # Убираем стандартный заголовок окна
         #self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
         #ytdn
+        # Подключаем сигналы к слотам
+        self.ui.home_pg1.clicked.connect(lambda: self.on_button_clicked(self.ui.home_pg1))
+        self.ui.settings_pg2.clicked.connect(lambda: self.on_button_clicked(self.ui.settings_pg2))
+        self.ui.open1_textreworker_pg3.clicked.connect(lambda: self.on_button_clicked(self.ui.open1_textreworker_pg3))
+        self.ui.textanalyzer_open_page6.clicked.connect(lambda: self.on_button_clicked(self.ui.textanalyzer_open_page6))
+        self.ui.translator_open_page4.clicked.connect(lambda: self.on_button_clicked(self.ui.translator_open_page4))
+        self.ui.open1_textreworker_pg3_2.clicked.connect(lambda: self.on_button_clicked(self.ui.open1_textreworker_pg3_2))
+        self.ui.drygoe_open_page5.clicked.connect(lambda: self.on_button_clicked(self.ui.drygoe_open_page5))
+        # тень
+        shadow_effect = QGraphicsDropShadowEffect()
+        shadow_effect.setBlurRadius(6)  # Радиус размытия
+        shadow_effect.setXOffset(1)  # Смещение по оси X
+        shadow_effect.setYOffset(0)  # Смещение по оси Y
+        shadow_effect.setColor(QColor("#060606"))
 
-            
+        # Находим кнопку и применяем эффект тени
+        self.ui.widget_5.setGraphicsEffect(shadow_effect)
+
+    def on_button_clicked(self, button):
+        # Снимаем нажатие со всех кнопок
+        self.ui.home_pg1.setChecked(False)
+        self.ui.settings_pg2.setChecked(False)
+        self.ui.open1_textreworker_pg3.setChecked(False)
+        self.ui.textanalyzer_open_page6.setChecked(False)
+        self.ui.translator_open_page4.setChecked(False)
+        self.ui.open1_textreworker_pg3_2.setChecked(False)
+        self.ui.drygoe_open_page5.setChecked(False)
+
+        # Принудительно обновляем интерфейс
+        self.ui.home_pg1.repaint()
+        self.ui.settings_pg2.repaint()
+        self.ui.open1_textreworker_pg3.repaint()
+        self.ui.textanalyzer_open_page6.repaint()
+        self.ui.translator_open_page4.repaint()
+        self.ui.open1_textreworker_pg3_2.repaint()
+        self.ui.drygoe_open_page5.repaint()
+
+        # Задержка перед установкой состояния выбранной кнопки
+        QTimer.singleShot(20, lambda: button.setChecked(True))
+
         # Привязка пользовательских кнопок к действиям
         self.ui.close.clicked.connect(self.animate_close)  # Кнопка закрытия с анимацией
         self.ui.rollup.clicked.connect(self.animate_minimize)  # Кнопка сворачивания с анимацией
@@ -148,31 +192,26 @@ class MyApp(QtWidgets.QMainWindow):
         return default
 
     def set_background_image(self):
-        #Выбор изображения и установка его как фон.
+
+        print("Вызван set_background_image()")  # Отладочное сообщение
         try:
-            # Вызываем диалог выбора файла
             file_path, _ = QFileDialog.getOpenFileName(
                 self, "Выбрать изображение", "", "Images (*.png *.jpg *.jpeg);;All Files (*)"
             )
-
-            # Проверяем, выбран ли файл
             if file_path:
-                self.current_background = file_path  # Сохраняем путь к изображению
-                self.ui.lineEdit.setText(file_path)  # Выводим путь к изображению в lineEdit
-                self.apply_background(file_path)  # Устанавливаем изображение как фон
+                print(f"Выбрано изображение: {file_path}")
+                self.current_background = file_path
+                self.ui.lineEdit.setText(file_path)
+                self.apply_background(file_path)
             else:
                 print("Файл не выбран.")
-
         except Exception as e:
-            print(f"Ошибка при выборе или установке фона: {e}")  # Печатаем ошибку для отладки
+            print(f"Ошибка: {e}")
 
     def apply_background(self, image_path):
         if not os.path.exists(image_path):
             print("Файл не найден")
             return
-
-        # Сохраняем текущие стили
-        current_style = self.styleSheet()
 
         # Создаем стиль для фона
         background_style = f"""
@@ -183,8 +222,8 @@ class MyApp(QtWidgets.QMainWindow):
         }}
         """
 
-        # Применяем новый стиль фона поверх существующих стилей
-        self.setStyleSheet(current_style + background_style)
+        # Применяем новый стиль, сбрасывая старый
+        self.setStyleSheet(background_style)
 
     def reset_background(self):
         """Сбросить фон до исходного состояния и применить соответствующую тему."""
@@ -207,25 +246,17 @@ class MyApp(QtWidgets.QMainWindow):
 
     def set_white_theme(self):
         """Установить светлую тему."""
-        print("Applying white theme")  # Отладочная информация
         self.apply_theme("styles/light_theme.qss")
         self.current_theme = "light"
 
     def set_black_theme(self):
         """Установить темную тему."""
-        print("Applying black theme")  # Отладочная информация
         self.apply_theme("styles/dark_theme.qss")
         self.current_theme = "dark"
 
     def analyze_text(self):
         """Функция анализа текста и вывода результатов."""
         text = self.ui.analyze_input.toPlainText()  # Получаем текст из поля ввода и удаляем лишние пробелы
-
-        # Проверка: если поле ввода пустое, выводим сообщение и завершаем функцию
-        if not text:
-            QtWidgets.QMessageBox.warning(self, "Ошибка", "Поле ввода пустое! Пожалуйста, введите текст для анализа.")
-
-            return
 
         # Выполняем анализ текста
         results = self.calculate_text_metrics(text)
@@ -310,9 +341,9 @@ class MyApp(QtWidgets.QMainWindow):
                     f"time: {elapsed_time:.2f} "
                 )
             except Exception as e:
-                self.ui.translator_otladka_output.setPlainText(f"Ошибка перевода: {str(e)}")
+                self.ui.translator_otladka_output.setPlainText(f"Translate error: {str(e)}")
         else:
-            self.ui.translator_otladka_output.setPlainText("Введите текст для перевода.")
+            self.ui.translator_otladka_output.setPlainText("popa")
 
     def get_selected_language(self):
         languages = {
@@ -441,7 +472,9 @@ class MyApp(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     import sys
 
+
     app = QtWidgets.QApplication(sys.argv)
     window = MyApp()
     window.show_with_animation()  # Запуск с анимацией
     sys.exit(app.exec())
+

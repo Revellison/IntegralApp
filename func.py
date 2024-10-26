@@ -58,10 +58,6 @@ def check_text(text_input, text_output, error_output):
     # Получаем текст из поля ввода
     input_text = text_input.toPlainText().strip()
 
-    # Проверяем, что текст не пустой
-    if not input_text:
-        QMessageBox.warning(None, "Ошибка", "Поле ввода пустое!")
-        return
 
     # Запрашиваем проверки орфографии через Yandex Speller API
     corrections = check_spelling(input_text)
@@ -84,8 +80,6 @@ def check_text(text_input, text_output, error_output):
         text_output.setPlainText(corrected_text)
         error_output.setPlainText("\n".join(error_messages))
     else:
-        # Если ошибок не найдено
-        QMessageBox.information(None, "Результат", "Ошибок не найдено.")
         text_output.setPlainText(input_text)
         error_output.clear()
 
