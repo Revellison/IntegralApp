@@ -1,0 +1,14 @@
+
+.idea/
+*.swp
+*.swo
+
+local/
+trash/
+
+.venv/
+
+settings.json
+
+__pycache__/
+*.py[cod]

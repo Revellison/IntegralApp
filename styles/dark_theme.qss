@@ -1,3 +1,14 @@
+
+/* drawpad */
+
+#,#,#,#,#,#,#,#,#,#,{
+    border: 0px solid transparent;
+    border-radius: 0px;
+	background-color: rgb(21, 21, 21);
+}
+
+
+
 QMainWindow {
     background-color: rgb(15, 15, 15);
 }
@@ -13,7 +24,7 @@ QMainWindow {
 }
 #home_pg1:pressed, #settings_pg2:pressed, #open1_textreworker_pg3:pressed, #textanalyzer_open_page6:pressed,
 #translator_open_page4:pressed, #open1_textreworker_pg3_2:pressed, #drygoe_open_page5:pressed {
-    background-color: gray;
+    background-color: #212121;
 }
 #home_pg1:checked, #settings_pg2:checked, #open1_textreworker_pg3:checked, #textanalyzer_open_page6:checked,
 #translator_open_page4:checked, #open1_textreworker_pg3_2:checked, #drygoe_open_page5:checked {
