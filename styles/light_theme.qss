@@ -1,38 +1,34 @@
 /* Общий стиль для светлой темы */
 QMainWindow {
-    background-color: #F4F1DE;  /* Фон белый */
+    background-color: #dee2e6;  /* Фон белый */
 }
-#theme_text_5, #label_2 {
-    color: white;              /* Черный текст для QLabel */
-}
-
 #home_pg1, #settings_pg2, #open1_textreworker_pg3, #textanalyzer_open_page6,
 #translator_open_page4, #open1_textreworker_pg3_2, #drygoe_open_page5 {
     border: 0px solid transparent;
     border-radius: 0px;
-	background-color: #E07A5F;
+	background-color: rgb(21, 21, 21);
 }
 #home_pg1:hover, #settings_pg2:hover, #open1_textreworker_pg3:hover, #textanalyzer_open_page6:hover,
 #translator_open_page4:hover, #open1_textreworker_pg3_2:hover, #drygoe_open_page5:hover {
-    background-color: #EB957E;
+    background-color: #252525;
 }
 #home_pg1:pressed, #settings_pg2:pressed, #open1_textreworker_pg3:pressed, #textanalyzer_open_page6:pressed,
 #translator_open_page4:pressed, #open1_textreworker_pg3_2:pressed, #drygoe_open_page5:pressed {
-    background-color: #FFC8BA;
+    background-color: gray;
 }
 #home_pg1:checked, #settings_pg2:checked, #open1_textreworker_pg3:checked, #textanalyzer_open_page6:checked,
 #translator_open_page4:checked, #open1_textreworker_pg3_2:checked, #drygoe_open_page5:checked {
-    background-color: #FFC8BA;
+    background-color: #212121;
     }
 
 #widget_5 {
     border: 0px solid transparent;
     border-radius: 15px;
-	background-color: #E07A5F;
+	background-color: rgb(21, 21, 21);
 }
 /* Кнопки */
 QPushButton {
-    background-color: #E07A5F; /* Фон кнопок */
+    background-color: #6495ED; /* Фон кнопок */
     color: white;              /* Черный текст */
     border: 2px solid transparent;
     border-radius: 6px;
@@ -40,17 +36,17 @@ QPushButton {
 
 /* При наведении на кнопку */
 QPushButton:hover {
-    background-color: #EB957E; /* Цвет кнопки при наведении */
+    background-color: #89AEF1; /* Цвет кнопки при наведении */
 }
 
 /* При нажатии на кнопку */
 QPushButton:pressed {
-    background-color: #FFC8BA;    /* Цвет кнопки при нажатии */
+    background-color: #B3CBF5;    /* Цвет кнопки при нажатии */
 }
 
 /* Поля ввода (QLineEdit, QTextEdit) */
 QLineEdit, QTextEdit {
-    background-color: white;   /* Фон полей ввода */
+    background-color: #BDD7F1;   /* Фон полей ввода */
     color: black;              /* Черный текст */
     border: 2px solid transparent;
     border-radius: 6px;
@@ -58,14 +54,13 @@ QLineEdit, QTextEdit {
 
 /* При наведении на поле ввода */
 QLineEdit:hover, QTextEdit:hover {
-    background-color: #FFF6F3; /* Цвет поля ввода при наведении */
+    background-color: #B6D0FB; /* Цвет поля ввода при наведении */
 }
 
 /* Метки */
 QLabel {
-    color: #E07A5F;              /* Черный текст для QLabel */
+    color: black;              /* Черный текст для QLabel */
 }
-
 
 /* Комбобоксы */
 QComboBox {
