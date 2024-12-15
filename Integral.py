@@ -776,7 +776,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.settings_pg2.clicked.connect(lambda: self.switch_page(1))  # Привязка кнопки к переключению на страницу 1
         self.ui.open1_textreworker_pg3.clicked.connect(lambda: self.switch_page(2))  # Привязка кнопки к переключению на страницу 2
         self.ui.translator_open_page4.clicked.connect(lambda: self.switch_page(3))  # Привязка кнопки к переключению на страницу 4
-        self.ui.drygoe_open_page5.clicked.connect(lambda: self.switch_page(4))  # Привязка кнопки к переключению на страницу 5
+        #self.ui.drygoe_open_page5.clicked.connect(lambda: self.switch_page(4))  # Привязка кнопки к переключению на страницу 5
         self.ui.textanalyzer_open_page6.clicked.connect(lambda: self.switch_page(5))  # Привязка кнопки к переключению на страницу 6
         self.ui.functions_page7.clicked.connect(lambda: self.switch_page(7))  # Привязка кнопки к переключению на страницу 7
         self.ui.drawpad_pg8.clicked.connect(lambda: self.switch_page(8))  # Привязка кнопки к переключению на страницу 8
