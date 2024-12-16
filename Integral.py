@@ -136,7 +136,7 @@ class MiniCalculatorUI(QMainWindow):
                 self.current_theme = settings.get("theme", "light")  # Загрузить текущую тему
                 self.current_background = settings.get("background_image", None)  # Загрузить путь к изображению фона
 
-                print(f"Mini calc oaded theme: {self.current_theme}")  # Отладочная информация
+                print(f"Mini calc loaded theme: {self.current_theme}")  # Отладочная информация
 
                 # Применяем загруженную тему
                 if self.current_theme == "dark":
