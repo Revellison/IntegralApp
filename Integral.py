@@ -19,7 +19,7 @@ import numpy as np
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import sympy as sp
-
+from updater import update_application
 from design import Ui_EduLab  # Импортируем интерфейс из сгенерированного файла
 
 class SplashScreen(QtWidgets.QWidget):
@@ -691,7 +691,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.current_theme = "dark"  # По умолчанию светлая тема
 
         self.buttons = [self.ui.settings_pg2, self.ui.opisanye_pg1, self.ui.open1_textreworker_pg3, self.ui.drawpad_pg8, self.ui.open1_textreworker_pg3,
-                        self.ui.textanalyzer_open_page6, self.ui.translator_open_page4, self.ui.calc_page10, self.ui.functions_page7, self.ui.drygoe_open_page5]  # Добавьте все кнопки из дизайна
+                        self.ui.textanalyzer_open_page6, self.ui.translator_open_page4, self.ui.functions_page7, self.ui.drygoe_open_page5]  # Добавьте все кнопки из дизайна
         self.animated_buttons = [Animated(button) for button in self.buttons]
 
         #hide
@@ -780,7 +780,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.textanalyzer_open_page6.clicked.connect(lambda: self.switch_page(5))  # Привязка кнопки к переключению на страницу 6
         self.ui.functions_page7.clicked.connect(lambda: self.switch_page(7))  # Привязка кнопки к переключению на страницу 7
         self.ui.drawpad_pg8.clicked.connect(lambda: self.switch_page(8))  # Привязка кнопки к переключению на страницу 8
-        self.ui.calc_page10.clicked.connect(lambda: self.switch_page(9))  # Привязка кнопки к переключению на страницу 9
+        #self.ui.calc_page10.clicked.connect(lambda: self.switch_page(9))  # Привязка кнопки к переключению на страницу 9
 
 
         # Перемещение окна
@@ -827,6 +827,13 @@ class MyApp(QtWidgets.QMainWindow):
         # Подключение кнопки для построения графика
         self.ui.function_create.clicked.connect(self.plot_function)
         self.ui.function_clear.clicked.connect(lambda: TextProcessor.clear_text(self.ui.function_lineEdit))  # Кнопка удаления
+        self.ui.checkupdate_button.clicked.connect(self.check_for_updates)
+
+
+    def check_for_updates(self):
+        # Вызов функции из обновляющего скрипта
+        GITHUB_REPO_URL = "https://api.github.com/repos/Revellison/IntegralApp"
+        update_application(GITHUB_REPO_URL)
 
     def clear_draw_pad(self):
         self.draw_pad_area.shapes = []

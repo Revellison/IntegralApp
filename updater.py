@@ -4,6 +4,7 @@ import requests
 import json
 import shutil
 from packaging import version
+from PyQt6.QtWidgets import QMessageBox
 
 def get_current_version():
     """Чтение текущей версии приложения из файла."""
@@ -25,20 +26,18 @@ def get_latest_version_info(repo_url):
         raise Exception(f"Failed to fetch latest version info: {response.status_code}")
 
 def download_and_extract_tarball(url, extract_to):
-    """Скачивание и распаковка .tar архива."""
+
     response = requests.get(url, stream=True)
     if response.status_code == 200:
         tarball_path = "latest.tar.gz"
         with open(tarball_path, "wb") as f:
             f.write(response.content)
 
-        # Распаковка архива
         with tarfile.open(tarball_path, "r:gz") as tar:
             tar.extractall(extract_to)
 
-        os.remove(tarball_path)  # Удаление архива после распаковки
+        os.remove(tarball_path)
 
-        # Определяем корневую папку внутри архива
         extracted_dirs = [
             name for name in os.listdir(extract_to)
             if os.path.isdir(os.path.join(extract_to, name))
@@ -55,10 +54,7 @@ def download_and_extract_tarball(url, extract_to):
 def backup_and_replace(src, dst, backup_dir):
     """Сохранение текущей версии файлов и замена."""
     if os.path.exists(dst):
-        # Создание директории для бэкапа, если её нет
         os.makedirs(backup_dir, exist_ok=True)
-
-        # Путь для сохранения бэкапа
         backup_path = os.path.join(backup_dir, os.path.basename(dst))
 
         if os.path.isdir(dst):
@@ -68,7 +64,7 @@ def backup_and_replace(src, dst, backup_dir):
         else:
             shutil.copy2(dst, backup_path)
 
-        print(f"Бэкап сделан: {backup_path}")
+        print("Бэкап", f"Бэкап сделан: {backup_path}")
 
         if os.path.isdir(dst):
             shutil.rmtree(dst)
@@ -82,62 +78,53 @@ def backup_and_replace(src, dst, backup_dir):
 
 def update_application(repo_url):
     """Основная функция обновления приложения."""
-    temp_dir = None  # Инициализация переменной
-    backup_dir = "updatelocalhistory"  # Директория для сохранения бэкапов
+    temp_dir = None
+    backup_dir = "updatelocalhistory"
     try:
-        print("Checking for updates...")
+        print("Обновление", "Проверка обновлений...")
 
-        # Получение текущей версии
         current_version = get_current_version()
-        print(f"Current version: {current_version}")
+        print("Текущая версия", f"Текущая версия: {current_version}")
 
-        # Получение информации о последней версии
         latest_version, tarball_url = get_latest_version_info(repo_url)
-        print(f"Latest version: {latest_version}")
+        print("Последняя версия", f"Последняя версия: {latest_version}")
 
-        # Сравнение версий
         if version.parse(current_version) > version.parse(latest_version):
-            print("Вы находитесь в тестовой версии приложения.")
+            QMessageBox.information(None, "Тестовая версия", "Вы находитесь в тестовой версии приложения.")
             return
 
         if current_version == latest_version:
-            print("Application is up-to-date.")
+            QMessageBox.information(None, "Обновление", "Приложение в актуальной версии.")
             return
 
-        print("Downloading the latest version...")
+        QMessageBox.information(None, "Обновление", "Скачивание последней версии...")
 
-        # Создание временной папки для распаковки
         temp_dir = "temp_update"
         os.makedirs(temp_dir, exist_ok=True)
 
         extracted_root = download_and_extract_tarball(tarball_url, temp_dir)
 
-        print("Updating application files...")
+        print(None, "Обновление", "Обновление файлов приложения...")
 
-        # Копирование файлов из корневой папки обновления в текущую директорию с бэкапом заменяемых файлов
         for item in os.listdir(extracted_root):
             s = os.path.join(extracted_root, item)
             d = os.path.join(os.getcwd(), item)
             backup_and_replace(s, d, backup_dir)
 
-        # Обновление версии
         with open("version.json", "w") as f:
             json.dump({"version": latest_version}, f)
 
-        print("Application updated successfully!")
+        QMessageBox.information(None, "Обновление", "Приложение успешно обновлено!")
 
     except Exception as e:
-        print(f"Update failed: {e}")
+        QMessageBox.critical(None, "Ошибка", f"Ошибка обновления: {e}")
 
     finally:
-        # Удаление временной папки
         if temp_dir and os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
 
 if __name__ == "__main__":
-    # Замените на URL вашего репозитория
     GITHUB_REPO_URL = "https://api.github.com/repos/Revellison/IntegralApp"
-
     update_application(GITHUB_REPO_URL)
 
 
