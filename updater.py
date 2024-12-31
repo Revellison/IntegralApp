@@ -6,6 +6,7 @@ import shutil
 from packaging import version
 from PyQt6.QtWidgets import QMessageBox
 
+
 def get_current_version():
     """Чтение текущей версии приложения из файла."""
     version_file = "version.json"
@@ -15,41 +16,56 @@ def get_current_version():
             return data.get("version", "0.0.0")
     return "0.0.0"
 
+
 def get_latest_version_info(repo_url):
     """Получение информации о последней версии из GitHub."""
     releases_api_url = f"{repo_url}/releases/latest"
     response = requests.get(releases_api_url)
     if response.status_code == 200:
         release_info = response.json()
-        return release_info.get("tag_name"), release_info.get("tarball_url")
+        tag_name = release_info.get("tag_name")
+        # Поиск подходящего файла с расширением .tar
+        asset_url = None
+        for asset in release_info.get("assets", []):
+            if asset["name"].endswith(".tar"):  # Укажите нужное расширение файла
+                asset_url = asset["browser_download_url"]
+                break
+
+        if not asset_url:
+            raise Exception("Не найден файл приложения в формате .tar в релизе.")
+
+        return tag_name, asset_url
     else:
         raise Exception(f"Failed to fetch latest version info: {response.status_code}")
 
-def download_and_extract_tarball(url, extract_to):
 
+def download_and_extract_tarball(url, extract_to):
+    """Скачивание и распаковка архива."""
     response = requests.get(url, stream=True)
     if response.status_code == 200:
-        tarball_path = "latest.tar.gz"
+        tarball_path = "latest.tar"
         with open(tarball_path, "wb") as f:
             f.write(response.content)
 
-        with tarfile.open(tarball_path, "r:gz") as tar:
+        with tarfile.open(tarball_path, "r:") as tar:
+            # Извлечь содержимое архива
             tar.extractall(extract_to)
 
         os.remove(tarball_path)
 
-        extracted_dirs = [
-            name for name in os.listdir(extract_to)
-            if os.path.isdir(os.path.join(extract_to, name))
-        ]
+        # Проверить, какие файлы или папки извлеклись
+        extracted_items = os.listdir(extract_to)
 
-        if len(extracted_dirs) == 1:
-            return os.path.join(extract_to, extracted_dirs[0])
+        # Если в архиве только одна папка, использовать её как корневую
+        if len(extracted_items) == 1 and os.path.isdir(os.path.join(extract_to, extracted_items[0])):
+            return os.path.join(extract_to, extracted_items[0])
         else:
-            raise Exception("Не удалось определить корневую папку архива.")
-
+            # Если несколько файлов/папок, оставить всё как есть
+            return extract_to
     else:
         raise Exception(f"Failed to download tarball: {response.status_code}")
+
+
 
 def backup_and_replace(src, dst, backup_dir):
     """Сохранение текущей версии файлов и замена."""
@@ -76,6 +92,7 @@ def backup_and_replace(src, dst, backup_dir):
     else:
         shutil.copy2(src, dst)
 
+
 def update_application(repo_url):
     """Основная функция обновления приложения."""
     temp_dir = None
@@ -86,7 +103,7 @@ def update_application(repo_url):
         current_version = get_current_version()
         print("Текущая версия", f"Текущая версия: {current_version}")
 
-        latest_version, tarball_url = get_latest_version_info(repo_url)
+        latest_version, asset_url = get_latest_version_info(repo_url)
         print("Последняя версия", f"Последняя версия: {latest_version}")
 
         if version.parse(current_version) > version.parse(latest_version):
@@ -102,7 +119,7 @@ def update_application(repo_url):
         temp_dir = "temp_update"
         os.makedirs(temp_dir, exist_ok=True)
 
-        extracted_root = download_and_extract_tarball(tarball_url, temp_dir)
+        extracted_root = download_and_extract_tarball(asset_url, temp_dir)
 
         print(None, "Обновление", "Обновление файлов приложения...")
 
@@ -123,8 +140,7 @@ def update_application(repo_url):
         if temp_dir and os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
 
+
 if __name__ == "__main__":
     GITHUB_REPO_URL = "https://api.github.com/repos/Revellison/IntegralApp"
     update_application(GITHUB_REPO_URL)
-
-

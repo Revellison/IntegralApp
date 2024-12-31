@@ -1,4 +1,4 @@
-#pyinstaller --noconfirm --onedir --windowed --icon "D:\Andrey\env\app_icons\logo_white.ico" --clean --log-level "DEBUG" --add-data "D:\Andrey\env\styles;styles/" --add-data "D:\Andrey\env\icons;icons/" --add-data "D:\Andrey\env\app_icons;app_icons/"  "D:\Andrey\env\EduLab.py"
+
 import sys
 import json
 import os
@@ -22,52 +22,19 @@ import sympy as sp
 from updater import update_application
 from design import Ui_EduLab  # Импортируем интерфейс из сгенерированного файла
 
-class SplashScreen(QtWidgets.QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint | QtCore.Qt.WindowType.WindowStaysOnTopHint)
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)
+def load_fonts():
+    font1_id = QFontDatabase.addApplicationFont("fonts/NotoSans.ttf")
+    if font1_id == -1:
+        print("error")
+    else:
+        font1_family = QFontDatabase.applicationFontFamilies(font1_id)[0]
 
-        # Настраиваем размеры окна
-        self.setFixedSize(400, 300)
+    font2_id = QFontDatabase.addApplicationFont("fonts/Rubik-VariableFont_wght.ttf")
+    if font2_id == -1:
+        print("error")
+    else:
+        font2_family = QFontDatabase.applicationFontFamilies(font2_id)[0]
 
-
-        # Получаем информацию о текущем экране
-        screen = QtWidgets.QApplication.primaryScreen()
-        screen_geometry = screen.availableGeometry()
-        screen_center = screen_geometry.center()
-
-        # Устанавливаем окно по центру экрана
-        self.move(screen_center - self.rect().center())
-
-        # Создаём QLabel для отображения GIF
-        self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(0, 0, 400, 300)
-
-        # Добавляем анимацию GIF
-        self.movie = QtGui.QMovie("icons/load3.gif")  # Убедитесь, что путь правильный!
-        self.label.setMovie(self.movie)
-
-    def start_animation(self):
-
-        if self.movie.isValid():
-            self.movie.start()
-        else:
-            print("GIF не загружен, проверьте путь к файлу!")
-
-    def stop_animation(self):
-        self.movie.stop()
-
-
-class LoadingThread(QtCore.QThread):
-
-    loading_finished = QtCore.pyqtSignal()
-
-    def run(self):
-        print("splash load")
-        time.sleep(3)
-        print("splash unload")
-        self.loading_finished.emit()
 
 
 class Animated:
@@ -1176,37 +1143,11 @@ class MyApp(QtWidgets.QMainWindow):
         self.animation.setEndValue(1)
         self.animation.start()
 
-class AppLoader(QtCore.QThread):
-    """Поток для инициализации основного приложения."""
-    app_ready = QtCore.pyqtSignal(object)  # Сигнал с объектом главного окна
 
-    def run(self):
-        """Создание и подготовка приложения."""
-        print("Инициализация главного окна в потоке...")
-        main_window = MyApp()  # Инициализация главного окна
-        self.app_ready.emit(main_window)  # Отправка сигнала с готовым окном
 
 if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-
-    # Создаём сплэш-экран
-    splash = SplashScreen()
-    splash.start_animation()
-    splash.show()
-
-    # Создаём поток для фоновой загрузки
-    loading_thread = LoadingThread()
-
-    # Создаём главное окно, но не показываем сразу
-    window = MyApp()
-
-    # Подключаем сигнал завершения загрузки к действиям
-    loading_thread.loading_finished.connect(splash.close)  # Закрыть сплэш-экран
-    loading_thread.loading_finished.connect(window.show)  # Показать главное окно
-
-    # Запускаем поток загрузки
-    loading_thread.start()
+    app = QApplication(sys.argv)
+    window = MyApp()  # Assuming your main class is MyApp
+    window.show()
     sys.exit(app.exec())
 
