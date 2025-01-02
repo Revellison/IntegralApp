@@ -11,9 +11,21 @@
 <link href="Безымянный1.css" rel="stylesheet">
 <link href="project.css" rel="stylesheet">
 <script src="jquery-3.7.1.min.js"></script>
+<script src="jquery.ui.effect.min.js"></script>
+<script src="wb.affix.min.js"></script>
 <script>
 $(document).ready(function()
 {
+   $("a[href*='#Bookmark1']").click(function(event)
+   {
+      event.preventDefault();
+      $('html, body').stop().animate({ scrollTop: $('#wb_Bookmark1').offset().top }, 600, 'easeOutCirc');
+   });
+   $("a[href*='#Bookmark2']").click(function(event)
+   {
+      event.preventDefault();
+      $('html, body').stop().animate({ scrollTop: $('#wb_Bookmark2').offset().top }, 1000, 'easeOutCirc');
+   });
    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {$('#preloader').remove();}
 });
 $(window).on('load', function()
@@ -72,7 +84,7 @@ $(window).on('load', function()
 <a id="Button14" href="./changelog.html">История</a>
 </div>
 <div class="col-4">
-<a id="Button10" href="https://github.com/Revellison/EduLabApp">Source</a>
+<a id="Button10" href="https://github.com/Revellison/EduLabApp">Исходный код</a>
 </div>
 <div class="col-5">
 </div>
@@ -101,38 +113,42 @@ $(window).on('load', function()
 <div id="wb_LayoutGrid1">
 <div id="LayoutGrid1">
 <div class="col-1">
-<div id="wb_LayoutGrid4">
-<div id="LayoutGrid4">
-<div class="row">
-<div class="col-1">
+<div id="wb_Section3" class="card" data-wb-spy="affix" >
+<div id="Section3-card-body">
+<div id="Section3-card-item0"><a href="#Bookmark1">Главная</a></div>
+<div id="Section3-card-item1"><a href="#Bookmark2">Графики</a></div>
+</div>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Section1" class="card">
+<div id="Section1-card-body">
+<div id="Section1-card-item0">Главная</div>
+<div id="Section1-card-item1">"Integral" — это прикладное программное обеспечение, созданное на языке Python с использованием графического интерфейса PyQt6. Проект демонстрирует, как искусственный интеллект может стать полноценным помощником в разработке ПО. Целью проекта было создание функционального приложения с привлечением инструментов ИИ, таких как ChatGPT, Grok и Copilot.</div>
+</div>
+</div>
+<div id="wb_Section2" class="card">
+<div id="Section2-card-body">
+<div id="Section2-card-item0">Синтаксис построения графиков</div>
+<div id="Section2-card-item1">Линейные функции</div>
+<div id="Section2-card-item2">2*x + 3  # Прямая линия<br>-x + 5   # Отрицательный угловой коэффициент<br><br></div>
+<div id="Section2-card-item3">Квадратичные функции</div>
+<div id="Section2-card-item4">x**2        # Простая парабола<br>-x**2 + 4*x + 1  # Парабола с линейным членом</div>
+<div id="Section2-card-item5">Степенные функции</div>
+<hr id="Section2-card-item6">
+<hr id="Section2-card-item7">
+<div id="Section2-card-item8">x**3           # Кубическая функция<br>-x**3 + 3*x**2  # Кубическая функция с доп. членами<br>x**0.5         # Квадратный корень<br>x**(1/3)       # Кубический корень</div>
+<hr id="Section2-card-item9">
 </div>
 </div>
 </div>
 </div>
-<div id="wb_LayoutGrid3">
-<div id="LayoutGrid3">
-<div class="row">
-<div class="col-1">
-<div id="wb_Image1">
-<img src="images/question.gif" id="Image1" alt="" width="940" height="940">
 </div>
+<div id="wb_Bookmark1">
+<div id="Bookmark1"></div>
 </div>
-</div>
-</div>
-</div>
-<div id="wb_LayoutGrid5">
-<div id="LayoutGrid5">
-<div class="row">
-<div class="col-1">
-<div id="wb_Text1">
-<span style="color:#000000;font-family:'Rubik Medium';font-size:16px;">Файл проекта недоступен</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div id="wb_Bookmark2">
+<div id="Bookmark2"></div>
 </div>
 <div id="preloader"></div>
 </body>

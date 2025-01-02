@@ -11,9 +11,10 @@
 <link href="fontawesome6.min.css" rel="stylesheet">
 <link href="Безымянный1.css" rel="stylesheet">
 <link href="index.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery-ui.min.js"></script>
 <script src="popper.min.js"></script>
 <script src="bootstrap.min.js"></script>
-<script src="jquery-3.7.1.min.js"></script>
 <script src="wwb19.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(event)
@@ -108,7 +109,7 @@ $(window).on('load', function()
 <img src="images/img0010.png" id="Shape10" alt="" width="25" height="26">
 </div>
 <div id="wb_Icon11">
-<a href="./changelog.html"><div id="Icon11"><i class="Icon11"></i></div></a>
+<div id="Icon11"><i class="Icon11"></i></div>
 </div>
 <div id="wb_Shape13">
 <img src="images/img0011.png" id="Shape13" alt="" width="25" height="23">
@@ -190,13 +191,13 @@ $(window).on('load', function()
 </div>
 </div>
 <div class="col-2">
-<a id="Button15" href="./project.html">Проект</a>
+<a id="Button15" href="./project.html">Документация</a>
 </div>
 <div class="col-3">
 <a id="Button14" href="./changelog.html">История</a>
 </div>
 <div class="col-4">
-<a id="Button1" href="https://github.com/Revellison/EduLabApp">Source</a>
+<a id="Button1" href="https://github.com/Revellison/EduLabApp">Исходный код</a>
 </div>
 <div class="col-5">
 </div>
@@ -249,7 +250,7 @@ $(window).on('load', function()
 <div id="LayoutGrid5">
 <div class="row">
 <div class="col-1">
-<a id="Button2" href="" onclick="$('#Layer1').modal('show');return false;">DOWNLOAD</a>
+<a id="Button2" href="https://github.com/Revellison/IntegralApp/releases/download/v1.2.5/Integral.zip" onclick="ShowObjectWithEffect('Layeroff', 1, 'fade', 500);TimerStartTimer1();return false;">DOWNLOAD</a>
 <div>
 </div>
 </div>
@@ -317,7 +318,9 @@ $(window).on('load', function()
 <div id="LayoutGrid12">
 <div class="row">
 <div class="col-1">
-<a id="Button3" href="" onclick="$('#Layer1').modal('show');return false;">DOWNLOAD</a>
+<a id="Button12" href="" onclick="ShowObjectWithEffect('Layeroff', 1, 'fade', 500);TimerStartTimer1();return false;">DOWNLOAD</a>
+<div>
+</div>
 </div>
 </div>
 </div>
@@ -372,7 +375,9 @@ $(window).on('load', function()
 <div id="LayoutGrid17">
 <div class="row">
 <div class="col-1">
-<a id="Button5" href="" onclick="$('#Layer1').modal('show');return false;">DOWNLOAD</a>
+<a id="Button3" href="" onclick="ShowObjectWithEffect('Layeroff', 1, 'fade', 500);TimerStartTimer1();return false;">DOWNLOAD</a>
+<div>
+</div>
 </div>
 </div>
 </div>
@@ -452,7 +457,7 @@ $(window).on('load', function()
 <div class="modal-body">
 <div id="wb_Icon14">
 <a href="#" onclick="$('#menu').modal('hide');return false;"><div id="Icon14"><i class="Icon14"></i></div></a></div>
-<a id="Button8" href="https://revellison.github.io/AboutMePage/">Разработчик</a>
+<a id="Button8" href="">Разработчик</a>
 <input type="submit" id="Button9" name="" value="///">
 <input type="submit" id="Button10" name="" value="///">
 <input type="submit" id="Button11" name="" value="///">
@@ -476,6 +481,27 @@ $(window).on('load', function()
 </div>
 </div>
 </div>
+<div id="Layeroff">
+<div id="Layeroff_Container">
+<div id="wb_Image2">
+<img src="images/wired-outline-212-arrow-1-rounded-loop-cycle.gif" id="Image2" alt="" width="111" height="111"></div>
+</div>
+</div>
+<script>
+var wb_Timer1;
+function TimerStartTimer1()
+{
+   wb_Timer1 = setTimeout(function()
+   {
+      var event = null;
+      ShowObjectWithEffect('Layeroff', 0, 'scale', 500, 'easeOutCirc');
+   }, 1600);
+}
+function TimerStopTimer1()
+{
+   clearTimeout(wb_Timer1);
+}
+</script>
 <div id="preloader"></div>
 </body>
 </html>

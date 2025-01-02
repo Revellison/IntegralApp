@@ -217,13 +217,14 @@ body
    width: 100%;
    background-color: transparent;
    background-image: none;
-   border: 0px solid rgba(204,204,204,0.00);
-   border-radius: 0px;
+   border: 0px solid #000000;
+   border-radius: 60px;
    box-sizing: border-box;
-   margin: 0;
+   margin: 20px 0 0 0 ;
    margin-right: auto;
    margin-left: auto;
-   max-width: 1200px;
+   max-width: 1000px;
+   animation: animate-fade-in-down 700ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms 1 normal both;
 }
 #LayoutGrid7
 {
@@ -699,22 +700,22 @@ body
 #Button14
 {
    box-sizing: border-box;
-   line-height: 26px;
+   line-height: 41px;
    text-decoration: none;
    vertical-align: top;
-   border: 1px solid rgba(255,140,0,0.00);
-   border-radius: 0px;
-   background-color: transparent;
+   border: 2px solid #000000;
+   border-radius: 10px;
+   background-color: #FFFFFF;
    background-image: none;
-   color: #000000;
-   font-family: Bahnschrift;
+   color: #212529;
+   font-family: "Bahnschrift SemiBold";
    font-weight: normal;
    font-style: normal;
    font-size: 16px;
-   padding: 2px 6px 1px 6px;
+   padding: 0;
    text-align: center;
    -webkit-appearance: none;
-   margin: 0;
+   margin: 10px 0 10px 0 ;
    animation: animate-fade-in-down 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 100ms 1 normal both;
 }
 #Button14:focus
@@ -723,33 +724,33 @@ body
 }
 #Button14:hover
 {
-   border-bottom-color: #DCDCDC;
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   background-color: #000000;
+   color: #FFFFFF;
+   transition: background-color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms, color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #Button14
 {
-   border-bottom-color: rgba(255,255,255,0.00);
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #Button15
 {
    box-sizing: border-box;
-   line-height: 26px;
+   line-height: 41px;
    text-decoration: none;
    vertical-align: top;
-   border: 1px solid rgba(255,140,0,0.00);
-   border-radius: 0px;
-   background-color: transparent;
+   border: 2px solid #000000;
+   border-radius: 10px;
+   background-color: #FFFFFF;
    background-image: none;
-   color: #000000;
-   font-family: Bahnschrift;
+   color: #212529;
+   font-family: "Bahnschrift SemiBold";
    font-weight: normal;
    font-style: normal;
    font-size: 16px;
-   padding: 2px 6px 1px 6px;
+   padding: 0;
    text-align: center;
    -webkit-appearance: none;
-   margin: 0;
+   margin: 10px 0 10px 0 ;
    animation: animate-fade-in-down 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms 1 normal both;
 }
 #Button15:focus
@@ -758,13 +759,13 @@ body
 }
 #Button15:hover
 {
-   border-bottom-color: #DCDCDC;
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   background-color: #000000;
+   color: #FFFFFF;
+   transition: background-color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms, color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #Button15
 {
-   border-bottom-color: rgba(255,255,255,0.00);
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #Button16
 {
@@ -804,22 +805,22 @@ body
 #Button1
 {
    box-sizing: border-box;
-   line-height: 26px;
+   line-height: 41px;
    text-decoration: none;
    vertical-align: top;
-   border: 1px solid rgba(255,140,0,0.00);
-   border-radius: 0px;
-   background-color: transparent;
+   border: 2px solid #000000;
+   border-radius: 10px;
+   background-color: #FFFFFF;
    background-image: none;
-   color: #000000;
-   font-family: Bahnschrift;
+   color: #212529;
+   font-family: "Bahnschrift SemiBold";
    font-weight: normal;
    font-style: normal;
    font-size: 16px;
-   padding: 1px 6px 1px 6px;
+   padding: 0;
    text-align: center;
    -webkit-appearance: none;
-   margin: 0;
+   margin: 10px 0 10px 0 ;
    animation: animate-fade-in-down 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 300ms 1 normal both;
 }
 #Button1:focus
@@ -828,13 +829,13 @@ body
 }
 #Button1:hover
 {
-   border-bottom-color: #DCDCDC;
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   background-color: #000000;
+   color: #FFFFFF;
+   transition: background-color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms, color 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #Button1
 {
-   border-bottom-color: rgba(255,255,255,0.00);
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms;
 }
 #wb_LayoutGrid8
 {
@@ -1862,76 +1863,6 @@ body
 {
    color: #DCDCDC;
 }
-#Button3
-{
-   box-sizing: border-box;
-   line-height: 39px;
-   text-decoration: none;
-   vertical-align: top;
-   border: 1px solid rgba(255,140,0,0.00);
-   border-radius: 0px;
-   background-color: transparent;
-   background-image: none;
-   color: #000000;
-   font-family: "Integral CF";
-   font-weight: normal;
-   font-style: normal;
-   font-size: 16px;
-   padding: 2px 6px 1px 6px;
-   text-align: center;
-   -webkit-appearance: none;
-   margin: 0;
-   animation: animate-fade-in-up 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 400ms 1 normal both;
-}
-#Button3:focus
-{
-   outline: 0;
-}
-#Button3:hover
-{
-   border-bottom-color: #DCDCDC;
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
-}
-#Button3
-{
-   border-bottom-color: rgba(255,255,255,0.00);
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
-}
-#Button5
-{
-   box-sizing: border-box;
-   line-height: 39px;
-   text-decoration: none;
-   vertical-align: top;
-   border: 1px solid rgba(255,140,0,0.00);
-   border-radius: 0px;
-   background-color: transparent;
-   background-image: none;
-   color: #000000;
-   font-family: "Integral CF";
-   font-weight: normal;
-   font-style: normal;
-   font-size: 16px;
-   padding: 2px 6px 1px 6px;
-   text-align: center;
-   -webkit-appearance: none;
-   margin: 0;
-   animation: animate-fade-in-up 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 400ms 1 normal both;
-}
-#Button5:focus
-{
-   outline: 0;
-}
-#Button5:hover
-{
-   border-bottom-color: #DCDCDC;
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
-}
-#Button5
-{
-   border-bottom-color: rgba(255,255,255,0.00);
-   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
-}
 #Layer2 .modal-content
 {
    background-color: #FFFFFF;
@@ -2735,17 +2666,6 @@ body
    position:relative;
    transition: all 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-#wb_Icon11 a::after
-{
-   position: absolute;
-   top: 0;
-   right: 0;
-   bottom: 0;
-   left: 0;
-   z-index: 1;
-   pointer-events: auto;
-   content: "";
-}
 #Icon11
 {
    height: 53px;
@@ -2833,7 +2753,7 @@ body
 }
 .Icon10:before
 {
-   content: "\e9fc";
+   content: "\e8fd";
 }
 #Icon10 i
 {
@@ -3841,12 +3761,98 @@ body
 {
    text-align: center;
 }
-#Button5
+#wb_Image2
 {
-   display: inline-block;
-   width: 144px;
-   height: 44px;
-   z-index: 50;
+   vertical-align: top;
+}
+#Image2
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#Layeroff
+{
+   background-color: #FFFFFF;
+   background-image: none;
+   border-radius: 15px;
+   box-shadow: 0px 0px 8px rgba(0,0,0,0.18);
+   animation: transform-scale-in 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 0ms 1 normal both;
+}
+#Button12
+{
+   box-sizing: border-box;
+   line-height: 39px;
+   text-decoration: none;
+   vertical-align: top;
+   border: 1px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   background-color: transparent;
+   background-image: none;
+   color: #000000;
+   font-family: "Integral CF";
+   font-weight: normal;
+   font-style: normal;
+   font-size: 16px;
+   padding: 2px 6px 1px 6px;
+   text-align: center;
+   -webkit-appearance: none;
+   margin: 0;
+   animation: animate-fade-in-up 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 400ms 1 normal both;
+}
+#Button12:focus
+{
+   outline: 0;
+}
+#Button12:hover
+{
+   border-bottom-color: #DCDCDC;
+   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+}
+#Button12
+{
+   border-bottom-color: rgba(255,255,255,0.00);
+   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+}
+#Button3
+{
+   box-sizing: border-box;
+   line-height: 39px;
+   text-decoration: none;
+   vertical-align: top;
+   border: 1px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   background-color: transparent;
+   background-image: none;
+   color: #000000;
+   font-family: "Integral CF";
+   font-weight: normal;
+   font-style: normal;
+   font-size: 16px;
+   padding: 2px 6px 1px 6px;
+   text-align: center;
+   -webkit-appearance: none;
+   margin: 0;
+   animation: animate-fade-in-up 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 400ms 1 normal both;
+}
+#Button3:focus
+{
+   outline: 0;
+}
+#Button3:hover
+{
+   border-bottom-color: #DCDCDC;
+   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
+}
+#Button3
+{
+   border-bottom-color: rgba(255,255,255,0.00);
+   transition: border-bottom-color 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86) 0ms;
 }
 #wb_Shape4
 {
@@ -3891,6 +3897,14 @@ body
    left: 0;
    top: 0;
    overflow: visible;
+}
+#Layeroff_Container
+{
+   width: 200px;
+   position: relative;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: left;
 }
 #wb_Text2
 {
@@ -3969,6 +3983,15 @@ body
    height: 26px;
    z-index: 1;
    position: relative;
+}
+#wb_Image2
+{
+   position: absolute;
+   left: 45px;
+   top: 45px;
+   width: 111px;
+   height: 111px;
+   z-index: 92;
 }
 #Button10
 {
@@ -4099,7 +4122,7 @@ body
    bottom: 15px;
    width: 65px;
    height: 65px;
-   z-index: 102;
+   z-index: 103;
 }
 #wb_Icon1
 {
@@ -4119,6 +4142,13 @@ body
    left: 0;
    top: 0;
    overflow: visible;
+}
+#Button12
+{
+   display: inline-block;
+   width: 144px;
+   height: 44px;
+   z-index: 38;
 }
 #wb_Shape13
 {
@@ -4152,7 +4182,7 @@ body
    bottom: 100px;
    width: 65px;
    height: 65px;
-   z-index: 104;
+   z-index: 105;
 }
 #wb_Icon2
 {
@@ -4195,7 +4225,7 @@ body
 {
    display: inline-block;
    width: 110px;
-   height: 31px;
+   height: 45px;
    z-index: 21;
 }
 #wb_Icon3
@@ -4226,8 +4256,8 @@ body
 #Button15
 {
    display: inline-block;
-   width: 110px;
-   height: 31px;
+   width: 125px;
+   height: 45px;
    z-index: 20;
 }
 #wb_Icon4
@@ -4285,6 +4315,19 @@ body
    text-align: center;
    z-index: 0;
 }
+#Layeroff
+{
+   position: fixed;
+   text-align: center;
+   visibility: hidden;
+   left: 50%;
+   margin-left: -100px;
+   top: 50%;
+   margin-top: -100px;
+   width: 200px;
+   height: 200px;
+   z-index: 108;
+}
 #wb_Text15
 {
    position: absolute;
@@ -4298,8 +4341,8 @@ body
 #Button1
 {
    display: inline-block;
-   width: 110px;
-   height: 30px;
+   width: 127px;
+   height: 45px;
    z-index: 22;
 }
 #wb_Icon8
@@ -4350,7 +4393,7 @@ body
    display: inline-block;
    width: 144px;
    height: 44px;
-   z-index: 38;
+   z-index: 50;
 }
 #wb_Shape2
 {
@@ -4495,7 +4538,7 @@ body
 #wb_LayoutGrid7
 {
    height: auto;
-   margin-top: 0px;
+   margin-top: 20px;
    margin-bottom: 0px;
 }
 #LayoutGrid7
@@ -4767,10 +4810,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 2px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button14
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #Button15
 {
@@ -4780,10 +4834,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 2px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button15
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #Button16
 {
@@ -4806,10 +4871,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 1px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button1
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #wb_LayoutGrid8
 {
@@ -5301,32 +5377,6 @@ body
    line-height: 25px;
    font-size: 25px;
    width: 24px;
-}
-#Button3
-{
-   width: 144px;
-   height: 44px;
-   visibility: visible;
-   display: inline-block;
-   margin: 0;
-   padding: 2px 6px 1px 6px;
-}
-#Button3
-{
-   line-height: 39px;
-}
-#Button5
-{
-   width: 144px;
-   height: 44px;
-   visibility: visible;
-   display: inline-block;
-   margin: 0;
-   padding: 2px 6px 1px 6px;
-}
-#Button5
-{
-   line-height: 39px;
 }
 #Layer2 .modal-content
 {
@@ -6091,6 +6141,64 @@ body
    margin: 0;
    padding: 0;
 }
+#wb_Image2
+{
+   left: 45px;
+   top: 45px;
+   width: 111px;
+   height: 111px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#Layeroff
+{
+   width: 200px;
+   height: 200px;
+   visibility: hidden;
+   display: none;
+   box-shadow: 0px 0px 8px rgba(0,0,0,0.20);
+}
+#Layeroff_Container
+{
+   width: 200px;
+}
+#Timer1
+{
+   left: 1226px;
+   top: 614px;
+   width: 99px;
+   height: 94px;
+   visibility: visible;
+   display: inline;
+}
+#Button12
+{
+   width: 144px;
+   height: 44px;
+   visibility: visible;
+   display: inline-block;
+   margin: 0;
+   padding: 2px 6px 1px 6px;
+}
+#Button12
+{
+   line-height: 39px;
+}
+#Button3
+{
+   width: 144px;
+   height: 44px;
+   visibility: visible;
+   display: inline-block;
+   margin: 0;
+   padding: 2px 6px 1px 6px;
+}
+#Button3
+{
+   line-height: 39px;
+}
 }
 @media only screen and (max-width: 479px)
 {
@@ -6206,7 +6314,7 @@ body
 #wb_LayoutGrid7
 {
    height: auto;
-   margin-top: 0px;
+   margin-top: 20px;
    margin-bottom: 0px;
 }
 #LayoutGrid7
@@ -6478,10 +6586,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 2px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button14
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #Button15
 {
@@ -6491,10 +6610,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 2px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button15
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #Button16
 {
@@ -6517,10 +6647,21 @@ body
    display: inline-block;
    margin: 0;
    padding: 1px 6px 1px 6px;
+   color: #000000;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   background-image: none;
+   background-image: none;
+   border: 2px solid rgba(255,140,0,0.00);
+   border-radius: 0px;
+   box-shadow: 0px 0px 0px #000000;
 }
 #Button1
 {
-   line-height: 26px;
+   line-height: 24px;
 }
 #wb_LayoutGrid8
 {
@@ -7012,32 +7153,6 @@ body
    line-height: 25px;
    font-size: 25px;
    width: 24px;
-}
-#Button3
-{
-   width: 144px;
-   height: 44px;
-   visibility: visible;
-   display: inline-block;
-   margin: 0;
-   padding: 2px 6px 1px 6px;
-}
-#Button3
-{
-   line-height: 39px;
-}
-#Button5
-{
-   width: 144px;
-   height: 44px;
-   visibility: visible;
-   display: inline-block;
-   margin: 0;
-   padding: 2px 6px 1px 6px;
-}
-#Button5
-{
-   line-height: 39px;
 }
 #Layer2 .modal-content
 {
@@ -7801,6 +7916,64 @@ body
    margin: 0;
    padding: 0;
 }
+#wb_Image2
+{
+   left: 45px;
+   top: 45px;
+   width: 111px;
+   height: 111px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#Layeroff
+{
+   width: 200px;
+   height: 200px;
+   visibility: hidden;
+   display: none;
+   box-shadow: 0px 0px 8px rgba(0,0,0,0.20);
+}
+#Layeroff_Container
+{
+   width: 200px;
+}
+#Timer1
+{
+   left: 1226px;
+   top: 614px;
+   width: 99px;
+   height: 94px;
+   visibility: visible;
+   display: inline;
+}
+#Button12
+{
+   width: 144px;
+   height: 44px;
+   visibility: visible;
+   display: inline-block;
+   margin: 0;
+   padding: 2px 6px 1px 6px;
+}
+#Button12
+{
+   line-height: 39px;
+}
+#Button3
+{
+   width: 144px;
+   height: 44px;
+   visibility: visible;
+   display: inline-block;
+   margin: 0;
+   padding: 2px 6px 1px 6px;
+}
+#Button3
+{
+   line-height: 39px;
+}
 }
 *:focus {
     outline: none; /* Убирает рамку, если элемент получает фокус */
@@ -7845,6 +8018,30 @@ body {
     }
 
        #wb_Text6 {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;     /* Internet Explorer */
+        user-select: none;         /* Standard */
+    }
+
+    /* Отключить выделение только для wb_Text3 */
+    #Button_2 {
+        user-select: none;
+    }
+
+       #Button_2 {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;     /* Internet Explorer */
+        user-select: none;         /* Standard */
+    }
+
+    /* Отключить выделение только для wb_Text3 */
+    #Button_2 {
+        user-select: none;
+    }
+
+       #Button_2 {
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none;    /* Firefox */
         -ms-user-select: none;     /* Internet Explorer */
