@@ -3,14 +3,16 @@ import sys
 import json
 import os
 import re
+from mistralai import Mistral
 from time import sleep
 import requests
 import time
+from PyQt6.QtCore import QThread, pyqtSignal
 import math
 from collections import Counter
 from PyQt6.QtWidgets import (QSplashScreen, QApplication, QLabel, QMainWindow, QVBoxLayout, QGraphicsDropShadowEffect, QFileDialog, QGraphicsOpacityEffect,
 QWidget, QHBoxLayout, QPushButton, QScrollArea, QGridLayout, QColorDialog, QInputDialog, QSlider, QComboBox, QTextEdit, QDialog, QMessageBox, QFontDialog, QLineEdit)
-from PyQt6.QtGui import QMovie, QPalette, QColor, QPainter, QPen, QFont, QBrush, QIcon, QPixmap
+from PyQt6.QtGui import QMovie, QPalette, QColor, QPainter, QPen, QFont, QBrush, QIcon, QPixmap, QFontDatabase
 from PyQt6.QtCore import Qt, QEasingCurve, QPropertyAnimation, QRect, QSize
 from deep_translator import GoogleTranslator
 from PyQt6 import QtWidgets, QtCore, QtGui
@@ -71,6 +73,96 @@ class Animated:
         # Запуск анимаций
         self.grow_animation.finished.connect(self.shrink_animation.start)
         self.grow_animation.start()
+
+
+class Worker(QThread):
+    # Сигнал для передачи результатов обратно в главный поток
+    result_signal = pyqtSignal(str, str)  # текст пользователя, ответ ИИ
+
+    def __init__(self, api_key, user_input):
+        super().__init__()
+        self.api_key = api_key
+        self.user_input = user_input
+
+    def run(self):
+        try:
+            client = Mistral(api_key=self.api_key)
+
+            chat_response = client.chat.complete(
+                model="mistral-small-latest",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": self.user_input,
+                    },
+                ]
+            )
+
+            if chat_response.choices:
+                response_text = chat_response.choices[0].message.content
+                self.result_signal.emit(self.user_input, response_text)
+            else:
+                self.result_signal.emit(self.user_input, "Ошибка. Ответ не был сгенерирован.")
+        except Exception as e:
+            self.result_signal.emit(self.user_input, f"Произошла ошибка: {e}")
+
+class ChatLogic:
+    def __init__(self, ui):
+        self.ui = ui
+        self.api_key = None
+        self.load_api_key()
+
+        # Connect buttons
+        self.ui.sendmessage_button.clicked.connect(self.send_request)
+        self.ui.mistralAPIuseButton.clicked.connect(self.set_api_key)
+
+    def set_api_key(self):
+        new_key = self.ui.mistralAPI_input.text().strip()
+        if new_key:
+            self.api_key = new_key
+            self.save_api_key()
+            QMessageBox.information(self.ui, "Успех", "API ключ сохранен.")
+            print(f"API ключ сохранен: {self.api_key}")  # Отладочная информация
+        else:
+            QMessageBox.warning(self.ui, "Ошибка", "API ключ не может быть пустым.")
+
+    def load_api_key(self):
+        try:
+            with open('api.json', 'r') as file:
+                data = json.load(file)
+                self.api_key = data.get('api_key')
+        except FileNotFoundError:
+            self.api_key = None
+            print("Файл с API ключом не найден")  # Отладочная информация
+
+    def save_api_key(self):
+        with open('api.json', 'w') as file:
+            json.dump({'api_key': self.api_key}, file)
+
+
+
+    def send_request(self):
+        user_input = self.ui.response_input.text().strip()
+        if not user_input:
+            QMessageBox.warning(self.ui, "Ошибка", "Поле запроса не может быть пустым!")
+            return
+
+        if not self.api_key:
+            QMessageBox.critical(self.ui, "Ошибка", "API ключ не установлен.")
+            return
+
+        # Создаем и запускаем фоновый поток
+        self.worker = Worker(self.api_key, user_input)
+        self.worker.result_signal.connect(self.update_response)  # Подключаем сигнал
+        self.worker.start()
+
+    def update_response(self, user_input, response_text):
+        # Форматируем и выводим сообщения
+        self.ui.response_area.append(f"<b>Вы:</b> {user_input}")
+        self.ui.response_area.append(f"<i>ИИ:</i> {response_text}\n")
+
+        # Очищаем поле ввода
+        self.ui.response_input.clear()
 
 
 class MiniCalculatorUI(QMainWindow):
@@ -653,13 +745,15 @@ class MyApp(QtWidgets.QMainWindow):
         self.isAnimating = False
         self.ui = Ui_EduLab()  # Создаем объект интерфейса
         self.ui.setupUi(self)  # Инициализируем интерфейс
-
+        self.chat_logic = ChatLogic(self.ui)
         self.ui.stackedWidget.setCurrentIndex(8)  # Устанавливаем начальную страницу
         self.current_theme = "dark"  # По умолчанию светлая тема
 
         self.buttons = [self.ui.settings_pg2, self.ui.opisanye_pg1, self.ui.open1_textreworker_pg3, self.ui.drawpad_pg8, self.ui.open1_textreworker_pg3,
-                        self.ui.textanalyzer_open_page6, self.ui.translator_open_page4, self.ui.functions_page7, self.ui.drygoe_open_page5]  # Добавьте все кнопки из дизайна
+                        self.ui.textanalyzer_open_page6, self.ui.aichat_pg10, self.ui.translator_open_page4, self.ui.functions_page7, self.ui.drygoe_open_page5]  # Добавьте все кнопки из дизайна
         self.animated_buttons = [Animated(button) for button in self.buttons]
+
+
 
         #hide
         self.ui.progressBar.hide()
@@ -748,6 +842,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.functions_page7.clicked.connect(lambda: self.switch_page(7))  # Привязка кнопки к переключению на страницу 7
         self.ui.drawpad_pg8.clicked.connect(lambda: self.switch_page(8))  # Привязка кнопки к переключению на страницу 8
         #self.ui.calc_page10.clicked.connect(lambda: self.switch_page(9))  # Привязка кнопки к переключению на страницу 9
+        self.ui.aichat_pg10.clicked.connect(lambda: self.switch_page(10))  # Привязка кнопки к переключению на страницу 8
 
 
         # Перемещение окна
@@ -795,7 +890,6 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.function_create.clicked.connect(self.plot_function)
         self.ui.function_clear.clicked.connect(lambda: TextProcessor.clear_text(self.ui.function_lineEdit))  # Кнопка удаления
         self.ui.checkupdate_button.clicked.connect(self.check_for_updates)
-
 
     def check_for_updates(self):
         # Вызов функции из обновляющего скрипта
