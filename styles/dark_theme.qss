@@ -175,6 +175,23 @@ QColorDialog QWidget#qt_colorpicker {
         border-top-right-radius: 5px;
     }
 
+#sendmessage_button
+    {
+        border: 0px solid transparent;
+        border-radius: 25px;
+    }
+
+#mistralAPI_input
+    {
+        background-color: rgb(21, 21, 21);
+        color: rgb(21, 21, 21);
+    }
+
+#mistralAPI_input:hover
+    {
+        color: white;
+    }
+
 /* app */
 QMainWindow
     {

@@ -2,14 +2,17 @@
 .idea/
 *.swp
 *.swo
-
+api.json
 local/
 trash/
-
+dist/
+build/
 .venv/
-
+integral.spec
 settings.json
-
+integral copy.py
+fdsef.py
 __pycache__/
 *.py[cod]
 /Integralawd.py
+/build.py

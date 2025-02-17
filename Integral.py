@@ -1,28 +1,43 @@
-
-import sys
+# Оптимизируем импорты, группируем их логически
+from collections import Counter
 import json
+import math
 import os
 import re
-from mistralai import Mistral
-from time import sleep
-import requests
+import sys
 import time
-from PyQt6.QtCore import QThread, pyqtSignal
-import math
-from collections import Counter
-from PyQt6.QtWidgets import (QSplashScreen, QApplication, QLabel, QMainWindow, QVBoxLayout, QGraphicsDropShadowEffect, QFileDialog, QGraphicsOpacityEffect,
-QWidget, QHBoxLayout, QPushButton, QScrollArea, QGridLayout, QColorDialog, QInputDialog, QSlider, QComboBox, QTextEdit, QDialog, QMessageBox, QFontDialog, QLineEdit)
-from PyQt6.QtGui import QMovie, QPalette, QColor, QPainter, QPen, QFont, QBrush, QIcon, QPixmap, QFontDatabase
-from PyQt6.QtCore import Qt, QEasingCurve, QPropertyAnimation, QRect, QSize
-from deep_translator import GoogleTranslator
-from PyQt6 import QtWidgets, QtCore, QtGui
-from PyQt6.QtCore import QTimer, Qt, QPoint
+from typing import Dict, List, Optional, Tuple
+
 import numpy as np
+import requests
+import sympy as sp
+from deep_translator import GoogleTranslator
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import sympy as sp
+from mistralai import Mistral
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import (QEasingCurve, QPoint, QPropertyAnimation, QRect, QSize,
+                         QThread, QTimer, Qt, pyqtSignal)
+from PyQt6.QtGui import (QBrush, QColor, QFont, QFontDatabase, QIcon, QPainter,
+                        QPen, QPixmap)
+from PyQt6.QtWidgets import (QApplication, QColorDialog, QComboBox, QDialog,
+                           QFileDialog, QFontDialog, QGraphicsDropShadowEffect,
+                           QGraphicsOpacityEffect, QGridLayout, QHBoxLayout,
+                           QInputDialog, QLabel, QLineEdit, QMainWindow,
+                           QMessageBox, QPushButton, QScrollArea, QSlider,
+                           QSplashScreen, QTextEdit, QVBoxLayout, QWidget)
+
+from design import Ui_EduLab
 from updater import update_application
-from design import Ui_EduLab  # Импортируем интерфейс из сгенерированного файла
+import markdown
+from markdown.extensions import fenced_code, tables, nl2br
+import subprocess
+
+
+# Константы
+SETTINGS_FILE = "settings.json"
+API_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "api.json")
+DEFAULT_THEME = "light"
 
 def load_fonts():
     font1_id = QFontDatabase.addApplicationFont("fonts/NotoSans.ttf")
@@ -76,10 +91,9 @@ class Animated:
 
 
 class Worker(QThread):
-    # Сигнал для передачи результатов обратно в главный поток
-    result_signal = pyqtSignal(str, str)  # текст пользователя, ответ ИИ
+    result_signal = pyqtSignal(str, str)
 
-    def __init__(self, api_key, user_input):
+    def __init__(self, api_key: str, user_input: str):
         super().__init__()
         self.api_key = api_key
         self.user_input = user_input
@@ -87,82 +101,408 @@ class Worker(QThread):
     def run(self):
         try:
             client = Mistral(api_key=self.api_key)
-
-            chat_response = client.chat.complete(
+            response = client.chat.complete(
                 model="mistral-small-latest",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": self.user_input,
-                    },
-                ]
+                messages=[{"role": "user", "content": self.user_input}]
             )
-
-            if chat_response.choices:
-                response_text = chat_response.choices[0].message.content
-                self.result_signal.emit(self.user_input, response_text)
-            else:
-                self.result_signal.emit(self.user_input, "Ошибка. Ответ не был сгенерирован.")
+            
+            response_text = response.choices[0].message.content if response.choices else "Ошибка. Ответ не был сгенерирован."
+            self.result_signal.emit(self.user_input, response_text)
+            
         except Exception as e:
-            self.result_signal.emit(self.user_input, f"Произошла ошибка: {e}")
+            self.result_signal.emit(self.user_input, f"Произошла ошибка: {str(e)}")
 
 class ChatLogic:
     def __init__(self, ui):
         self.ui = ui
-        self.api_key = None
-        self.load_api_key()
-
-        # Connect buttons
+        # Получаем ссылку на главное окно
+        self.main_window = self.ui.centralwidget.window()
+        self.api_key = self._load_api_key()
+        self._connect_signals()
+        self._setup_markdown()
+        
+        # Устанавливаем API ключ в поле ввода при запуске, если он существует
+        if self.api_key:
+            self.ui.mistralAPI_input.setText(self.api_key)
+    
+    def _connect_signals(self):
+        """Подключение сигналов к слотам"""
         self.ui.sendmessage_button.clicked.connect(self.send_request)
         self.ui.mistralAPIuseButton.clicked.connect(self.set_api_key)
-
-    def set_api_key(self):
-        new_key = self.ui.mistralAPI_input.text().strip()
-        if new_key:
-            self.api_key = new_key
-            self.save_api_key()
-            QMessageBox.information(self.ui, "Успех", "API ключ сохранен.")
-            print(f"API ключ сохранен: {self.api_key}")  # Отладочная информация
-        else:
-            QMessageBox.warning(self.ui, "Ошибка", "API ключ не может быть пустым.")
-
-    def load_api_key(self):
+        self.ui.code_start.clicked.connect(self.execute_code_from_chat)
+    
+    def _load_api_key(self) -> Optional[str]:
+        """Загрузка API ключа из файла"""
         try:
-            with open('api.json', 'r') as file:
-                data = json.load(file)
-                self.api_key = data.get('api_key')
-        except FileNotFoundError:
-            self.api_key = None
-            print("Файл с API ключом не найден")  # Отладочная информация
-
-    def save_api_key(self):
-        with open('api.json', 'w') as file:
-            json.dump({'api_key': self.api_key}, file)
-
-
+            if os.path.exists(API_FILE):
+                with open(API_FILE, 'r') as file:
+                    return json.load(file).get('api_key')
+            return None
+        except Exception as e:
+            print(f"Ошибка при загрузке API ключа: {str(e)}")
+            return None
+    
+    def set_api_key(self):
+        """Установка и сохранение API ключа"""
+        try:
+            new_key = self.ui.mistralAPI_input.text().strip()
+            if not new_key:
+                QtWidgets.QMessageBox.warning(
+                    self.main_window,  # Используем главное окно вместо self.ui
+                    "Ошибка",
+                    "API ключ не может быть пустым."
+                )
+                return
+                
+            # Проверяем валидность ключа
+            if not self._validate_api_key(new_key):
+                QtWidgets.QMessageBox.warning(
+                    self.main_window,  # Используем главное окно вместо self.ui
+                    "Ошибка",
+                    "Неверный формат API ключа."
+                )
+                return
+                
+            self.api_key = new_key
+            self._save_api_key()
+            
+            QtWidgets.QMessageBox.information(
+                self.main_window,  # Используем главное окно вместо self.ui
+                "Успех",
+                "API ключ успешно сохранен."
+            )
+            
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(
+                self.main_window,  # Используем главное окно вместо self.ui
+                "Ошибка",
+                f"Произошла ошибка при сохранении API ключа: {str(e)}"
+            )
+    
+    def _validate_api_key(self, key: str) -> bool:
+        """Проверка формата API ключа"""
+        # Базовая проверка - ключ должен быть непустой строкой определенной длины
+        # Можно добавить более сложную валидацию при необходимости
+        return isinstance(key, str) and len(key) > 0
+    
+    def _save_api_key(self):
+        """Сохранение API ключа в файл"""
+        try:
+            with open(API_FILE, 'w') as file:
+                json.dump({'api_key': self.api_key}, file)
+        except Exception as e:
+            print(f"Ошибка при сохранении API ключа: {str(e)}")
+            raise
 
     def send_request(self):
+        """Отправка запроса к ИИ"""
         user_input = self.ui.response_input.text().strip()
         if not user_input:
-            QMessageBox.warning(self.ui, "Ошибка", "Поле запроса не может быть пустым!")
+            QtWidgets.QMessageBox.warning(
+                self.main_window,
+                "Ошибка",
+                "Поле запроса не может быть пустым!"
+            )
             return
 
         if not self.api_key:
-            QMessageBox.critical(self.ui, "Ошибка", "API ключ не установлен.")
+            QtWidgets.QMessageBox.critical(
+                self.main_window,
+                "Ошибка",
+                "API ключ не установлен."
+            )
             return
+
+        # Добавляем инструкцию про маркеры кода
+        instruction = """
+        """
+        user_input += instruction
 
         # Создаем и запускаем фоновый поток
         self.worker = Worker(self.api_key, user_input)
-        self.worker.result_signal.connect(self.update_response)  # Подключаем сигнал
+        self.worker.result_signal.connect(self.update_response)
         self.worker.start()
 
-    def update_response(self, user_input, response_text):
-        # Форматируем и выводим сообщения
-        self.ui.response_area.append(f"<b>Вы:</b> {user_input}")
-        self.ui.response_area.append(f"<i>ИИ:</i> {response_text}\n")
+    def _setup_markdown(self):
+        """Настройка обработчика Markdown с улучшенными стилями"""
+        self.md = markdown.Markdown(extensions=[
+            'fenced_code',    # Поддержка блоков кода
+            'tables',         # Поддержка таблиц
+            'nl2br',          # Перевод строк
+            'codehilite',     # Подсветка синтаксиса
+            'sane_lists',     # Улучшенные списки
+            'smarty',         # Умные кавычки и тире
+            'meta'            # Метаданные
+        ])
+        
+        # Улучшенные стили для markdown
+        markdown_style = """
+            <style>
+                /* Основные стили текста */
+                body {
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    line-height: 1.6;
+                    padding: 10px;
+                }
+                
+                /* Блоки кода */
+                pre {
+                    background-color: #f8f9fa;
+                    border: 1px solid #eaecef;
+                    border-radius: 6px;
+                    padding: 16px;
+                    overflow-x: auto;
+                    margin: 10px 0;
+                    font-family: 'Consolas', 'Monaco', monospace;
+                    font-size: 0.9em;
+                }
+                
+                code {
+                    font-family: 'Consolas', 'Monaco', monospace;
+                    background-color: rgba(27,31,35,0.05);
+                    border-radius: 3px;
+                    padding: 0.2em 0.4em;
+                    font-size: 0.9em;
+                }
+                
+                /* Таблицы */
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 16px 0;
+                    background-color: #ffffff;
+                }
+                
+                th, td {
+                    border: 1px solid #e1e4e8;
+                    padding: 8px 16px;
+                    text-align: left;
+                }
+                
+                th {
+                    background-color: #f6f8fa;
+                    font-weight: 600;
+                }
+                
+                tr:nth-child(even) {
+                    background-color: #f8f9fa;
+                }
+                
+                /* Цитаты */
+                blockquote {
+                    border-left: 4px solid #0366d6;
+                    color: #6a737d;
+                    margin: 16px 0;
+                    padding: 0 16px;
+                    background-color: #f6f8fa;
+                    border-radius: 0 3px 3px 0;
+                }
+                
+                /* Заголовки */
+                h1, h2, h3, h4, h5, h6 {
+                    margin-top: 24px;
+                    margin-bottom: 16px;
+                    font-weight: 600;
+                    line-height: 1.25;
+                    color: #24292e;
+                }
+                
+                /* Списки */
+                ul, ol {
+                    padding-left: 2em;
+                    margin: 16px 0;
+                }
+                
+                li {
+                    margin: 4px 0;
+                }
+                
+                /* Горизонтальная линия */
+                hr {
+                    height: 0px;
+                    background-color: #e1e4e8;
+                    border: none;
+                    margin: 24px 0;
+                }
+                
+                /* Сообщения пользователя и ИИ */
+                .user-message {
+                    background-color: #f1f8ff;
+                    border-left: 4px solid #0366d6;
+                    padding: 12px;
+                    margin: 8px 0;
+                    border-radius: 0 4px 4px 0;
+                }
+                
+                .ai-message {
+                    background-color: #f6f8fa;
+                    border-left: 4px solid #28a745;
+                    padding: 12px;
+                    margin: 8px 0;
+                    border-radius: 0 4px 4px 0;
+                }
+                
+                /* Ссылки */
+                a {
+                    color: #0366d6;
+                    text-decoration: none;
+                }
+                
+                a:hover {
+                    text-decoration: underline;
+                }
+                
+                /* Выделение */
+                mark {
+                    background-color: #fff3b8;
+                    padding: 0.2em;
+                    border-radius: 2px;
+                }
+            </style>
+        """
+        self.ui.response_area.document().setDefaultStyleSheet(markdown_style)
 
+    def update_response(self, user_input, response_text):
+        """Обновление области вывода с улучшенным форматированием"""
+        # Форматируем сообщение пользователя
+        user_message = f'<div class="user-message"><b>Вы:</b> {user_input}</div>'
+        
+        # Преобразуем Markdown в HTML для ответа ИИ
+        ai_response_html = self.md.convert(response_text)
+        ai_message = f'<div class="ai-message"><b>ИИ:</b><br>{ai_response_html}</div>'
+        
+        # Добавляем сообщения в область вывода без разделителя
+        self.ui.response_area.append(user_message)
+        self.ui.response_area.append(ai_message)
+        
+        # Прокручиваем до последнего сообщения
+        scrollbar = self.ui.response_area.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
+        
         # Очищаем поле ввода
         self.ui.response_input.clear()
+        
+        # Сбрасываем состояние Markdown конвертера
+        self.md.reset()
+
+    def execute_code_from_chat(self):
+        """Извлечение и выполнение кода из чата"""
+        try:
+            # Получаем текст из response_area
+            content = self.ui.response_area.toPlainText()
+            
+            # Ищем код между маркерами [code] и [/code]
+            code_blocks = []
+            pattern = r'\[code\](.*?)\[/code\]'
+            matches = re.finditer(pattern, content, re.DOTALL)
+            
+            for match in matches:
+                code = match.group(1).strip()
+                if code:  # Проверяем, что блок не пустой
+                    code_blocks.append(code)
+            
+            if not code_blocks:
+                QtWidgets.QMessageBox.warning(
+                    self.main_window,
+                    "Предупреждение",
+                    "Не найдено блоков кода для выполнения.\nКод должен быть между маркерами [code]...[/code]"
+                )
+                return
+                
+            # Создаем временный файл для кода
+            temp_file = "temp_code.py"
+            with open(temp_file, "w", encoding="utf-8") as f:
+                for i, block in enumerate(code_blocks):
+                    f.write(f"# Блок кода {i+1}\n")
+                    f.write(block)
+                    f.write("\n\n")
+            
+            # Выполняем код
+            try:
+                result = subprocess.run(
+                    [sys.executable, temp_file],
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                    encoding='utf-8'
+                )
+                
+                if result.returncode == 0:
+                    output = result.stdout
+                    if output:
+                        self._show_code_output("Результат выполнения", output)
+                    else:
+                        QtWidgets.QMessageBox.information(
+                            self.main_window,
+                            "Успех",
+                            "Код успешно выполнен"
+                        )
+                else:
+                    error_msg = f"Ошибка выполнения:\n{result.stderr}"
+                    self._show_code_output("Ошибка", error_msg)
+                    
+            except subprocess.TimeoutExpired:
+                QtWidgets.QMessageBox.critical(
+                    self.main_window,
+                    "Ошибка",
+                    "Превышено время выполнения кода (30 секунд)"
+                )
+            finally:
+                if os.path.exists(temp_file):
+                    os.remove(temp_file)
+            
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(
+                self.main_window,
+                "Ошибка",
+                f"Произошла ошибка при выполнении кода:\n{str(e)}"
+            )
+    
+    def _is_code_block(self, text: str) -> bool:
+        """Проверка, является ли текст блоком кода"""
+        # Удаляем пустые строки в начале и конце
+        text = text.strip()
+        
+        # Проверяем характерные признаки кода
+        code_indicators = [
+            text.startswith("def "),
+            text.startswith("class "),
+            text.startswith("import "),
+            text.startswith("from "),
+            text.startswith("    "),  # Отступ
+            text.startswith("if "),
+            text.startswith("for "),
+            text.startswith("while "),
+            text.startswith("try:"),
+            text.startswith("with "),
+            "#" in text,  # Комментарии
+            "=" in text,  # Присваивание
+            "return" in text,
+            "print(" in text
+        ]
+        
+        return any(code_indicators)
+    
+    def _show_code_output(self, title: str, output: str):
+        """Показать результат выполнения кода в отдельном окне"""
+        dialog = QtWidgets.QDialog(self.main_window)
+        dialog.setWindowTitle(title)
+        dialog.setMinimumSize(500, 300)
+
+        layout = QtWidgets.QVBoxLayout()
+        
+        output_text = QtWidgets.QTextEdit()
+        output_text.setReadOnly(True)
+        output_text.setPlainText(output)
+        
+        layout.addWidget(output_text)
+        
+        close_button = QtWidgets.QPushButton("Закрыть")
+        close_button.clicked.connect(dialog.close)
+        layout.addWidget(close_button)
+        
+        dialog.setLayout(layout)
+        dialog.exec()
 
 
 class MiniCalculatorUI(QMainWindow):
@@ -278,13 +618,9 @@ class MiniCalculatorUI(QMainWindow):
             self.entry.setText(new_text)
 
     def error_message(self):
-        """Показать сообщение об ошибке с кастомной иконкой"""
         msg = QMessageBox(self)
 
-        # Загружаем кастомную иконку из файла
-        custom_icon = QPixmap("path/to/your/icon.png")  # Укажите путь к вашему файлу иконки
-
-        # Устанавливаем кастомную иконку в MessageBox
+        custom_icon = QPixmap("path/to/your/icon.png")  
         msg.setIconPixmap(custom_icon)
 
         msg.setText("Произошла ошибка при вычислении!")
@@ -346,13 +682,41 @@ class Math:
         self.mini_calculator.calcanimation()
 
 class TextProcessor:
+    STOP_WORDS = {
+        "и", "в", "на", "с", "по", "а", "но", "или", "для", "что", "к", 
+        # ... остальные стоп-слова ...
+    }
+    
     @staticmethod
-    def clean_text(text):
-        """Удаляет HTML-теги и лишние пробелы из текста."""
-        clean = re.sub(r'<.*?>', '', text)
-        # Удаляем лишние пробелы
-        clean = ' '.join(clean.split())
-        return clean
+    def clean_text(text: str) -> str:
+        """Очистка текста от HTML-тегов и лишних пробелов"""
+        return ' '.join(re.sub(r'<.*?>', '', text).split())
+
+    @staticmethod
+    def calculate_text_metrics(text: str) -> Dict:
+        """Расчет метрик текста"""
+        words = re.findall(r'\b\w+\b', text)
+        total_words = len(words)
+        
+        metrics = {
+            "total_characters": len(text),
+            "total_spaces": text.count(' '),
+            "total_words": total_words,
+            "a4_pages": total_words / 250,
+            "notebook_pages": total_words / 80,
+        }
+        
+        if total_words > 0:
+            water_words = sum(1 for word in words if word.lower() in TextProcessor.STOP_WORDS)
+            word_frequencies = Counter(words)
+            most_frequent_count = word_frequencies.most_common(1)[0][1] if word_frequencies else 0
+            
+            metrics.update({
+                "water_percentage": (water_words / total_words) * 100,
+                "nausea_percentage": (most_frequent_count / total_words) * 100
+            })
+        
+        return metrics
 
     @staticmethod
     def clear_text(text_input):
@@ -1237,6 +1601,22 @@ class MyApp(QtWidgets.QMainWindow):
         self.animation.setEndValue(1)
         self.animation.start()
 
+
+class SettingsManager:
+    @staticmethod
+    def load_settings() -> Dict:
+        """Загрузка настроек из файла"""
+        try:
+            with open(SETTINGS_FILE, 'r') as file:
+                return json.load(file)
+        except FileNotFoundError:
+            return {"theme": DEFAULT_THEME, "background_image": None}
+    
+    @staticmethod
+    def save_settings(settings: Dict):
+        """Сохранение настроек в файл"""
+        with open(SETTINGS_FILE, 'w') as file:
+            json.dump(settings, file)
 
 
 if __name__ == "__main__":
