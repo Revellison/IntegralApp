@@ -1,0 +1,197 @@
+html {
+  background: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding-top: 60px; /* Высота header */
+  min-height: 100vh;
+  position: relative;
+}
+
+.triangle:hover, .square:hover, .circle:hover {
+  color: #252525;
+}
+
+.triangle, .square, .circle {
+  transition: all 0.5s;
+}
+
+.triangle {
+	width: 0; 
+	height: 0; 
+	border-left: 350px solid transparent;
+	border-right: 350px solid transparent;
+	border-bottom: 606.2px solid #000000;
+}
+
+.inner-triangle {
+  position: relative;
+  left: -325px;
+  top: 30px;
+	width: 0; 
+	height: 0; 
+	border-left: 325px solid transparent;
+	border-right: 325px solid transparent;
+	border-bottom: 562.9px solid #ffffff00;
+}
+
+.triangle {
+  animation: clockwise-rotation 120s linear infinite;
+}
+
+.triangle-container, .square-container, .circle-container {
+  display: none;
+}
+
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+/* Разные типы частиц */
+.particle:nth-child(3n) {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.particle:nth-child(3n+1) {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.particle:nth-child(3n+2) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(var(--mouse-x, 0) * 0.1), calc(var(--mouse-y, 0) * 0.1)) scale(1.1);
+  }
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translate(100%, 100%) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(var(--mouse-x, 0) * 0.15), calc(var(--mouse-y, 0) * 0.15)) scale(1.2);
+  }
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes floatFast {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(var(--mouse-x, 0) * 0.2), calc(var(--mouse-y, 0) * 0.2)) scale(1.3);
+  }
+  90% {
+    opacity: 1;
+  }
+}
+
+.square {
+  width: 550px;
+  height: 550px;
+  border: 15px solid #000000;
+  animation: counterclockwise-rotation 140s linear infinite;
+}
+
+@keyframes circle-self-rotation {
+  0%   { transform: rotate(0deg) }
+  100% { transform: rotate(-360deg); }
+}
+
+.circle {
+  width: 650px;
+  height: 650px;
+  border: 15px solid #000000;
+  border-radius:100%;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: #ffffff;
+    transition: transform 0.2s ease-out;
+}
+
+/* Эффект волны при клике */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(0);
+    animation: ripple 1s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(100);
+        opacity: 0;
+    }
+}
+
+/* Стили для частиц при наведении */
+#particles-js canvas {
+    transition: filter 0.3s ease;
+}
+
+#particles-js:hover canvas {
+    filter: contrast(120%);
+}
+
+/* Удаляем старые стили частиц */
+.particles-container,
+.triangle-container,
+.square-container,
+.circle-container {
+    display: none;
+}

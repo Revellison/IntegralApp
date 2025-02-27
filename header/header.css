@@ -1,0 +1,229 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--header-bg);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    user-select: none;
+    transition: box-shadow 0.3s; transition: 0.7s;
+    font-family: "Rubik", sans-serif;
+    justify-content: space-between;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+    margin: 0 10px;
+    transform: translateY(0);
+    transition: all 0.3s;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: cadetblue;
+  }
+
+  .buy {
+    padding: 10px 15px;
+    border-radius: 17px;
+    color: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+    font-size: 16px;
+    background-color: var(--text-primary);
+    font-family: "Rubik", sans-serif;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .buy::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+      transparent 25%,
+      rgba(255,255,255,0.1) 50%,
+      transparent 75%);
+    transform: rotate(0deg);
+    animation: rotate 3s linear infinite;
+    z-index: -1;
+  }
+  
+  .buy::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 15px;
+    background: #000;
+    z-index: -1;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+  
+  .buy:hover {
+    background-color: #F0F0FF;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .buy:hover::before {
+    background: linear-gradient(45deg, 
+      transparent 25%,
+      rgba(0,0,0,0.1) 50%,
+      transparent 75%);
+  }
+
+  .logo {
+    font-family: 'IntegralCF-Bold', sans-serif;
+    font-size: clamp(26px, 5vw, 26px);
+    margin-right: 10px;
+    transition: transform 0.7s;
+  }
+
+  #buy {
+    width: 25%;
+    height: 40px;
+    margin-left: 20%;
+    background-color: #F0F0FF;
+    border: 1px solid #000000;
+  }
+
+  @media (max-width: 768px) {header {
+    padding: 10px;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    animation: none; 
+  }
+
+
+  .logo {
+    font-size: 28px;
+  }
+
+  #buy {
+    width: 100%;
+    margin: 20px auto;
+    height: 50px;
+    border-radius: 25px; 
+    font-size: 16px;
+    display: block; 
+  }
+}
+
+@media (max-width: 523px) {
+
+    header {
+      padding: 10px;
+      flex-direction: column; 
+      justify-content: space-between;
+      align-items: center;
+      animation: none; 
+      font-size: 18px;
+      justify-content: center;
+    }
+    .navigation {
+      margin: 18px 0;
+      text-align: center;
+      background-color: var(--text-primary);
+      padding: 10px;
+      border-radius: 35px;
+  
+    }
+    .navbtn {
+      color: #F0F0FF;
+    }
+  
+    .logo {
+      font-size: 35px;
+    }
+  
+    .theme-toggle {
+        color: var(--bg-primary);
+        margin-right: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 401px) {
+  
+    header {
+      font-size: 13px;
+    }
+  }
+
+.navigation {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbtn {
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.navbtn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.navbtn:hover::after {
+    width: 100%;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    transition: transform 0.5s ease;
+}
+
+[data-theme="dark"] .theme-toggle i {
+    transform: rotate(360deg);
+}
