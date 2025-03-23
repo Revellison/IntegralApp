@@ -1,18 +1,28 @@
+# Игнорирование директории разработки
+dev/
+IntegralALL.py
+# Игнорирование конфиденциальных файлов
+data/api.json
+data/settings.json
 
-.idea/
-*.swp
-*.swo
-api.json
-local/
-trash/
-dist/
-build/
-.venv/
-integral.spec
-settings.json
-integral copy.py
-fdsef.py
+# Игнорирование всех кеш папок
+design/__pycache__/
+modules/__pycache__/
 __pycache__/
 *.py[cod]
-/Integralawd.py
-/build.py
+*$py.class
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.egg-info/
+.eggs/
+*.egg
+dist/
+build/
+*.so
+*~
+.DS_Store

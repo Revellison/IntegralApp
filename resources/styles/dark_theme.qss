@@ -85,7 +85,7 @@ MiniCalculatorUI QPushButton:pressed {
 QColorDialog QSpinBox
     {
     background-color: #1e1e1e;
-    color: #white;
+    color: white;
     border-radius: 5px;
     padding: 4px;
     min-width: 60px;
@@ -108,13 +108,13 @@ QColorDialog QSpinBox::down-button {
 
 QColorDialog {
     background-color: #0f0f0f;
-    color: #white;
+    color: white;
 }
 
 /* Стили для всех кнопок внутри палитры */
 QColorDialog QPushButton {
 	background-color: rgb(21, 21, 21);
-    color: #white;
+    color: white;
     border-radius: 5px;
     padding: 5px 10px;
 }
