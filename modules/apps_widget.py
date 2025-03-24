@@ -1,4 +1,3 @@
-# floating_widget.py
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QPushButton, QScrollArea, QVBoxLayout, QLabel
 from PyQt6.QtGui import QIcon
@@ -63,12 +62,10 @@ class CategoryWidget(QWidget):
         layout.setSpacing(5)
         layout.setContentsMargins(0, 5, 0, 10)
         
-        # Метка категории
         label = QLabel(category_name)
         label.setStyleSheet("color: #E8F5E9; font-size: 12px;")
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
-        # Контейнер для кнопок
         self.buttons_container = QWidget()
         self.buttons_layout = QHBoxLayout(self.buttons_container)
         self.buttons_layout.setSpacing(10)
@@ -80,7 +77,7 @@ class CategoryWidget(QWidget):
 
 class AppsWidget(QWidget):
     appClicked = pyqtSignal(str)
-    focusLost = pyqtSignal()  # Новый сигнал для потери фокуса
+    focusLost = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -90,9 +87,7 @@ class AppsWidget(QWidget):
         self.isAnimating = False
         self.original_pos = None
         
-        # Включаем отслеживание мыши
         self.setMouseTracking(True)
-        # Устанавливаем политику фокуса
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
     def setup_ui(self):
@@ -100,13 +95,11 @@ class AppsWidget(QWidget):
         self.main_layout.setSpacing(0)
         self.main_layout.setContentsMargins(20, 10, 20, 10)
         
-        # Создаем область прокрутки
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
         scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         
-        # Основной контейнер для категорий
         self.categories_widget = QWidget()
         self.categories_layout = QVBoxLayout(self.categories_widget)
         self.categories_layout.setSpacing(15)
@@ -116,11 +109,9 @@ class AppsWidget(QWidget):
         scroll_area.setWidget(self.categories_widget)
         self.main_layout.addWidget(scroll_area)
         
-        # Добавляем категории
         self.add_categories()
         
     def add_categories(self):
-        # Структура категорий и приложений
         categories = {
             "Общие": [
                 ("mistralAi.png", "ИИ чат")
@@ -153,14 +144,11 @@ class AppsWidget(QWidget):
             self.categories_layout.addWidget(category_widget)
 
     def handle_app_click(self, app_name):
-        """Обработчик клика по приложению"""
         self.appClicked.emit(app_name)
-        self.hide_with_animation()  # Скрываем виджет после клика
+        self.hide_with_animation()
 
     def focusOutEvent(self, event):
-        """Обработчик потери фокуса"""
         super().focusOutEvent(event)
-        # Проверяем, не находится ли мышь над виджетом
         if not self.geometry().contains(self.mapFromGlobal(QtCore.QCursor.pos())):
             self.focusLost.emit()
 
@@ -170,29 +158,23 @@ class AppsWidget(QWidget):
             
         self.isAnimating = True
         
-        # Сохраняем исходную позицию при первом показе
         if self.original_pos is None:
             self.original_pos = self.geometry()
         else:
-            # Возвращаем виджет в исходную позицию
             self.setGeometry(self.original_pos)
         
-        # Создаем эффект прозрачности
         self.opacity_effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(self.opacity_effect)
         self.opacity_effect.setOpacity(0.0)
         
-        # Уменьшаем длительность анимации
-        duration = 200  # было 400
+        duration = 200
         
-        # Анимация прозрачности
         self.fade_in = QPropertyAnimation(self.opacity_effect, b"opacity")
         self.fade_in.setDuration(duration)
         self.fade_in.setStartValue(0.0)
         self.fade_in.setEndValue(1.0)
-        self.fade_in.setEasingCurve(QEasingCurve.Type.InQuad)  # Меняем кривую на более быструю
+        self.fade_in.setEasingCurve(QEasingCurve.Type.InQuad)
         
-        # Анимация движения (уменьшаем смещение)
         start_geometry = QtCore.QRect(
             self.original_pos.x(),
             self.original_pos.y() - 10, 
@@ -206,7 +188,6 @@ class AppsWidget(QWidget):
         self.slide_in.setEndValue(self.original_pos)
         self.slide_in.setEasingCurve(QEasingCurve.Type.OutQuad)
         
-        # Группа анимаций
         self.animation_group = QParallelAnimationGroup()
         self.animation_group.addAnimation(self.fade_in)
         self.animation_group.addAnimation(self.slide_in)
@@ -221,22 +202,18 @@ class AppsWidget(QWidget):
             
         self.isAnimating = True
         
-        # Создаем эффект прозрачности
         self.opacity_effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(self.opacity_effect)
         self.opacity_effect.setOpacity(1.0)
         
-        # Уменьшаем длительность анимации
         duration = 200  
         
-        # Анимация прозрачности
         self.fade_out = QPropertyAnimation(self.opacity_effect, b"opacity")
         self.fade_out.setDuration(duration)
         self.fade_out.setStartValue(1.0)
         self.fade_out.setEndValue(0.0)
         self.fade_out.setEasingCurve(QEasingCurve.Type.OutQuad)
         
-        # Анимация движения
         end_geometry = QtCore.QRect(
             self.original_pos.x(),
             self.original_pos.y() + 10,  
@@ -260,12 +237,10 @@ class AppsWidget(QWidget):
     def finish_show_animation(self):
         self.setGraphicsEffect(None)
         self.isAnimating = False
-        # Возвращаем в исходную позицию
         self.setGeometry(self.original_pos)
         
     def finish_hide_animation(self):
         self.hide()
         self.setGraphicsEffect(None)
         self.isAnimating = False
-        # Возвращаем в исходную позицию
         self.setGeometry(self.original_pos)

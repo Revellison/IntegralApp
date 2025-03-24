@@ -10,10 +10,10 @@ from PyQt6.QtWidgets import (QLineEdit, QMainWindow,
 class MiniCalculatorUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.load_settings()  # Загружаем настройки при старте
+        self.load_settings()
         self.setWindowTitle("Mini Calculator")
-        self.setFixedSize(250, 350)  # Устанавливаем фиксированные размеры окна
-        self.setWindowIcon(QIcon(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "icons", "icon.ico")))  # Указываем абсолютный путь к файлу с иконкой в корневой директории
+        self.setFixedSize(250, 350)
+        self.setWindowIcon(QIcon(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "icons", "icon.ico")))
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
 
@@ -25,33 +25,26 @@ class MiniCalculatorUI(QMainWindow):
         self.layout.addWidget(self.entry)
 
         self.create_buttons()
-        self.apply_current_theme()  # Применяем текущую тему
-
-
+        self.apply_current_theme()
 
     def load_settings(self):
-        """Загрузить настройки из файла"""
-        # Определяем путь к файлу настроек
         settings_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "settings.json")
         
         if os.path.exists(settings_file_path):
             with open(settings_file_path, "r") as settings_file:
                 settings = json.load(settings_file)
-                self.current_theme = settings.get("theme", "light")  # Загрузить текущую тему
+                self.current_theme = settings.get("theme", "light")
 
-                print(f"Mini calc loaded theme: {self.current_theme}")  # Отладочная информация
+                print(f"Mini calc loaded theme: {self.current_theme}")
 
-                # Применяем загруженную тему
                 if self.current_theme == "dark":
-                    self.set_black_theme()  # Применяем тёмную тему
+                    self.set_black_theme()
                 else:
-                    self.set_white_theme()  # Применяем светлую тему
+                    self.set_white_theme()
         else:
-            # Если файл настроек не существует, устанавливаем тему по умолчанию
             self.set_white_theme()
 
     def apply_background(self, background_path):
-        """Применить фоновое изображение"""
         if os.path.exists(background_path):
             self.setStyleSheet(f"QWidget {{ background-image: url({background_path}); }}")
         else:
@@ -67,7 +60,7 @@ class MiniCalculatorUI(QMainWindow):
         ]
 
         for row in buttons:
-            button_row = QHBoxLayout()  # Используем горизонтальный макет для каждого ряда
+            button_row = QHBoxLayout()
             for button_text in row:
                 button = QPushButton(button_text)
                 button.clicked.connect(self.on_button_click)
@@ -80,10 +73,10 @@ class MiniCalculatorUI(QMainWindow):
 
         if button_text == '=':
             try:
-                result = str(eval(self.entry.text()))  # Вычисляем результат
+                result = str(eval(self.entry.text()))
                 self.entry.setText(result)
             except Exception as e:
-                self.error_message()  # Показываем сообщение об ошибке
+                self.error_message()
 
         elif button_text == 'C':
             current_text = self.entry.text()
@@ -97,14 +90,14 @@ class MiniCalculatorUI(QMainWindow):
                 result = math.sqrt(float(self.entry.text()))
                 self.entry.setText(str(result))
             except ValueError:
-                self.error_message()  # Показываем сообщение об ошибке
+                self.error_message()
 
         elif button_text == 'pow':
             try:
                 result = str(eval(self.entry.text()))
                 self.entry.setText(result)
             except Exception as e:
-                self.error_message()  # Показываем сообщение об ошибке
+                self.error_message()
 
         elif button_text == 'pi':
             self.entry.setText(str(math.pi))
@@ -127,15 +120,12 @@ class MiniCalculatorUI(QMainWindow):
         msg.setWindowTitle("Ошибка")
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         self.clear_text(self.entry)
-        # Отображаем сообщение
         msg.exec()
 
     def clear_text(self, text_input):
-        """Очищает текстовое поле."""
         text_input.clear()
 
     def calcanimation(self):
-        """Анимация открытия окна."""
         self.setWindowOpacity(0)
         self.show()
         self.animation = QPropertyAnimation(self, b"windowOpacity")
@@ -145,7 +135,6 @@ class MiniCalculatorUI(QMainWindow):
         self.animation.start()
 
     def apply_theme(self, theme_path):
-        """Загрузить и применить тему из файла .qss."""
         try:
             with open(theme_path, "r") as file:
                 theme_style = file.read()
@@ -156,22 +145,18 @@ class MiniCalculatorUI(QMainWindow):
             print(f"Ошибка при загрузке темы: {e}")
 
     def set_white_theme(self):
-        """Установить светлую тему."""
         self.apply_theme("resources/styles/light_theme.qss")
         self.current_theme = "light"
 
     def set_black_theme(self):
-        """Установить темную тему."""
         self.apply_theme("resources/styles/dark_theme.qss")
         self.current_theme = "dark"
 
     def set_custom_theme(self):
-        """Установить темную тему."""
         self.apply_theme("resources/styles/custom_theme.qss")
         self.current_theme = "custom"
 
     def apply_current_theme(self):
-        """Применить текущую тему при запуске."""
         if self.current_theme == "light":
             self.set_white_theme()
         else:
@@ -179,7 +164,7 @@ class MiniCalculatorUI(QMainWindow):
 
 class Math:
     def __init__(self):
-        self.mini_calculator = None  # Placeholder for the calculator instance
+        self.mini_calculator = None
 
     def open_calculator(self):
         if not self.mini_calculator:
