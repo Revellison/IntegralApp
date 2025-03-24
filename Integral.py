@@ -8,6 +8,7 @@ import time
 from typing import Dict
 from modules.chat import ChatLogic
 from modules.calc import *
+from modules.apps_widget import OverlayedPlainTextEdit, FloatingButtonWidget, AppsWidget
 import numpy as np
 import requests
 import sympy as sp
@@ -34,6 +35,8 @@ API_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "api
 DEFAULT_THEME = "light"
 with open('data/water_words.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
+
+
 
 def load_fonts():
     font1_id = QFontDatabase.addApplicationFont("resources/fonts/NotoSans.ttf")
@@ -400,9 +403,6 @@ class DrawPad(QWidget):
         font.setStrikeOut(text_settings["strikeout"])
         return font
 
-
-
-
 class TextProcessor:
 
 
@@ -483,8 +483,6 @@ class TextProcessor:
         new_window.setLayout(layout)
         new_window.exec()
 
-
-
 class MyApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -496,11 +494,16 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(8)  # Устанавливаем начальную страницу
         self.current_theme = "dark"  # По умолчанию светлая тема
 
-        self.buttons = [self.ui.settings_pg2, self.ui.opisanye_pg1, self.ui.open1_textreworker_pg3, self.ui.drawpad_pg8, self.ui.open1_textreworker_pg3,
-                        self.ui.textanalyzer_open_page6, self.ui.aichat_pg10, self.ui.translator_open_page4, self.ui.functions_page7, self.ui.drygoe_open_page5]  # Добавьте все кнопки из дизайна
+        self.buttons = [self.ui.settings_pg2, self.ui.opisanye_pg1, self.ui.drawpad_pg8]
         self.animated_buttons = [Animated(button) for button in self.buttons]
 
-
+        # Создаем виджет с приложениями
+        self.apps_widget = AppsWidget(self)
+        self.apps_widget.setFixedHeight(300)
+        self.apps_widget.setGeometry(65, 20, 420, 300)
+        self.apps_widget.appClicked.connect(self.handle_app_click)
+        self.apps_widget.focusLost.connect(self.hide_apps_widget)  # Подключаем новый сигнал
+        self.apps_widget.hide()
 
         #hide
         self.ui.progressBar.hide()
@@ -516,7 +519,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.draw_pad.layout().addWidget(scroll_area)  # Добавляем прокручиваемую область
 
         self.math = Math()
-        self.ui.opencalculatorbutton.clicked.connect(self.math.open_calculator)
+        #self.ui.opencalculatorbutton.clicked.connect(self.math.open_calculator)
         #drawpad_binds
         self.ui.pen_1.clicked.connect(lambda: self.draw_pad_area.set_tool("pen"))  # Перо
         self.ui.line_1.clicked.connect(lambda: self.draw_pad_area.set_tool("line"))  # Линия
@@ -554,7 +557,6 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.simvols_output_vsego.setReadOnly(True)
         self.ui.translate_output.setReadOnly(True)
         self.ui.translator_otladka_output.setReadOnly(True)
-        self.ui.ynikalnost_output.setReadOnly(True)
 
         # Привязка функций к кнопкам для проверки текста
         self.ui.paste1.clicked.connect(lambda: TextProcessor.paste_text(self.ui.inputYandex))
@@ -575,14 +577,14 @@ class MyApp(QtWidgets.QMainWindow):
         # Переключение страниц
         self.ui.opisanye_pg1.clicked.connect(lambda: self.switch_page(0))  # Привязка кнопки к переключению на страницу 0
         self.ui.settings_pg2.clicked.connect(lambda: self.switch_page(1))  # Привязка кнопки к переключению на страницу 1
-        self.ui.open1_textreworker_pg3.clicked.connect(lambda: self.switch_page(2))  # Привязка кнопки к переключению на страницу 2
-        self.ui.translator_open_page4.clicked.connect(lambda: self.switch_page(3))  # Привязка кнопки к переключению на страницу 4
+        #self.ui.open1_textreworker_pg3.clicked.connect(lambda: self.switch_page(2))  # Привязка кнопки к переключению на страницу 2
+        #self.ui.translator_open_page4.clicked.connect(lambda: self.switch_page(3))  # Привязка кнопки к переключению на страницу 4
         #self.ui.drygoe_open_page5.clicked.connect(lambda: self.switch_page(4))  # Привязка кнопки к переключению на страницу 5
-        self.ui.textanalyzer_open_page6.clicked.connect(lambda: self.switch_page(5))  # Привязка кнопки к переключению на страницу 6
-        self.ui.functions_page7.clicked.connect(lambda: self.switch_page(7))  # Привязка кнопки к переключению на страницу 7
+        #self.ui.textanalyzer_open_page6.clicked.connect(lambda: self.switch_page(5))  # Привязка кнопки к переключению на страницу 6
+        #self.ui.functions_page7.clicked.connect(lambda: self.switch_page(7))  # Привязка кнопки к переключению на страницу 7
         self.ui.drawpad_pg8.clicked.connect(lambda: self.switch_page(8))  # Привязка кнопки к переключению на страницу 8
         #self.ui.calc_page10.clicked.connect(lambda: self.switch_page(9))  # Привязка кнопки к переключению на страницу 9
-        self.ui.aichat_pg10.clicked.connect(lambda: self.switch_page(10))  # Привязка кнопки к переключению на страницу 8
+        #self.ui.aichat_pg10.clicked.connect(lambda: self.switch_page(10))  # Привязка кнопки к переключению на страницу 8
 
         # Перемещение окна
         self.dragPos = None
@@ -630,6 +632,36 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.function_create.clicked.connect(self.plot_function)
         self.ui.function_clear.clicked.connect(lambda: TextProcessor.clear_text(self.ui.function_lineEdit))  # Кнопка удаления
 
+        self.ui.apps_widget_start.clicked.connect(self.toggle_apps_widget)
+
+        self.floating_widget = OverlayedPlainTextEdit(self) 
+        self.floating_widget.setGeometry(65, 10, 420, 270)  #(x=a, y=b, ширина=c, высота=d)
+        self.floating_widget.update_floating_button_text("Открыть")  
+        self.floating_widget.hide()  
+    
+    def handle_app_click(self, app_name):
+        """Обработчик клика по приложению"""
+        page_mapping = {
+            "Калькулятор": lambda: self.math.open_calculator(),
+            "Блокнот": lambda: self.switch_page(2),
+            "Рисование": lambda: self.switch_page(8),  
+            "Орфографический анализатор": lambda: self.switch_page(2),
+            "СЕО анализатор текста": lambda: self.switch_page(5),
+            "Переводчик": lambda: self.switch_page(3),
+            "Построение функций": lambda: self.switch_page(7),
+            "ИИ чат": lambda: self.switch_page(10),
+        }
+        
+        if action := page_mapping.get(app_name):
+            action()
+            self.apps_widget.hide_with_animation()
+
+    def toggle_apps_widget(self):
+        """Показать/скрыть панель приложений"""
+        if self.apps_widget.isHidden():
+            self.apps_widget.show_with_animation()
+        else:
+            self.apps_widget.hide_with_animation()
 
     def clear_draw_pad(self):
         self.draw_pad_area.shapes = []
@@ -720,7 +752,7 @@ class MyApp(QtWidgets.QMainWindow):
     def set_background_image(self):
         # Определяем путь к папке с изображениями
         project_dir = os.path.dirname(os.path.abspath(__file__))  # Корневая папка проекта
-        images_dir = os.path.join(project_dir, "backgrounds")  # Папка с изображениями
+        images_dir = os.path.join(project_dir, "resources", "backgrounds")  # Папка с изображениями
 
         # Открываем файловый диалог с указанием начальной директории
         file_path, _ = QFileDialog.getOpenFileName(
@@ -974,6 +1006,11 @@ class MyApp(QtWidgets.QMainWindow):
         self.animation.setStartValue(0)
         self.animation.setEndValue(1)
         self.animation.start()
+
+    def hide_apps_widget(self):
+        """Скрыть виджет приложений"""
+        if self.apps_widget.isVisible() and not self.apps_widget.isAnimating:
+            self.apps_widget.hide_with_animation()
 
 
 class SettingsManager:

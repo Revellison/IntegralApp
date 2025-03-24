@@ -1,6 +1,9 @@
 # Игнорирование директории разработки
 dev/
 IntegralALL.py
+Integral_test_ui.py
+Integral_test.ui
+Integral_ui.py
 # Игнорирование конфиденциальных файлов
 data/api.json
 data/settings.json

@@ -1,35 +1,11 @@
-from collections import Counter
+
 import json
 import math
 import os
-import re
-import sys
-import time
-from typing import Dict, List, Optional, Tuple
-
-import numpy as np
-import requests
-import sympy as sp
-from deep_translator import GoogleTranslator
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-from mistralai import Mistral
-from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtCore import (QEasingCurve, QPoint, QPropertyAnimation, QRect, QSize,
-                         QThread, QTimer, Qt, pyqtSignal)
-from PyQt6.QtGui import (QBrush, QColor, QFont, QFontDatabase, QIcon, QPainter,
-                        QPen, QPixmap)
-from PyQt6.QtWidgets import (QApplication, QColorDialog, QComboBox, QDialog,
-                           QFileDialog, QFontDialog, QGraphicsDropShadowEffect,
-                           QGraphicsOpacityEffect, QGridLayout, QHBoxLayout,
-                           QInputDialog, QLabel, QLineEdit, QMainWindow,
-                           QMessageBox, QPushButton, QScrollArea, QSlider,
-                           QSplashScreen, QTextEdit, QVBoxLayout, QWidget)
-
-
-import markdown
-from markdown.extensions import fenced_code, tables, nl2br
-import subprocess
+from PyQt6.QtCore import (QPropertyAnimation)
+from PyQt6.QtGui import (QIcon, QPixmap)
+from PyQt6.QtWidgets import (QLineEdit, QMainWindow,
+                           QMessageBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget)
 
 class MiniCalculatorUI(QMainWindow):
     def __init__(self):
@@ -55,11 +31,13 @@ class MiniCalculatorUI(QMainWindow):
 
     def load_settings(self):
         """Загрузить настройки из файла"""
-        if os.path.exists("settings.json"):
-            with open("settings.json", "r") as settings_file:
+        # Определяем путь к файлу настроек
+        settings_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "settings.json")
+        
+        if os.path.exists(settings_file_path):
+            with open(settings_file_path, "r") as settings_file:
                 settings = json.load(settings_file)
                 self.current_theme = settings.get("theme", "light")  # Загрузить текущую тему
-                self.current_background = settings.get("background_image", None)  # Загрузить путь к изображению фона
 
                 print(f"Mini calc loaded theme: {self.current_theme}")  # Отладочная информация
 
@@ -68,10 +46,6 @@ class MiniCalculatorUI(QMainWindow):
                     self.set_black_theme()  # Применяем тёмную тему
                 else:
                     self.set_white_theme()  # Применяем светлую тему
-
-                # Если путь к изображению фона существует, применяем его
-                if self.current_background:
-                    self.apply_background(self.current_background)  # Устанавливаем изображение как фон
         else:
             # Если файл настроек не существует, устанавливаем тему по умолчанию
             self.set_white_theme()
@@ -93,7 +67,7 @@ class MiniCalculatorUI(QMainWindow):
         ]
 
         for row in buttons:
-            button_row = QHBoxLayout()
+            button_row = QHBoxLayout()  # Используем горизонтальный макет для каждого ряда
             for button_text in row:
                 button = QPushButton(button_text)
                 button.clicked.connect(self.on_button_click)
@@ -190,6 +164,11 @@ class MiniCalculatorUI(QMainWindow):
         """Установить темную тему."""
         self.apply_theme("resources/styles/dark_theme.qss")
         self.current_theme = "dark"
+
+    def set_custom_theme(self):
+        """Установить темную тему."""
+        self.apply_theme("resources/styles/custom_theme.qss")
+        self.current_theme = "custom"
 
     def apply_current_theme(self):
         """Применить текущую тему при запуске."""

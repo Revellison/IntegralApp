@@ -1,4 +1,63 @@
 
+/* Стили для виджета приложений */
+AppsWidget {
+    background-color: #161616;
+    border-radius: 10px;
+    border: 1px solid #2e2e2e;
+}
+
+AppsWidget QScrollArea {
+    background: transparent;
+    border: none;
+}
+
+AppsWidget QScrollArea > QWidget > QWidget {
+    background: transparent;
+}
+
+AppsWidget QScrollBar:horizontal {
+    background: #3d3d3d;
+    height: 8px;
+    margin: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 4px;
+}
+
+AppsWidget QScrollBar::handle:horizontal {
+    background: #505050;
+    min-width: 20px;
+    border-radius: 4px;
+}
+
+AppsWidget QScrollBar::add-line:horizontal,
+AppsWidget QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+}
+
+AppsWidget QPushButton {
+    background-color: #3d3d3d;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+}
+
+AppsWidget QPushButton:hover {
+    background-color: #4d4d4d;
+}
+
+AppsWidget QPushButton:pressed {
+    background-color: #505050;
+}
+
+AppsWidget QToolTip {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 /* calc */
 MiniCalculatorUI QLineEdit
     {
@@ -218,7 +277,7 @@ QMainWindow
 
 #widget_5
     {
-        border: 0px solid;
+        border: 1px solid #2e2e2e;
         border-radius: 13px;
 	    background-color: rgb(21, 21, 21);
     }

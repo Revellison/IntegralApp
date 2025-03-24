@@ -7,6 +7,7 @@ MiniCalculatorUI QLineEdit
         color: #E8F5E9;
         border: none;
         box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        margin-bottom: 5px;
     }
 
 MiniCalculatorUI QPushButton {
@@ -15,8 +16,9 @@ MiniCalculatorUI QPushButton {
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    padding: 10px;
-    margin: 1px;
+    padding: 5px;
+    margin: 2px;
+    min-height: 40px;
 }
 
 MiniCalculatorUI QPushButton:hover {
