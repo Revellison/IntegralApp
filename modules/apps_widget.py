@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QPushButton, QScrollArea, QVBoxLayout, QLabel
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon,QFont, QFontDatabase
 from PyQt6.QtCore import Qt, pyqtSignal, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve
 from PyQt6.QtWidgets import QGraphicsOpacityEffect
 import os
@@ -67,9 +67,10 @@ class CategoryWidget(QWidget):
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         self.buttons_container = QWidget()
+        self.buttons_container.setObjectName("buttons_container")
         self.buttons_layout = QHBoxLayout(self.buttons_container)
         self.buttons_layout.setSpacing(10)
-        self.buttons_layout.setContentsMargins(0, 0, 0, 0)
+        self.buttons_layout.setContentsMargins(8, 8, 8, 8)
         self.buttons_layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
         
         layout.addWidget(label)
@@ -97,8 +98,8 @@ class AppsWidget(QWidget):
         
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
-        scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         
         self.categories_widget = QWidget()
         self.categories_layout = QVBoxLayout(self.categories_widget)
@@ -117,7 +118,7 @@ class AppsWidget(QWidget):
                 ("mistralAi.png", "ИИ чат")
             ],
             "Текст": [
-                ("text_rework.png", "Орфографический анализатор"),
+                ("text_rework.png", "Орфографический анализатор"), 
                 ("text_analyze.png", "СЕО анализатор текста"),
                 ("translator.png", "Переводчик")
             ],
@@ -126,11 +127,22 @@ class AppsWidget(QWidget):
                 ("function.png", "Построение функций")
             ]
         }
-        
+
         icons_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "icons", "widget")
+        QFontDatabase.addApplicationFont("resources/fonts/onest.ttf")
+
+        font = QFont()
+        font.setFamily("onest")
+        font.setPointSize(26)
+        font.setBold(False)
         
         for category_name, apps in categories.items():
             category_widget = CategoryWidget(category_name)
+            
+            # Применяем шрифт к метке категории
+            label = category_widget.findChild(QLabel)
+            if label:
+                label.setFont(font)
             
             for icon_file, app_name in apps:
                 icon_path = os.path.join(icons_path, icon_file)
@@ -142,7 +154,6 @@ class AppsWidget(QWidget):
                     print(f"Иконка не найдена: {icon_path}")
             
             self.categories_layout.addWidget(category_widget)
-
     def handle_app_click(self, app_name):
         self.appClicked.emit(app_name)
         self.hide_with_animation()

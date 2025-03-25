@@ -177,9 +177,6 @@ class MyApp(QtWidgets.QMainWindow):
         self.apps_widget.focusLost.connect(self.hide_apps_widget)
         self.apps_widget.hide()
 
-        self.ui.progressBar.hide()
-        self.ui.lineEdit_3.hide()
-        self.ui.lineEdit_4.hide()
         self.ui.lineEdit_2.hide()
 
         self.ui.draw_pad.setLayout(QVBoxLayout())
@@ -368,7 +365,7 @@ class MyApp(QtWidgets.QMainWindow):
                 if self.current_background:
                     self.apply_background(self.current_background)
                     file_name = os.path.basename(self.current_background)
-                    self.ui.lineEdit.setText(file_name)
+                    self.ui.lineEdit_2.setText(file_name)
         else:
             self.apply_current_theme()
 
@@ -394,7 +391,7 @@ class MyApp(QtWidgets.QMainWindow):
             print(f"Выбрано изображение: {file_path}")
             self.current_background = file_path
             file_name = os.path.basename(file_path)
-            self.ui.lineEdit.setText(file_name)
+            self.ui.lineEdit_2.setText(file_name)
             self.apply_background(file_path)
         else:
             print("Файл не выбран.")
@@ -409,7 +406,6 @@ class MyApp(QtWidgets.QMainWindow):
             background-image: url({image_path});
             background-repeat: no-repeat;
             background-position: center;
-            background-size: cover;
         }}
         """
 
@@ -419,7 +415,7 @@ class MyApp(QtWidgets.QMainWindow):
 
     def reset_background(self):
         self.current_background = None
-        self.ui.lineEdit.clear()
+        self.ui.lineEdit_2.clear()
 
         existing_style = self.styleSheet()
 

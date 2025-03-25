@@ -145,6 +145,7 @@ class DrawPad(QWidget):
         self.color_picker_open = False
         self.is_dragging = False
         self.last_pos = None
+        self.panning = False  # Флаг для отслеживания перемещения холста средней кнопкой
         
         self.scale_factor = 1.0
         self.offset = QPoint(0, 0)
@@ -280,11 +281,25 @@ class DrawPad(QWidget):
         elif event.button() == Qt.MouseButton.RightButton:
             self.show_slider = not self.show_slider
             self.update_slider_visibility()
+        
+        # Добавляем обработку нажатия средней кнопки (колесика)
+        elif event.button() == Qt.MouseButton.MiddleButton:
+            self.panning = True
+            self.last_pos = event.pos()
+            self.setCursor(Qt.CursorShape.ClosedHandCursor)
             
         self.update()
     
     def mouseMoveEvent(self, event):
         self.cursor_pos = event.pos()
+        
+        # Обработка панорамирования с помощью средней кнопки мыши
+        if self.panning and self.last_pos:
+            delta = event.pos() - self.last_pos
+            self.offset += delta
+            self.last_pos = event.pos()
+            self.update()
+            return
         
         transformed_pos = self.transform_point(event.pos())
         
@@ -310,6 +325,11 @@ class DrawPad(QWidget):
             elif self.current_tool == "move_object" and self.moving_object:
                 self.moving_object = None
                 self.moving_object_offset = QPoint(0, 0)
+        
+        # Обработка отпускания средней кнопки мыши
+        elif event.button() == Qt.MouseButton.MiddleButton:
+            self.panning = False
+            self.setCursor(Qt.CursorShape.CrossCursor if self.current_tool != "eraser" else Qt.CursorShape.BlankCursor)
         
         self.update()
     
@@ -389,16 +409,16 @@ class DrawPad(QWidget):
     def draw_shape(self, painter, shape):
         try:
             if shape[0] == "pen":
-                pen = QPen(shape[2], shape[3])
+                painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+                pen = QPen(shape[2], shape[3], Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap, Qt.PenJoinStyle.RoundJoin)
                 painter.setPen(pen)
                 points = shape[1]
                 if not points or len(points) < 2:
                     return
+                
+                # Создаем непрерывную линию между всеми точками
                 for i in range(1, len(points)):
-                    painter.drawLine(points[i - 1], points[i])
-                painter.setPen(QPen(shape[2], shape[3], Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap))
-                for point in points:
-                    painter.drawPoint(point)
+                    painter.drawLine(points[i-1], points[i])
 
             elif shape[0] == "line":
                 pen = QPen(shape[3], shape[4])
