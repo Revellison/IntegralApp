@@ -367,3 +367,108 @@ QLineEdit:hover
     {
         background-color: #1a1a1a;
     }
+
+/* AI Chat Styles */
+#ai_chat_widget {
+    background-color: #0f0f0f;
+    border-radius: 15px;
+}
+
+#chat_area {
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    background-color: #131313;
+}
+
+#chat_container {
+    background-color: transparent;
+}
+
+#user_message {
+    background-color: #161616;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 50px;
+}
+
+#ai_message {
+    background-color: #212121;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 50px;
+}
+
+#sender_label {
+    color: #cccccc;
+    font-weight: bold;
+}
+
+#loading_indicator {
+    background-color: #212121;
+    border-radius: 2px;
+    text-align: center;
+}
+
+#loading_indicator::chunk {
+    background-color: #1e88e5;
+    border-radius: 2px;
+}
+
+/* Скрываем рамку скролбара и его кнопки */
+QScrollBar:vertical {
+    border: none;
+    background-color: transparent;
+    width: 10px;
+    margin: 0px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #323232;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+
+/* EnhancedTextEdit для чата */
+AIChat QTextEdit {
+    background-color: #161616;
+    color: white;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+AIChat QPushButton:disabled {
+    background-color: #0f0f0f;
+    color: #444444;
+}
+
+/* Стиль для кнопки отправки сообщений */
+#send_button {
+    background-color: #161616;
+    color: white;
+    border: 0px solid transparent;
+    border-radius: 6px;
+    padding: 8px;
+    min-height: 80px;
+    max-height: 80px;
+}
+
+#send_button:hover {
+    background-color: #252525;
+}
+
+#send_button:pressed {
+    background-color: #323232;
+}
