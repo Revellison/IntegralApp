@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSlider,
                            QComboBox, QDialog, QTextEdit, QPushButton, QLineEdit,
                            QFontDialog, QColorDialog, QInputDialog,
                            QApplication)
-import math
+
 
 __all__ = ['DrawPad', 'TextInputDialog']
 
@@ -416,7 +416,7 @@ class DrawPad(QWidget):
                 if not points or len(points) < 2:
                     return
                 
-                # Создаем непрерывную линию между всеми точками
+
                 for i in range(1, len(points)):
                     painter.drawLine(points[i-1], points[i])
 

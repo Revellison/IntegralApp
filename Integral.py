@@ -25,7 +25,7 @@ from design.design import Ui_EduLab
 
 
 SETTINGS_FILE = "settings.json"
-API_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "api.json")
+API_FILE = os.path.join("data", "api.json")
 DEFAULT_THEME = "light"
 with open('data/water_words.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
@@ -421,7 +421,7 @@ class MyApp(QtWidgets.QMainWindow):
             self.apply_current_theme()
 
     def load_setting(self, key, default=None):
-        if os.path.exists("settings.json"):
+        if os.path.join("data", "settings.json"):
             with open("settings.json", "r") as settings_file:
                 settings = json.load(settings_file)
                 return settings.get(key, default)

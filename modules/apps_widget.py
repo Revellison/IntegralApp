@@ -128,7 +128,7 @@ class AppsWidget(QWidget):
             ]
         }
 
-        icons_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "icons", "widget")
+        icons_path = os.path.join("icons", "widget")
         QFontDatabase.addApplicationFont("resources/fonts/onest.ttf")
 
         font = QFont()
@@ -139,7 +139,6 @@ class AppsWidget(QWidget):
         for category_name, apps in categories.items():
             category_widget = CategoryWidget(category_name)
             
-            # Применяем шрифт к метке категории
             label = category_widget.findChild(QLabel)
             if label:
                 label.setFont(font)

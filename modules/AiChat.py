@@ -12,7 +12,8 @@ from mistralai import Mistral
 import markdown
 
 
-API_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "api.json")
+API_FILE = os.path.join("data", "api.json")
+
 
 
 __all__ = ['AIChat', 'AIChatWindow', 'Worker', 'MessageWidget', 'ChatArea']
@@ -110,7 +111,6 @@ class MessageWidget(QFrame):
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
     
     def animate_appearance(self):
-        """Анимирует появление сообщения через изменение прозрачности"""
         opacity_effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(opacity_effect)
         self.animation = QPropertyAnimation(opacity_effect, b"opacity")
@@ -121,7 +121,6 @@ class MessageWidget(QFrame):
         self.animation.start()
 
 class ChatArea(QScrollArea):
-    """Область чата с прокруткой"""
     
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -143,7 +142,6 @@ class ChatArea(QScrollArea):
         self.setWidget(self.container)
     
     def add_message(self, text, is_user=True):
-        """Добавляет новое сообщение в чат с анимацией"""
         message_widget = MessageWidget(text, is_user)
         self.layout.addWidget(message_widget)
         
@@ -160,7 +158,6 @@ class ChatArea(QScrollArea):
         return message_widget
 
     def add_message(self, text, is_user=True):
-        """Добавляет новое сообщение в чат с анимацией"""
         message_widget = MessageWidget(text, is_user)
         self.layout.addWidget(message_widget)
     
@@ -180,7 +177,6 @@ class EnhancedTextEdit(QTextEdit):
         super().__init__(parent)
     
     def keyPressEvent(self, event: QKeyEvent):
-        """Обработка нажатия клавиш"""
         if event.key() == Qt.Key.Key_Return and not event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
 
             self.enterPressed.emit()
