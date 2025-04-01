@@ -7,7 +7,9 @@ Integral_ui.py
 # Игнорирование конфиденциальных файлов
 data/api.json
 data/settings.json
-
+build.bat
+integral.spec
+.idea
 # Игнорирование всех кеш папок
 design/__pycache__/
 modules/__pycache__/

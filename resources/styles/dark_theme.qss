@@ -1,4 +1,4 @@
-/* Стили для виджета приложений */
+
 AppsWidget {
     background-color: #161616;
     border-radius: 10px;
@@ -280,7 +280,7 @@ QMainWindow
 
 
 
-#widget_6,#widget_8,#widget_3,#widget,#widget_2,#widget_4
+#widget_8,#widget_3,#widget,#widget_2,#widget_4
     {
         border: 0px solid transparent;
         border-radius: 10px;
@@ -416,7 +416,6 @@ QLineEdit:hover
     border-radius: 2px;
 }
 
-/* Скрываем рамку скролбара и его кнопки */
 QScrollBar:vertical {
     border: none;
     background-color: transparent;
@@ -440,7 +439,6 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
     height: 0px;
 }
 
-/* EnhancedTextEdit для чата */
 AIChat QTextEdit {
     background-color: #161616;
     color: white;
@@ -454,7 +452,6 @@ AIChat QPushButton:disabled {
     color: #444444;
 }
 
-/* Стиль для кнопки отправки сообщений */
 #send_button {
     background-color: #161616;
     color: white;
