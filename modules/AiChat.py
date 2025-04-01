@@ -4,17 +4,17 @@ import os
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                             QHBoxLayout, QTextEdit, QLineEdit, QPushButton, 
                             QScrollArea, QLabel, QFrame, QSizePolicy, QMessageBox,
-                            QProgressBar)
+                            QProgressBar, QGraphicsOpacityEffect, QTextBrowser)
 from PyQt6.QtCore import (Qt, QSize, pyqtSignal, QThread, QPropertyAnimation, 
                          QEasingCurve, QSequentialAnimationGroup, QTimer, QPoint, QRect)
 from PyQt6.QtGui import QFont, QColor, QPalette, QKeyEvent, QIcon
 from mistralai import Mistral
 import markdown
 
-# Определение API_FILE как пути к файлу в корне проекта
+
 API_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "api.json")
 
-# Экспортируемые классы для использования в основном приложении
+
 __all__ = ['AIChat', 'AIChatWindow', 'Worker', 'MessageWidget', 'ChatArea']
 
 class Worker(QThread):
@@ -40,62 +40,83 @@ class Worker(QThread):
             self.result_signal.emit(self.user_input, f"Произошла ошибка: {str(e)}")
 
 class LoadingIndicator(QProgressBar):
-    """Индикатор загрузки с анимацией"""
+
     
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setTextVisible(False)
-        self.setRange(0, 0)  # Бесконечный режим
+        self.setRange(0, 0)  
         self.setFixedHeight(4)
         self.setValue(0)
         self.setObjectName("loading_indicator")
 
+class ExpandingTextBrowser(QTextBrowser):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
+        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        self.setWordWrapMode(self.document().defaultTextOption().wrapMode())
+    
+    def updateHeight(self):
+        width = self.viewport().width() or 300
+        self.document().setTextWidth(width)
+        new_height = self.document().size().height() + 10
+        self.setFixedHeight(int(new_height))
+    
+    def setHtml(self, html: str) -> None:
+        super().setHtml(html)
+        self.updateHeight()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.updateHeight()
+
+
 class MessageWidget(QFrame):
-    """Виджет для отображения одного сообщения в чате"""
+
     
     def __init__(self, text, is_user=True, parent=None):
         super().__init__(parent)
         self.is_user = is_user
         
-        # Настройка внешнего вида сообщения
         self.setFrameShape(QFrame.Shape.StyledPanel)
         self.setFrameShadow(QFrame.Shadow.Raised)
         self.setObjectName("user_message" if is_user else "ai_message")
         
-        # Создание макета
         layout = QVBoxLayout(self)
         
-        # Добавление метки отправителя
         sender = QLabel("Вы" if is_user else "ИИ")
         sender.setObjectName("sender_label")
         font = QFont()
         font.setBold(True)
         sender.setFont(font)
         layout.addWidget(sender)
-        
-        # Добавление текста сообщения
-        message = QLabel(text)
-        message.setWordWrap(True)
-        message.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        layout.addWidget(message)
-        
-        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
-        
-    def animate_appearance(self):
-        """Анимирует появление сообщения с улучшенной производительностью"""
-        # Используем анимацию позиции вместо геометрии для улучшения производительности
-        self.animation = QPropertyAnimation(self, b"pos")
-        self.animation.setDuration(250)  # Уменьшаем длительность для более быстрой анимации
-        
-        current_pos = self.pos()
-        if self.is_user:
-            # Анимация справа налево
-            self.animation.setStartValue(QPoint(current_pos.x() + 30, current_pos.y()))
+
+        if is_user:
+            self.message_widget = QLabel(text)
+            self.message_widget.setWordWrap(True)
+            self.message_widget.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         else:
-            # Анимация слева направо
-            self.animation.setStartValue(QPoint(current_pos.x() - 30, current_pos.y()))
-            
-        self.animation.setEndValue(current_pos)
+          
+            self.message_widget = ExpandingTextBrowser()
+            self.message_widget.setHtml(text)
+            self.message_widget.setFrameStyle(QFrame.Shape.NoFrame)
+            self.message_widget.setReadOnly(True)
+            self.message_widget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        
+        layout.addWidget(self.message_widget)
+        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+    
+    def animate_appearance(self):
+        """Анимирует появление сообщения через изменение прозрачности"""
+        opacity_effect = QGraphicsOpacityEffect(self)
+        self.setGraphicsEffect(opacity_effect)
+        self.animation = QPropertyAnimation(opacity_effect, b"opacity")
+        self.animation.setDuration(250)
+        self.animation.setStartValue(0)
+        self.animation.setEndValue(1)
         self.animation.setEasingCurve(QEasingCurve.Type.OutCubic)
         self.animation.start()
 
@@ -105,21 +126,20 @@ class ChatArea(QScrollArea):
     def __init__(self, parent=None):
         super().__init__(parent)
         
-        # Настройка области прокрутки
+
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setObjectName("chat_area")
-        self.setFrameShape(QFrame.Shape.NoFrame)  # Убираем стандартную рамку
+        self.setFrameShape(QFrame.Shape.NoFrame)  
         
-        # Создание контейнера для сообщений
+
         self.container = QWidget()
         self.container.setObjectName("chat_container")
         self.layout = QVBoxLayout(self.container)
         self.layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.layout.setSpacing(10)
-        self.layout.setContentsMargins(15, 15, 15, 15)  # Добавляем внутренние отступы
-        
+        self.layout.setContentsMargins(15, 15, 15, 15)  
         self.setWidget(self.container)
     
     def add_message(self, text, is_user=True):
@@ -127,22 +147,32 @@ class ChatArea(QScrollArea):
         message_widget = MessageWidget(text, is_user)
         self.layout.addWidget(message_widget)
         
-        # Устанавливаем фиксированную высоту на основе содержимого
-        # чтобы избежать неправильного растягивания при анимации
+
         message_widget.adjustSize()
         message_widget.setMinimumHeight(message_widget.sizeHint().height())
         message_widget.setMaximumHeight(message_widget.sizeHint().height())
         
-        # Прокрутка вниз к новому сообщению с небольшой задержкой
+
         QTimer.singleShot(10, lambda: self.verticalScrollBar().setValue(self.verticalScrollBar().maximum()))
         
-        # Запускаем анимацию появления после отрисовки виджета
         QTimer.singleShot(0, message_widget.animate_appearance)
         
         return message_widget
 
+    def add_message(self, text, is_user=True):
+        """Добавляет новое сообщение в чат с анимацией"""
+        message_widget = MessageWidget(text, is_user)
+        self.layout.addWidget(message_widget)
+    
+    
+        QTimer.singleShot(10, lambda: self.verticalScrollBar().setValue(self.verticalScrollBar().maximum()))
+        QTimer.singleShot(0, message_widget.animate_appearance)
+    
+        return message_widget
+
+
 class EnhancedTextEdit(QTextEdit):
-    """Улучшенный текстовый редактор с отправкой по Enter"""
+
     
     enterPressed = pyqtSignal()
     
@@ -152,24 +182,21 @@ class EnhancedTextEdit(QTextEdit):
     def keyPressEvent(self, event: QKeyEvent):
         """Обработка нажатия клавиш"""
         if event.key() == Qt.Key.Key_Return and not event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
-            # Enter без Shift - отправка сообщения
+
             self.enterPressed.emit()
         elif event.key() == Qt.Key.Key_Return and event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
-            # Shift+Enter - перевод строки
+
             super().keyPressEvent(event)
         else:
-            # Все остальные клавиши обрабатываются стандартно
+
             super().keyPressEvent(event)
 
 class AIChat(QWidget):
-    """Основной виджет чата с ИИ"""
-    
-    # Сигнал для уведомления о начале и окончании обработки сообщения
+
     processing_changed = pyqtSignal(bool)
     
     def __init__(self, parent=None, use_default_api_key=True, custom_api_key=None):
         super().__init__(parent)
-        # Загружаем API ключ в зависимости от параметров
         if use_default_api_key:
             self.api_key = self._load_api_key()
         else:
@@ -180,7 +207,6 @@ class AIChat(QWidget):
         self.setup_ui()
         
     def _load_api_key(self):
-        """Загрузка API ключа из файла"""
         try:
             if os.path.exists(API_FILE):
                 with open(API_FILE, 'r') as file:
@@ -203,22 +229,18 @@ class AIChat(QWidget):
         ])
         
     def setup_ui(self):
-        # Основной макет
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(0, 0, 0, 0)  # Убираем отступы для лучшей интеграции
-        self.setObjectName("ai_chat_widget")  # Имя для стилизации
-        
-        # Область чата
+        main_layout.setContentsMargins(0, 0, 0, 0) 
+        self.setObjectName("ai_chat_widget")  
+
         self.chat_area = ChatArea()
         self.chat_area.setObjectName("chat_area")
         main_layout.addWidget(self.chat_area)
-        
-        # Индикатор загрузки
+
         self.loading_indicator = LoadingIndicator()
         self.loading_indicator.hide()
         main_layout.addWidget(self.loading_indicator)
-        
-        # Область ввода
+
         input_layout = QHBoxLayout()
         
         self.message_input = EnhancedTextEdit()
@@ -242,33 +264,29 @@ class AIChat(QWidget):
         
         main_layout.addLayout(input_layout)
         
-        # Добавление приветственного сообщения
         self.chat_area.add_message("Привет! Я ИИ-ассистент. Чем я могу вам помочь сегодня?", False)
     
     def adjust_input_height(self):
-        """Регулирует высоту поля ввода в зависимости от содержимого"""
         document_height = self.message_input.document().size().height()
         new_height = min(max(50, document_height + 10), 100)
         self.message_input.setMinimumHeight(int(new_height))
     
     def set_api_key(self, api_key):
-        """Устанавливает новый API ключ"""
+
         self.api_key = api_key
     
     def clear_chat(self):
-        """Очищает чат и добавляет приветственное сообщение"""
-        # Удаляем все виджеты из контейнера
+
         for i in reversed(range(self.chat_area.layout.count())): 
             widget = self.chat_area.layout.itemAt(i).widget()
             if widget:
                 widget.deleteLater()
         
-        # Добавляем приветственное сообщение
+
         self.chat_area.add_message("Привет! Я ИИ-ассистент. Чем я могу вам помочь сегодня?", False)
     
     def send_message(self):
-        """Отправляет сообщение пользователя и получает ответ от ИИ"""
-        # Проверяем, не обрабатывается ли уже сообщение
+
         if self.is_processing:
             return
             
@@ -284,62 +302,58 @@ class AIChat(QWidget):
             )
             return
         
-        # Устанавливаем флаг обработки
+
         self.is_processing = True
         self.processing_changed.emit(True)
         
-        # Блокируем поле ввода и кнопку
+
         self.message_input.setReadOnly(True)
         self.send_button.setEnabled(False)
         
-        # Показываем индикатор загрузки
         self.loading_indicator.show()
             
-        # Добавляем сообщение пользователя в чат
+
         self.chat_area.add_message(message_text, True)
         
-        # Очищаем поле ввода
+
         self.message_input.clear()
         
-        # Создаем и запускаем фоновый поток для получения ответа от ИИ
+
         self.worker = Worker(self.api_key, message_text)
         self.worker.result_signal.connect(self.handle_ai_response)
         self.worker.start()
     
     def handle_ai_response(self, user_input, response_text):
-        """Обрабатывает ответ от ИИ"""
-        # Скрываем индикатор загрузки
+
         self.loading_indicator.hide()
-        
-        # Преобразуем Markdown в HTML для ответа ИИ
+
         ai_response_html = self.md.convert(response_text)
         self.chat_area.add_message(ai_response_html, False)
-        
-        # Сбрасываем состояние Markdown конвертера
+
         self.md.reset()
         
-        # Снимаем блокировку с поля ввода и кнопки
+
         self.message_input.setReadOnly(False)
         self.send_button.setEnabled(True)
         self.message_input.setFocus()
         
-        # Сбрасываем флаг обработки
+
         self.is_processing = False
         self.processing_changed.emit(False)
 
 class AIChatWindow(QMainWindow):
-    """Главное окно приложения чата с ИИ (для автономного использования)"""
+
     
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Чат с ИИ")
         self.resize(800, 600)
         
-        # Создание и установка центрального виджета
+
         self.chat_widget = AIChat()
         self.setCentralWidget(self.chat_widget)
         
-        # Применение стилей
+
         self.apply_styles()
     
     def apply_styles(self):
@@ -430,9 +444,8 @@ class AIChatWindow(QMainWindow):
             }
         """)
 
-# Функция для получения стилей, которые могут быть добавлены в основное приложение
+
 def get_chat_styles():
-    """Возвращает стили для виджета чата, которые можно применить в основном приложении"""
     return """
         #user_message {
             background-color: #161616;
@@ -467,7 +480,6 @@ def get_chat_styles():
         }
     """
 
-# Запуск автономного приложения, если файл запущен напрямую
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = AIChatWindow()

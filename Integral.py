@@ -285,46 +285,55 @@ class MyApp(QtWidgets.QMainWindow):
         self.floating_widget.update_floating_button_text("Открыть")  
         self.floating_widget.hide()  
 
+        self.ui.mistralAPIuseButton.clicked.connect(self.save_api_key)
+
         self.setup_ai_chat()
     
     def setup_ai_chat(self):
-        """Инициализирует AI чат на 10-й странице stackedWidget"""
-        # Проверяем, есть ли 10-я страница, если нет - создаем
+
         if self.ui.stackedWidget.count() <= 10:
             ai_chat_page = QtWidgets.QWidget()
             self.ui.stackedWidget.addWidget(ai_chat_page)
         else:
-            # Если страница уже существует, получаем её
             ai_chat_page = self.ui.stackedWidget.widget(10)
-            
-        # Очищаем существующие виджеты на этой странице
+
         if ai_chat_page.layout():
             while ai_chat_page.layout().count():
                 item = ai_chat_page.layout().takeAt(0)
                 widget = item.widget()
                 if widget:
                     widget.deleteLater()
-        
-        # Создаем новый макет для страницы
         ai_chat_layout = QtWidgets.QVBoxLayout(ai_chat_page)
         ai_chat_layout.setContentsMargins(0, 0, 0, 0)
-        
-        # Создаем и добавляем виджет AIChat
+
         self.ai_chat = AIChat(parent=ai_chat_page)
         ai_chat_layout.addWidget(self.ai_chat)
-        
-        # Подключаем сигнал обработки сообщения
+
         self.ai_chat.processing_changed.connect(self.handle_ai_chat_processing)
     
     def handle_ai_chat_processing(self, is_processing):
-        """Обработчик сигнала о начале/окончании обработки сообщения в чате"""
-        # Блокировка/разблокировка UI элементов во время обработки сообщения
         if is_processing:
-            # Если нужно, можно блокировать другие элементы UI
             pass
         else:
-            # Если нужно, можно разблокировать другие элементы UI
             pass
+
+    def save_api_key(self):
+        api_key = self.ui.mistralAPI_input.text().strip()
+        if not api_key:
+            QMessageBox.warning(self, "Ошибка", "API ключ не может быть пустым!")
+            return
+        data = {"api_key": api_key}
+        try:
+            data_dir = os.path.join(os.getcwd(), "data")
+            os.makedirs(data_dir, exist_ok=True)
+            file_path = os.path.join(data_dir, "api.json")
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4, ensure_ascii=False)
+            QMessageBox.information(self, "Успех", "API ключ успешно сохранён.")
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", f"Не удалось сохранить API ключ: {str(e)}")        
+
+
 
     def handle_app_click(self, app_name):
         page_mapping = {
