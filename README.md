@@ -1,80 +1,30 @@
+# React + TypeScript + Vite
 
-# Integral: Программа для анализа и работы с текстом с использованием нейросетей
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+Currently, two official plugins are available:
 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 📋 Описание проекта
+## Expanding the ESLint configuration
 
-**Integral** — это приложение, демонстрирующее возможности искусственного интеллекта (ИИ) в разработке программного обеспечения. Программа разработана с использованием **Python**, библиотеки **PyQt6** для создания графического интерфейса и нейросетевых инструментов для анализа данных.
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-### 🎯 Основные функции:
-- Графический редактор
-- Работа с текстом: анализ, структурирование, обработка.
-- Математические функции: построение графиков, калькулятор.
-- Удобный и интуитивно понятный графический интерфейс.
+- Configure the top-level `parserOptions` property like this:
 
----
-
-## 🚀 Основные технологии
-- **Python** — для реализации логики программы.
-- **PyQt6** — для разработки пользовательского интерфейса.
-- **PyInstaller** — для сборки приложения в исполняемый файл.
-- **ИИ-инструменты**:
-  - **Claude 3.5/3.7 sonnet** — генерация и оптимизация кода.
-  - **Cursor IDE** — среда разработки.
-
-
-## 💻 Установка и запуск
-
-### Требования:
-- Python версии **3.12+**.
-- Установленные зависимости из `requirements.txt`.
-
-### Установка:
-1. Клонируйте репозиторий:
-   ```bash
-   git clone https://github.com/Revellison/IntegralApp
-   ```
-2. Перейдите в папку проекта:
-   ```bash
-   cd integral
-   ```
-3. Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Запуск:
-Запустите файл `Integral.py`:
-```bash
-python Integral.py
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
 ```
 
----
-
-## 📦 Сборка в исполняемый файл
-Для сборки приложения в единый файл используйте `PyInstaller`:
-```bash
-pyinstaller --onefile --noconsole Integral.py
-```
-Готовый исполняемый файл будет находиться в папке `dist/`.
-
----
-
-## 🛠 Разработка и вклад
-Ваш вклад приветствуется! Если у вас есть предложения по улучшению, создайте **issue** или отправьте **pull request**.
-
-### Репозиторий:
-[GitHub Repository](https://github.com/Revellison/IntegralApp)
-
----
-
-## 📞 Обратная связь
-Если у вас есть вопросы или вы обнаружили ошибку, напишите мне:
-- оставьте сообщение в [issues](https://github.com/Revellison/IntegralApp/issues).
-
----
-
-## 📜 Лицензия
-Этот проект лицензирован под лицензией Apache License 2.0 — подробности см. в файле [LICENSE](LICENSE).
-```
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
