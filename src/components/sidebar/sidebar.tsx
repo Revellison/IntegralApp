@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHome, 
@@ -14,15 +15,33 @@ import {
   faStar,
   faHistory,
   faBookmark,
+  IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import './sidebar.css';
 
-const Sidebar = () => {
+interface MenuItem {
+  id: string | number;
+  icon: IconDefinition;
+  label: string;
+  path?: string;
+  dropdown?: {
+    id: string;
+    label: string;
+  }[];
+}
+
+interface SubmenuItem {
+  icon: IconDefinition;
+  label: string;
+}
+
+const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
   const [theme, setTheme] = useState('dark');
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [activeSubmenu, setActiveSubmenu] = useState(null);
-  const timeoutRef = useRef(null);
-  const submenuTimeoutRef = useRef(null);
+  const [activeDropdown, setActiveDropdown] = useState<string | number | null>(null);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const submenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -32,7 +51,7 @@ const Sidebar = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  const handleMouseEnter = (id) => {
+  const handleMouseEnter = (id: string | number) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -45,7 +64,7 @@ const Sidebar = () => {
     }, 300);
   };
 
-  const handleSubmenuEnter = (id) => {
+  const handleSubmenuEnter = (id: string) => {
     if (submenuTimeoutRef.current) {
       clearTimeout(submenuTimeoutRef.current);
     }
@@ -58,12 +77,12 @@ const Sidebar = () => {
     }, 300);
   };
 
-  const topMenuItems = [
-    { id: 'home', icon: faHome, label: 'Главная' },
-    { id: 'draw', icon: faPaintbrush, label: 'Рисовалка' },
+  const topMenuItems: MenuItem[] = [
+    { id: 'home', icon: faHome, label: 'Главная', path: '/' },
+    { id: 'draw', icon: faPaintbrush, label: 'Рисовалка', path: '/drawpad' },
   ];
 
-  const subjectMenuItems = [
+  const subjectMenuItems: MenuItem[] = [
     { 
       id: 3, 
       icon: faCalculator, 
@@ -96,28 +115,29 @@ const Sidebar = () => {
     },
   ];
 
-  const bottomMenuItems = [
+  const bottomMenuItems: MenuItem[] = [
     { id: 'settings', icon: faCog, label: 'Настройки' },
   ];
 
-  const submenuItems = [
+  const submenuItems: SubmenuItem[] = [
     { icon: faExternalLinkAlt, label: 'Открыть в новом окне' },
     { icon: faStar, label: 'Добавить в избранное' },
     { icon: faHistory, label: 'История' },
     { icon: faBookmark, label: 'Закладки' },
   ];
 
-  const renderSimpleMenuItem = (item) => (
+  const renderSimpleMenuItem = (item: MenuItem) => (
     <li 
       key={item.id} 
       className="menu-item"
       title={item.label}
+      onClick={() => item.path && navigate(item.path)}
     >
       <FontAwesomeIcon icon={item.icon} />
     </li>
   );
 
-  const renderDropdownMenuItem = (item) => (
+  const renderDropdownMenuItem = (item: MenuItem) => (
     <li 
       key={item.id} 
       className="menu-item"
@@ -127,7 +147,7 @@ const Sidebar = () => {
     >
       <FontAwesomeIcon icon={item.icon} />
       <div className={`dropdown-menu ${activeDropdown === item.id ? 'show' : ''}`}>
-        {item.dropdown.map((subItem) => (
+        {item.dropdown?.map((subItem) => (
           <div key={subItem.id} className="dropdown-item">
             <span>{subItem.label}</span>
             <div 
@@ -177,4 +197,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebar; 

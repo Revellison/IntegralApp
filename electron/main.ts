@@ -41,7 +41,7 @@ function createWindow() {
   Menu.setApplicationMenu(null)
 
   // Открытие DevTools по нажатию F12
-  win.webContents.on('before-input-event', (event, input) => {
+  win.webContents.on('before-input-event', (_event, input) => {
     if (input.key === 'F12') {
       win?.webContents.toggleDevTools()
     }
