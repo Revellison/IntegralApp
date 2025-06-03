@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHome, 
@@ -37,6 +37,7 @@ interface SubmenuItem {
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [theme, setTheme] = useState('dark');
   const [activeDropdown, setActiveDropdown] = useState<string | number | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -116,21 +117,19 @@ const Sidebar: React.FC = () => {
   ];
 
   const bottomMenuItems: MenuItem[] = [
-    { id: 'settings', icon: faCog, label: 'Настройки' },
+    { id: 'settings', icon: faCog, label: 'Настройки', path: "/settings" },
   ];
 
   const submenuItems: SubmenuItem[] = [
     { icon: faExternalLinkAlt, label: 'Открыть в новом окне' },
     { icon: faStar, label: 'Добавить в избранное' },
-    { icon: faHistory, label: 'История' },
-    { icon: faBookmark, label: 'Закладки' },
   ];
 
   const renderSimpleMenuItem = (item: MenuItem) => (
     <li 
       key={item.id} 
-      className="menu-item"
-      title={item.label}
+      className={`menu-item ${location.pathname === item.path ? 'active' : ''} ${item.id === 'settings' ? 'settings-button' : ''}`}
+      data-tooltip={item.label}
       onClick={() => item.path && navigate(item.path)}
     >
       <FontAwesomeIcon icon={item.icon} />
@@ -141,7 +140,8 @@ const Sidebar: React.FC = () => {
     <li 
       key={item.id} 
       className="menu-item"
-      title={item.label}
+      data-tooltip={item.label}
+      data-has-dropdown="true"
       onMouseEnter={() => handleMouseEnter(item.id)}
       onMouseLeave={handleMouseLeave}
     >

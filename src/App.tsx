@@ -3,6 +3,7 @@ import './App.css'
 import Sidebar from './components/sidebar/sidebar'
 import Home from './pages/home/Home'
 import Drawpad from './pages/drawpad/Drawpad'
+import Settings from './pages/settings/Settings'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/drawpad" element={<Drawpad />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
       </div>
