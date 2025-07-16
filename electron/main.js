@@ -1,9 +1,9 @@
-import { app, BrowserWindow, Menu } from 'electron'
-// import { createRequire } from 'node:module'
+import { app, BrowserWindow } from 'electron'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
-// const require = createRequire(import.meta.url)
+const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // The built directory structure
@@ -24,27 +24,14 @@ export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST
 
-let win: BrowserWindow | null
+let win = null
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 1280,
-    height: 720,
-    minWidth: 1000,
-    minHeight: 600,
-    icon: path.join(process.env.VITE_PUBLIC, 'logo.ico'),
+    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
-  })
-
-  Menu.setApplicationMenu(null)
-
-  // Открытие DevTools по нажатию F12
-  win.webContents.on('before-input-event', (_event, input) => {
-    if (input.key === 'F12') {
-      win?.webContents.toggleDevTools()
-    }
   })
 
   // Test active push message to Renderer-process.
@@ -78,4 +65,4 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow) 

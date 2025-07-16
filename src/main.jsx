@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'F5') {
-    e.preventDefault();
-    window.location.reload();
-  }
-});
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
@@ -19,4 +12,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 // Use contextBridge
 window.ipcRenderer.on('main-process-message', (_event, message) => {
   console.log(message)
-})
+}) 

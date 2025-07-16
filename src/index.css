@@ -1,107 +1,30 @@
+@font-face {
+  font-family: 'CeraPro';
+  src: url('assets/fonts/CeraPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Colvetica';
+  src: url('assets/fonts/Colvetica.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Colvetica, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:root[data-theme="light"] {
-  --bg-primary: #eeeeee;
-  --bg-secondary: #f5f5f5;
-  --text-primary: #1b1b1b;
-  --text-secondary: #666666;
-  --border-color: #e0e0e0;
-  --accent-color: #ff6464;
-  --hover-color: #ff5c5c;
-  --sidebar-bg: #ffffff;
-  --sidebar-border: #e0e0e0;
-}
-
-:root[data-theme="dark"] {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --border-color: #333333;
-  --accent-color: #ff6464;
-  --hover-color: #ff5c5c;
-  --sidebar-bg: #141414;
-  --sidebar-border: #333333;
-}
-
-.sidebar {
-  animation: fadeIn 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-}
-
-a {
-  font-weight: 500;
-  color: var(--accent-color);
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: var(--hover-color);
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: var(--text-primary);
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.25s;
-}
-
-button:hover {
-  border-color: var(--accent-color);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

@@ -1,61 +1,30 @@
-![Логотип приложения](public/logo.png)
+# React + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Идеи по функционалу
+Currently, two official plugins are available:
 
-- **Решение задач по математике**
-  - Решение уравнений и неравенств (линейных, квадратных, показательных, логарифмических и др.)
-  - Решение систем уравнений
-  - Решение задач по геометрии: вычисление площадей, объёмов, длин, углов, построение чертежей
-  - Решение задач по тригонометрии, анализу, теории вероятностей, комбинаторике
-  - Интегралы и производные: вычисление, пошаговое объяснение, графики
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Решение задач по информатике**
-  - Анализ и генерация алгоритмов (псевдокод, блок-схемы)
-  - Проверка и объяснение программ на популярных языках (Python, C++, JavaScript)
-  - Решение задач по логике, булевой алгебре, теории графов
+## Expanding the ESLint configuration
 
-- **ИИ-помощник**
-  - Ответы на вопросы по теории и практике (математика, информатика, физика и др.)
-  - Генерация пошаговых объяснений решений
-  - Помощь в разборе ошибок и непонятных моментов
-  - Генерация персональных рекомендаций по обучению
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- **Генерация и проверка тестов**
-  - Создание индивидуальных тестов по выбранным темам
-  - Автоматическая проверка и разбор ошибок
-  - Ведение истории прохождения тестов и статистики
+- Configure the top-level `parserOptions` property like this:
 
-- **Распознавание задач с фото**
-  - Распознавание текста и формул с фотографий или сканов
-  - Автоматический перенос задачи в редактор для решения
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
 
-- **Интерактивный чат с ИИ**
-  - Возможность задать любой вопрос, получить объяснение, совет или дополнительную информацию
-  - Поддержка естественного языка
-
-- **Графический калькулятор**
-  - Построение графиков функций
-  - Визуализация решений задач
-
-- **Аналитика и отслеживание прогресса**
-  - Ведение статистики по решённым задачам, темам, ошибкам
-  - Персональные рекомендации для повторения и закрепления материала
-
-- **Экспорт и импорт данных**
-  - Сохранение решений, тестов и прогресса в файл
-  - Загрузка своих задач или тестов
-
-- **Настройки и персонализация**
-  - Темы оформления, настройка интерфейса
-  - Управление профилем пользователя
-
----
-
-**Бонусные идеи:**
-- Справочник формул и теории по всем дисциплинам
-- Генерация шпаргалок и кратких конспектов с помощью ИИ
-- Модули для подготовки к экзаменам (ЕГЭ, ОГЭ, олимпиады и др.)
-- Возможность работы офлайн для основных функций
-
----
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
